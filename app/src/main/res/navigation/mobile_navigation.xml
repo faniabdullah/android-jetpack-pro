@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.bangkit.faniabdullah_jetpack.ui.home.HomeFragment"
+        android:name="com.bangkit.faniabdullah_jetpack.ui.tvshows.HomeFragment"
         android:label="@string/title_movies"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.bangkit.faniabdullah_jetpack.ui.dashboard.DashboardFragment"
+        android:name="com.bangkit.faniabdullah_jetpack.ui.movie.DashboardFragment"
         android:label="@string/title_tvshows"
         tools:layout="@layout/fragment_dashboard" />
 

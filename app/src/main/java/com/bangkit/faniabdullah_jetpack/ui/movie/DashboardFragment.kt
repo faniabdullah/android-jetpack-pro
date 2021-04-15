@@ -1,4 +1,4 @@
-package com.bangkit.faniabdullah_jetpack.ui.dashboard
+package com.bangkit.faniabdullah_jetpack.ui.movie
 
 import android.os.Bundle
 import android.view.LayoutInflater
