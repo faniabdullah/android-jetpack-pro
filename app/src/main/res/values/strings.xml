@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">faniabdullah_jetpack</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="title_movies">Movies</string>
+    <string name="title_tvshows">TV shows</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
