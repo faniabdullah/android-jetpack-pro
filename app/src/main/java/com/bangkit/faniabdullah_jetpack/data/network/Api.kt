@@ -2,6 +2,7 @@ package com.bangkit.faniabdullah_jetpack.data.network
 
 import com.bangkit.faniabdullah_jetpack.BuildConfig
 import com.bangkit.faniabdullah_jetpack.model.ResultMovieResponse
+import com.bangkit.faniabdullah_jetpack.model.ResultTvShowsResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,4 +13,9 @@ interface Api {
     fun getMovieNowPlaying(
         @Query("api_key") apiKey: String = BuildConfig.MOVIE_TOKEN
     ) : Call<ResultMovieResponse>
+
+    @GET("tv/popular")
+    fun getPopularTvShows(
+        @Query("api_key") apiKey: String = BuildConfig.MOVIE_TOKEN
+    ) : Call<ResultTvShowsResponse>
 }

@@ -6,21 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.databinding.MovieItemBinding
-import com.bangkit.faniabdullah_jetpack.model.MovieEntity
+import com.bangkit.faniabdullah_jetpack.model.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
-    private val list = ArrayList<MovieEntity>()
+class TvShowsAdapter : RecyclerView.Adapter<TvShowsAdapter.MovieViewHolder>() {
+    private val list = ArrayList<TvShowsEntity>()
 
-    inner class MovieViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = MovieItemBinding.bind(itemView)
 
-        fun bind(movie: MovieEntity) {
+        fun bind(movie: TvShowsEntity) {
             binding.apply {
-                tvTitle.text = movie.original_title
+                tvTitle.text = movie.original_name
                 tvOverview.text = movie.overview
                 Glide.with(itemView)
                     .load("${Constant.BASE_IMAGE_URL}${movie.poster_path}")
@@ -31,9 +31,9 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         }
     }
 
-    fun setList(repos: ArrayList<MovieEntity>) {
+    fun setList(tv_item: ArrayList<TvShowsEntity>) {
         list.clear()
-        list.addAll(repos)
+        list.addAll(tv_item)
         notifyDataSetChanged()
     }
 

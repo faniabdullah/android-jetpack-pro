@@ -13,4 +13,20 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerSizeTopRight">60dp</item>
+        <item name="cornerSizeTopLeft">60dp</item>
+        <item name="cornerSizeBottomRight">60dp</item>
+        <item name="cornerSizeBottomLeft">60dp</item>
+    </style>
+
+
+    <style name="ShapeAppearanceOverlay_card_custom_corners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">4dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomRight">60dp</item>
+        <item name="cornerSizeBottomLeft">60dp</item>
+    </style>
 </resources>

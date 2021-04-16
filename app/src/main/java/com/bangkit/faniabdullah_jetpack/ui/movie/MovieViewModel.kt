@@ -17,7 +17,6 @@ class MovieViewModel : ViewModel() {
     val isSuccess = MutableLiveData<Boolean>()
 
     fun setMovieNowPlaying() {
-        Log.e("response","value = ")
         RetrofitClient.apiInstance
             .getMovieNowPlaying()
             .enqueue(object : Callback<ResultMovieResponse> {
@@ -28,7 +27,6 @@ class MovieViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         isSuccess.postValue(true)
                         listMovieNowPlaying.postValue(response.body()?.results)
-                        Log.e("response","value = "+response.body()?.results)
                     }
                 }
 

@@ -6,17 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".ui.tv_shows.TvShowFragment">
 
-    <TextView
-        android:id="@+id/text_dashboard"
-        android:layout_width="match_parent"
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:indeterminateTint="@color/purple_500"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/rv_tv_shows"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/rv_tv_shows" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tv_shows"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="196dp"
+        tools:layout_editor_absoluteY="284dp"
+        tools:listitem="@layout/movie_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>
