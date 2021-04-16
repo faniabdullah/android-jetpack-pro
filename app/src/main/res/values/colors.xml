@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white_shape">#F6F6F6</color>
     <color name="black_shape">#393838</color>
+    <color name="fontSub">#7B8292</color>
 </resources>
