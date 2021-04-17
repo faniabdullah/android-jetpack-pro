@@ -166,8 +166,6 @@ object DataDummy {
             )
         )
 
-
-
         return listMovieNowPlaying
     }
 
