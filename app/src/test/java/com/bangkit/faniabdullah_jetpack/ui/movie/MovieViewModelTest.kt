@@ -17,6 +17,6 @@ class MovieViewModelTest {
     fun testGetMovieNowPlaying() {
         val movieEntities = mainViewModel.getMovieNowPlaying()
         assertNotNull(movieEntities)
-        assertEquals(11, movieEntities.size)
+        assertEquals(12, movieEntities.size)
     }
 }

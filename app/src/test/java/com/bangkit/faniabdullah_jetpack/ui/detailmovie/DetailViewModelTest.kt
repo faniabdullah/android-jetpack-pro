@@ -2,6 +2,7 @@ package com.bangkit.faniabdullah_jetpack.ui.detailmovie
 
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 
@@ -21,6 +22,7 @@ class DetailViewModelTest {
     fun testGetDetailMovieById() {
         mainViewModel.setSelectedMovie(movieId)
         val movie = mainViewModel.getDetailMovieById()
+        assertNotNull(movie)
         assertEquals(dummyMovieNowPlaying.id, movie.id)
     }
 
@@ -28,6 +30,7 @@ class DetailViewModelTest {
     fun testGetDetailTvShowById() {
         mainViewModel.setSelectedMovie(tvShowId)
         val movie = mainViewModel.getDetailTvShowById()
+        assertNotNull(movie)
         assertEquals(dummyTvShowPopular.id, movie.id)
     }
 }

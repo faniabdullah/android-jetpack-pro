@@ -10,24 +10,25 @@
 
     <TextView
         android:id="@+id/tv_movie_detail_title"
-        android:layout_width="218dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:padding="8dp"
-        tools:text="Wonder Woman"
+        tools:text="Kimetsu No yaiba - The Movie: Mugen Traine"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/poster_movie" />
+        app:layout_constraintTop_toTopOf="@+id/poster_movie"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/tv_movie_detail_title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        tools:text="Overview"
+        android:text="@string/overview_title"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

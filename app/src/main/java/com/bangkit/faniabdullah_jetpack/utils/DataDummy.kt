@@ -11,7 +11,7 @@ object DataDummy {
                 "1",
                 "/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
                 "Godzilla vs. Kong",
-                "overview",
+                "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
                 "/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",
                 "2021-03-24",
                 8.3,
@@ -139,6 +139,7 @@ object DataDummy {
                 360
             )
         )
+
         listMovieNowPlaying.add(
             MovieEntity(
                 "11",
@@ -149,6 +150,19 @@ object DataDummy {
                 "2021-03-24",
                 8.3,
                 4450
+            )
+        )
+
+        listMovieNowPlaying.add(
+            MovieEntity(
+                "12",
+                "/d1sVANghKKMZNvqjW0V6y1ejvV9.jpg",
+                "Kimetsu no Yaiba - The Movie: Mugen Train",
+                "  Tanjirō Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar's head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Kyōjurō Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!.",
+                "/qfLpiXGV93x8EnZIjmuyO6qXBMx.jpg",
+                "2020-10-16",
+                8.5,
+                565
             )
         )
 

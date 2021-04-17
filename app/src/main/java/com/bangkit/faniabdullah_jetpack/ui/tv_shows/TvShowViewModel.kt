@@ -6,6 +6,6 @@ import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 
 class TvShowViewModel : ViewModel() {
 
-    fun getTvShowsPopularNewsVersion(): List<MovieEntity> =
+    fun getTvShowsPopular(): List<MovieEntity> =
         DataDummy.generateDummyDataTvShowsPopular()
 }

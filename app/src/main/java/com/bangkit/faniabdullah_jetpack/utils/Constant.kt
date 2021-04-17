@@ -6,4 +6,5 @@ object Constant {
     const val MOVIE_TYPE = "movie_type"
     const val TV_SHOWS_TYPE = "tv_shows_type"
     const val KEY_TYPE = "key_type"
+    const val SPLASH_TIME_OUT: Long = 1000
 }

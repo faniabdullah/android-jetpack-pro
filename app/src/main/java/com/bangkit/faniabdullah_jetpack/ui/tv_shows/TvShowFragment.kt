@@ -42,7 +42,7 @@ class TvShowFragment : Fragment() {
         }
 
         tvShowViewModel = ViewModelProvider(this).get(TvShowViewModel::class.java)
-        val tvShowsPopular = tvShowViewModel.getTvShowsPopularNewsVersion()
+        val tvShowsPopular = tvShowViewModel.getTvShowsPopular()
         adapter.setList(tvShowsPopular)
 
         adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {

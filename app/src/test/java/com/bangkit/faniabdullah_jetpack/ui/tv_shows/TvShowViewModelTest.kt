@@ -15,8 +15,8 @@ class TvShowViewModelTest {
     }
 
     @Test
-    fun testGetTvShowsPopularNewsVersion() {
-        val movieEntities = mainViewModel.getTvShowsPopularNewsVersion()
+    fun testGetTvShowsPopular() {
+        val movieEntities = mainViewModel.getTvShowsPopular()
         assertNotNull(movieEntities)
         assertEquals(12, movieEntities.size)
     }
