@@ -55,7 +55,8 @@ class TvShowFragment : Fragment() {
 
     private fun showDetailMovie(data: MovieEntity) {
         val intentDetail = Intent(context, DetailActivity::class.java)
-        intentDetail.putExtra(Constant.MOVIE_DETAIL, data)
+        intentDetail.putExtra(Constant.MOVIE_ID, data.id)
+            .putExtra(Constant.KEY_TYPE, Constant.TV_SHOWS_TYPE)
         startActivity(intentDetail)
     }
 }

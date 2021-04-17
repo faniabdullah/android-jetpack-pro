@@ -6,6 +6,6 @@ import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 
 class MovieViewModel : ViewModel() {
 
-    fun getMovieNowPlayingNewsVersion(): List<MovieEntity> =
+    fun getMovieNowPlaying(): List<MovieEntity> =
         DataDummy.generateDummyDataMovieNowPlaying()
 }

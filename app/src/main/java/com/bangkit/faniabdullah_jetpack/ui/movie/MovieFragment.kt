@@ -43,7 +43,7 @@ class MovieFragment : Fragment() {
         }
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-        val moviePlaying = movieViewModel.getMovieNowPlayingNewsVersion()
+        val moviePlaying = movieViewModel.getMovieNowPlaying()
         adapter.setList(moviePlaying)
 
 
@@ -57,7 +57,8 @@ class MovieFragment : Fragment() {
 
     private fun showDetailMovie(data: MovieEntity) {
         val intentDetail = Intent(context, DetailActivity::class.java)
-        intentDetail.putExtra(Constant.MOVIE_DETAIL, data)
+        intentDetail.putExtra(Constant.MOVIE_ID, data.id)
+            .putExtra(Constant.KEY_TYPE, Constant.MOVIE_TYPE)
         startActivity(intentDetail)
     }
 }

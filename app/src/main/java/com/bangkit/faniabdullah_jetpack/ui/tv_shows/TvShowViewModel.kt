@@ -8,5 +8,4 @@ class TvShowViewModel : ViewModel() {
 
     fun getTvShowsPopularNewsVersion(): List<MovieEntity> =
         DataDummy.generateDummyDataTvShowsPopular()
-
 }
