@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.movie.MovieFragment">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:indeterminateTint="@color/purple_500"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_movie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_movie" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movie"
         android:layout_width="match_parent"

@@ -7,10 +7,10 @@ import org.junit.Test
 
 class DetailViewModelTest {
     private lateinit var mainViewModel: DetailViewModel
-    private val dummyMovie = DataDummy.generateDummyDataMovieNowPlaying()[0]
-    private val dummyTvShow = DataDummy.generateDummyDataTvShowsPopular()[0]
-    private val movieId = dummyMovie.id
-    private val tvShowId = dummyTvShow.id
+    private val dummyMovieNowPlaying = DataDummy.generateDummyDataMovieNowPlaying()[0]
+    private val dummyTvShowPopular = DataDummy.generateDummyDataTvShowsPopular()[0]
+    private val movieId = dummyMovieNowPlaying.id
+    private val tvShowId = dummyTvShowPopular.id
 
     @Before
     fun setUp() {
@@ -21,13 +21,13 @@ class DetailViewModelTest {
     fun testGetDetailMovieById() {
         mainViewModel.setSelectedMovie(movieId)
         val movie = mainViewModel.getDetailMovieById()
-        assertEquals(dummyMovie.id, movie.id)
+        assertEquals(dummyMovieNowPlaying.id, movie.id)
     }
 
     @Test
     fun testGetDetailTvShowById() {
         mainViewModel.setSelectedMovie(tvShowId)
         val movie = mainViewModel.getDetailTvShowById()
-        assertEquals(dummyTvShow.id, movie.id)
+        assertEquals(dummyTvShowPopular.id, movie.id)
     }
 }
