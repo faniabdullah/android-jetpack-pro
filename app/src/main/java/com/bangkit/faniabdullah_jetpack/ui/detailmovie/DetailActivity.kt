@@ -12,13 +12,14 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var detailViewModel: DetailViewModel
-
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         val movie = intent.getStringExtra(Constant.MOVIE_ID)
         val typeMovie = intent.getStringExtra(Constant.KEY_TYPE)
@@ -46,5 +47,9 @@ class DetailActivity : AppCompatActivity() {
             }
 
         }
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

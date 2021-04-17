@@ -35,7 +35,6 @@ class TvShowFragment : Fragment() {
         adapter = MovieAdapter()
         adapter.notifyDataSetChanged()
 
-
         binding.apply {
             rvTvShows.layoutManager = GridLayoutManager(activity, 2)
             rvTvShows.setHasFixedSize(true)

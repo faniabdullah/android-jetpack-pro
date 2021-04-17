@@ -2,31 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.Faniabdullah_jetpack" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blue_500</item>
+        <item name="colorPrimaryVariant">@color/blue_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/white_shape</item>
-        <item name="colorSecondaryVariant">@color/white_shape</item>
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/black</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-    </style>
-
-    <style name="CustomCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="cornerSizeTopRight">60dp</item>
-        <item name="cornerSizeTopLeft">60dp</item>
-        <item name="cornerSizeBottomRight">60dp</item>
-        <item name="cornerSizeBottomLeft">60dp</item>
-    </style>
-
-
-    <style name="ShapeAppearanceOverlay_card_custom_corners" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopRight">4dp</item>
-        <item name="cornerSizeTopLeft">8dp</item>
-        <item name="cornerSizeBottomRight">60dp</item>
-        <item name="cornerSizeBottomLeft">60dp</item>
     </style>
 </resources>
