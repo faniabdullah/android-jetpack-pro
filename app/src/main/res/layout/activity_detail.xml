@@ -8,6 +8,7 @@
     tools:context=".ui.detailmovie.DetailActivity">
 
     <include layout="@layout/content_detail"
+        android:id="@+id/contentDetail"
         />
 
 </androidx.core.widget.NestedScrollView>

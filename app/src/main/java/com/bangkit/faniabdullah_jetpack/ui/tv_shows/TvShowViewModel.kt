@@ -9,6 +9,7 @@ import com.bangkit.faniabdullah_jetpack.model.MovieEntity
 import com.bangkit.faniabdullah_jetpack.model.ResultMovieResponse
 import com.bangkit.faniabdullah_jetpack.model.ResultTvShowsResponse
 import com.bangkit.faniabdullah_jetpack.model.TvShowsEntity
+import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,6 +44,8 @@ class TvShowViewModel : ViewModel() {
     fun getTvShowsPopular(): LiveData<ArrayList<TvShowsEntity>> {
         return listTvShowsPopular
     }
+
+    fun getTvShowsPopularNewsVersion(): List<MovieEntity> = DataDummy.generateDummyDataTvShowsPopular()
 
     fun checkStatusServer(): MutableLiveData<Boolean> {
         return isSuccess

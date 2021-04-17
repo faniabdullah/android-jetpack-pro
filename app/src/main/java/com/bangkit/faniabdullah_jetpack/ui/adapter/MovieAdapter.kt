@@ -14,8 +14,17 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private val list = ArrayList<MovieEntity>()
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
-    inner class MovieViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: MovieEntity)
+    }
+
+    inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = MovieItemBinding.bind(itemView)
 
         fun bind(movie: MovieEntity) {
@@ -26,14 +35,15 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                     .load("${Constant.BASE_IMAGE_URL}${movie.poster_path}")
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .placeholder(R.drawable.placeholder_movie)
-                    .into(imageView)
+                    .into(posterMovie)
             }
+            itemView.setOnClickListener { onItemClickCallback.onItemClicked(movie) }
         }
     }
 
-    fun setList(repos: ArrayList<MovieEntity>) {
+    fun setList(movies: List<MovieEntity>) {
         list.clear()
-        list.addAll(repos)
+        list.addAll(movies)
         notifyDataSetChanged()
     }
 

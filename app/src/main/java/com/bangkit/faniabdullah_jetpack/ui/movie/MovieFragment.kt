@@ -1,5 +1,6 @@
 package com.bangkit.faniabdullah_jetpack.ui.movie
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentMovieBinding
+import com.bangkit.faniabdullah_jetpack.model.MovieEntity
 import com.bangkit.faniabdullah_jetpack.ui.adapter.MovieAdapter
+import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
+import com.bangkit.faniabdullah_jetpack.utils.Constant
 
 class MovieFragment : Fragment() {
 
@@ -32,38 +36,28 @@ class MovieFragment : Fragment() {
         adapter = MovieAdapter()
         adapter.notifyDataSetChanged()
 
-
         binding.apply {
             rvMovie.layoutManager = GridLayoutManager(activity, 2)
             rvMovie.setHasFixedSize(true)
             rvMovie.adapter = adapter
         }
-
         movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
 
-        movieViewModel.checkStatusServer().observe(viewLifecycleOwner, {
+        val moviePlaying = movieViewModel.getMovieNowPlayingNewsVersion()
+        adapter.setList(moviePlaying)
 
-        })
 
-        movieViewModel.setMovieNowPlaying()
-
-        movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, {
-            if (it != null){
-                adapter.setList(it)
-                showLoading(false)
+        adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: MovieEntity) {
+                showDetailMovie(data)
             }
-
         })
-        showLoading(true)
+
     }
 
-    private fun showLoading(state: Boolean) {
-        if (state) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
+    private fun showDetailMovie(data: MovieEntity) {
+        val intentDetail = Intent(context, DetailActivity::class.java)
+        intentDetail.putExtra(Constant.MOVIE_DETAIL, data)
+        startActivity(intentDetail)
     }
-
-
 }

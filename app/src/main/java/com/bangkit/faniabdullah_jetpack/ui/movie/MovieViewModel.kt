@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.bangkit.faniabdullah_jetpack.data.network.RetrofitClient
 import com.bangkit.faniabdullah_jetpack.model.MovieEntity
 import com.bangkit.faniabdullah_jetpack.model.ResultMovieResponse
+import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,4 +46,6 @@ class MovieViewModel : ViewModel() {
     fun checkStatusServer(): MutableLiveData<Boolean> {
         return isSuccess
     }
+
+    fun getMovieNowPlayingNewsVersion(): List<MovieEntity> = DataDummy.generateDummyDataMovieNowPlaying()
 }
