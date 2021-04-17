@@ -43,13 +43,6 @@ class TvShowFragment : Fragment() {
         }
 
         tvShowViewModel = ViewModelProvider(this).get(TvShowViewModel::class.java)
-
-        tvShowViewModel.checkStatusServer().observe(viewLifecycleOwner, {
-
-        })
-
-        tvShowViewModel.setPopularTvShows()
-
         val tvShowsPopular = tvShowViewModel.getTvShowsPopularNewsVersion()
         adapter.setList(tvShowsPopular)
 
@@ -64,13 +57,5 @@ class TvShowFragment : Fragment() {
         val intentDetail = Intent(context, DetailActivity::class.java)
         intentDetail.putExtra(Constant.MOVIE_DETAIL, data)
         startActivity(intentDetail)
-    }
-
-    private fun showLoading(state: Boolean) {
-        if (state) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
     }
 }

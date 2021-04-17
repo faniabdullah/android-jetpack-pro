@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.databinding.MovieItemBinding
 import com.bangkit.faniabdullah_jetpack.model.MovieEntity
-import com.bangkit.faniabdullah_jetpack.model.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -32,7 +31,7 @@ class TvShowsAdapter : RecyclerView.Adapter<TvShowsAdapter.MovieViewHolder>() {
         }
     }
 
-    fun setList(tv_item:List<MovieEntity>) {
+    fun setList(tv_item: List<MovieEntity>) {
         list.clear()
         list.addAll(tv_item)
         notifyDataSetChanged()
