@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">faniabdullah_jetpack</string>
-    <string name="title_activity_main2">MainActivity</string>
+    <string name="app_name">Moca</string>
+    <string name="activity_detail">Detail Activity</string>
     <string name="title_movies">Movies</string>
-    <string name="title_tvshows">TV shows</string>
+    <string name="title_tv_shows">TV shows</string>
     <string name="title_notifications">Notifications</string>
-    <string name="lorem">lorem is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     </resources>

@@ -10,5 +10,5 @@
     <item
         android:id="@+id/navigation_tv_shows"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_tvshows" />
+        android:title="@string/title_tv_shows" />
 </menu>

@@ -1,7 +1,6 @@
 package com.bangkit.faniabdullah_jetpack.ui.detailmovie
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.faniabdullah_jetpack.R
@@ -35,7 +34,6 @@ class DetailActivity : AppCompatActivity() {
 
         data.apply {
             binding.apply {
-                title = "Detail"
                 contentDetail.tvInfoMovie.text = vote_average.toString()
                 contentDetail.tvMovieDetailTitle.text = original_title
                 contentDetail.tvOverviewDetail.text = overview

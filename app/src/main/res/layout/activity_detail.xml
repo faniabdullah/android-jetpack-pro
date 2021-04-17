@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dp"
     tools:context=".ui.detailmovie.DetailActivity">
 
-    <include layout="@layout/content_detail"
+    <include
         android:id="@+id/contentDetail"
-        />
+        layout="@layout/content_detail" />
 
 </androidx.core.widget.NestedScrollView>

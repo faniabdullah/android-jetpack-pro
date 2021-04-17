@@ -15,7 +15,7 @@
 
         android:id="@+id/navigation_tv_shows"
         android:name="com.bangkit.faniabdullah_jetpack.ui.tv_shows.TvShowFragment"
-        android:label="@string/title_tvshows"
+        android:label="@string/title_tv_shows"
         tools:layout="@layout/fragment_tv_shows" />
 
 </navigation>

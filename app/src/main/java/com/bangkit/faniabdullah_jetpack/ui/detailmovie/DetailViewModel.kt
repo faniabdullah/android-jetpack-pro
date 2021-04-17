@@ -19,7 +19,7 @@ class DetailViewModel : ViewModel() {
         DataDummy.generateDummyDataTvShowsPopular() as ArrayList<MovieEntity>
 
 
-    fun getDetailMovieById():MovieEntity {
+    fun getDetailMovieById(): MovieEntity {
         lateinit var result: MovieEntity
         val listMovie = getListMovieNowPlaying()
         for (movie in listMovie) {
