@@ -1,17 +1,17 @@
 package com.bangkit.faniabdullah_jetpack.ui
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
-import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -20,10 +20,8 @@ class MainActivityTest {
     private val dummyMovieNowPlaying = DataDummy.generateDummyDataMovieNowPlaying()
     private val dummyTvShowPopular = DataDummy.generateDummyDataTvShowsPopular()
 
-    @Before
-    fun setup() {
-        ActivityScenario.launch(MainActivity::class.java)
-    }
+    @get:Rule
+    var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
     fun showMovie() {
