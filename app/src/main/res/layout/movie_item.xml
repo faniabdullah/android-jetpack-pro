@@ -29,7 +29,8 @@
             android:layout_gravity="fill"
             android:foregroundGravity="fill"
             android:scaleType="fitXY"
-            tools:srcCompat="@drawable/placeholder_movie" />
+            tools:srcCompat="@drawable/placeholder_movie"
+            tools:ignore="ContentDescription" />
 
     </androidx.cardview.widget.CardView>
 
@@ -51,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="2dp"
-        android:text="TextView"
+        tools:text="TextView"
         android:maxLines="2"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
