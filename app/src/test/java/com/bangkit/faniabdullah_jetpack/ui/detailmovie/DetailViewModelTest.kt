@@ -24,6 +24,11 @@ class DetailViewModelTest {
         val movie = mainViewModel.getDetailMovieById()
         assertNotNull(movie)
         assertEquals(dummyMovieNowPlaying.id, movie.id)
+        assertEquals(dummyMovieNowPlaying.original_title, movie.original_title)
+        assertEquals(dummyMovieNowPlaying.overview, movie.overview)
+        assertEquals(dummyMovieNowPlaying.poster_path, movie.poster_path)
+        assertEquals(dummyMovieNowPlaying.vote_average.toString(), movie.vote_average.toString())
+        assertEquals(dummyMovieNowPlaying.vote_count.toString(), movie.vote_count.toString())
     }
 
     @Test
@@ -32,5 +37,11 @@ class DetailViewModelTest {
         val movie = mainViewModel.getDetailTvShowById()
         assertNotNull(movie)
         assertEquals(dummyTvShowPopular.id, movie.id)
+        assertEquals(dummyTvShowPopular.id, movie.id)
+        assertEquals(dummyTvShowPopular.original_title, movie.original_title)
+        assertEquals(dummyTvShowPopular.overview, movie.overview)
+        assertEquals(dummyTvShowPopular.poster_path, movie.poster_path)
+        assertEquals(dummyTvShowPopular.vote_average.toString(), movie.vote_average.toString())
+        assertEquals(dummyTvShowPopular.vote_count.toString(), movie.vote_count.toString())
     }
 }
