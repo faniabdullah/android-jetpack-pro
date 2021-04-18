@@ -48,6 +48,7 @@ class DetailActivity : AppCompatActivity() {
 
         }
     }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
