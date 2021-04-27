@@ -44,7 +44,7 @@ class DetailActivity : AppCompatActivity() {
     private fun displayData(data: DetailMovieData?) {
         data?.apply {
             binding.apply {
-                contentDetail.tvInfoMovie.text = vote_average
+                contentDetail.tvInfoMovie.text = vote_average.toString()
                 contentDetail.tvMovieDetailTitle.text = original_title
                 contentDetail.tvOverviewDetail.text = overview
                 Glide.with(this@DetailActivity)

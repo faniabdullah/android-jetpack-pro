@@ -16,6 +16,7 @@ import com.bangkit.faniabdullah_jetpack.ui.adapter.MovieAdapter
 import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
+import okhttp3.internal.notify
 
 class TvShowFragment : Fragment() {
 
@@ -38,6 +39,10 @@ class TvShowFragment : Fragment() {
         adapter = MovieAdapter()
         adapter.notifyDataSetChanged()
 
+        if (adapter.itemCount <= 0){
+            showLoading(true)
+        }
+
         binding.apply {
             rvTvShows.layoutManager = GridLayoutManager(activity, 2)
             rvTvShows.setHasFixedSize(true)
@@ -48,7 +53,10 @@ class TvShowFragment : Fragment() {
         tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, {
-            adapter.setList(it)
+            if (it !== null){
+                adapter.setList(it)
+                showLoading(false)
+            }
         })
 
         adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
@@ -63,5 +71,17 @@ class TvShowFragment : Fragment() {
         intentDetail.putExtra(Constant.MOVIE_ID, data.id)
             .putExtra(Constant.KEY_TYPE, Constant.TV_SHOWS_TYPE)
         startActivity(intentDetail)
+    }
+
+
+    private fun showLoading(state: Boolean) {
+
+        if (state) {
+            binding.rvTvShows.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.rvTvShows.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }

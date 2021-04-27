@@ -20,11 +20,6 @@ interface ApiService {
     ): Call<ParentResponse<TvShowsResponse>>
 
 
-    @GET("tv/popular")
-    fun getTvShowsById(
-        @Query("api_key") apiKey: String = BuildConfig.MOVIE_TOKEN
-    ): Call<ParentResponse<TvShowsResponse>>
-
 
     @GET("movie/{movie_id}")
     fun getDetailMovie(

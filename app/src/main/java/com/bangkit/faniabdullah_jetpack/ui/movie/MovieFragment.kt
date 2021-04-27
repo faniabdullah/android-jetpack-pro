@@ -2,12 +2,10 @@ package com.bangkit.faniabdullah_jetpack.ui.movie
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentMovieBinding
@@ -37,19 +35,26 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = MovieAdapter()
-        adapter.notifyDataSetChanged()
+
+        if (adapter.itemCount <= 0) {
+            showLoading(true)
+        }
 
         binding.apply {
             rvMovie.layoutManager = GridLayoutManager(activity, 2)
             rvMovie.setHasFixedSize(true)
             rvMovie.adapter = adapter
         }
+
         val factory = ViewModelFactory.getInstance()
         movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
 
         movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, {
-            adapter.setList(it)
+            if (it !== null) {
+                adapter.setList(it)
+                showLoading(false)
+            }
         })
 
         adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
@@ -64,5 +69,15 @@ class MovieFragment : Fragment() {
         intentDetail.putExtra(Constant.MOVIE_ID, data.id)
             .putExtra(Constant.KEY_TYPE, Constant.MOVIE_TYPE)
         startActivity(intentDetail)
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.rvMovie.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.rvMovie.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }
