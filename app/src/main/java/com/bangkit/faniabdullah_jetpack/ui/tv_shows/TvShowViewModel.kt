@@ -1,11 +1,11 @@
 package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.bangkit.faniabdullah_jetpack.model.MovieEntity
-import com.bangkit.faniabdullah_jetpack.utils.DataDummy
+import com.bangkit.faniabdullah_jetpack.data.CatalogRepository
+import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 
-class TvShowViewModel : ViewModel() {
+class TvShowViewModel(private val mAcademyRepository: CatalogRepository) : ViewModel() {
 
-    fun getTvShowsPopular(): List<MovieEntity> =
-        DataDummy.generateDummyDataTvShowsPopular()
+    fun getTvShowsPopular(): LiveData<List<MovieData>> = mAcademyRepository.getPopularTvShows()
 }

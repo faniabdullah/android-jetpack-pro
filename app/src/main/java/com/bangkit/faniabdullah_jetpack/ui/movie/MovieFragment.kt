@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentMovieBinding
-import com.bangkit.faniabdullah_jetpack.model.MovieEntity
+import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.ui.adapter.MovieAdapter
 import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
+import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
 
 class MovieFragment : Fragment() {
 
@@ -41,21 +42,22 @@ class MovieFragment : Fragment() {
             rvMovie.setHasFixedSize(true)
             rvMovie.adapter = adapter
         }
-        movieViewModel = ViewModelProvider(this).get(MovieViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(requireActivity())
+        movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
-        val moviePlaying = movieViewModel.getMovieNowPlaying()
-        adapter.setList(moviePlaying)
 
+        movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, {
+            adapter.setList(it)
+        })
 
         adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: MovieEntity) {
+            override fun onItemClicked(data: MovieData) {
                 showDetailMovie(data)
             }
         })
-
     }
 
-    private fun showDetailMovie(data: MovieEntity) {
+    private fun showDetailMovie(data: MovieData) {
         val intentDetail = Intent(context, DetailActivity::class.java)
         intentDetail.putExtra(Constant.MOVIE_ID, data.id)
             .putExtra(Constant.KEY_TYPE, Constant.MOVIE_TYPE)

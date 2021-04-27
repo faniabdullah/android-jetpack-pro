@@ -11,7 +11,7 @@ class TvShowViewModelTest {
 
     @Before
     fun init() {
-        mainViewModel = TvShowViewModel()
+        mainViewModel = TvShowViewModel(mAcademyRepository)
     }
 
     @Test

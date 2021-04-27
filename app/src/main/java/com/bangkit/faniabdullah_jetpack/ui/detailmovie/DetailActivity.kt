@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.databinding.ActivityDetailBinding
-import com.bangkit.faniabdullah_jetpack.model.MovieEntity
+import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -27,7 +27,7 @@ class DetailActivity : AppCompatActivity() {
         if (movie != null) {
             detailViewModel.setSelectedMovie(movie)
         }
-        val data: MovieEntity = if (typeMovie == Constant.MOVIE_TYPE) {
+        val data: MovieData = if (typeMovie == Constant.MOVIE_TYPE) {
             detailViewModel.getDetailMovieById()
         } else {
             detailViewModel.getDetailTvShowById()

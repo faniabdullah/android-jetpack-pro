@@ -1,11 +1,12 @@
 package com.bangkit.faniabdullah_jetpack.ui.movie
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.bangkit.faniabdullah_jetpack.model.MovieEntity
+import com.bangkit.faniabdullah_jetpack.data.CatalogRepository
+import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 
-class MovieViewModel : ViewModel() {
+class MovieViewModel(private val mCatalogRepository: CatalogRepository) : ViewModel() {
 
-    fun getMovieNowPlaying(): List<MovieEntity> =
-        DataDummy.generateDummyDataMovieNowPlaying()
+    fun getMovieNowPlaying(): LiveData<List<MovieData>> = mCatalogRepository.getMovieNowPlaying()
 }

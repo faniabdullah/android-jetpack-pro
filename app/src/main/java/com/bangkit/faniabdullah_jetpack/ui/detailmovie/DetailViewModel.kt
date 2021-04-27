@@ -1,7 +1,7 @@
 package com.bangkit.faniabdullah_jetpack.ui.detailmovie
 
 import androidx.lifecycle.ViewModel
-import com.bangkit.faniabdullah_jetpack.model.MovieEntity
+import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 
 class DetailViewModel : ViewModel() {
@@ -12,15 +12,15 @@ class DetailViewModel : ViewModel() {
     }
 
 
-    private fun getListMovieNowPlaying(): ArrayList<MovieEntity> =
-        DataDummy.generateDummyDataMovieNowPlaying() as ArrayList<MovieEntity>
+    private fun getListMovieNowPlaying(): ArrayList<MovieData> =
+        DataDummy.generateDummyDataMovieNowPlaying() as ArrayList<MovieData>
 
-    private fun getListTvShowPopular(): ArrayList<MovieEntity> =
-        DataDummy.generateDummyDataTvShowsPopular() as ArrayList<MovieEntity>
+    private fun getListTvShowPopular(): ArrayList<MovieData> =
+        DataDummy.generateDummyDataTvShowsPopular() as ArrayList<MovieData>
 
 
-    fun getDetailMovieById(): MovieEntity {
-        lateinit var result: MovieEntity
+    fun getDetailMovieById(): MovieData {
+        lateinit var result: MovieData
         val listMovie = getListMovieNowPlaying()
         for (movie in listMovie) {
             if (movie.id == selectedMovie) {
@@ -31,9 +31,9 @@ class DetailViewModel : ViewModel() {
         return result
     }
 
-    fun getDetailTvShowById(): MovieEntity {
+    fun getDetailTvShowById(): MovieData {
         val listTvShow = getListTvShowPopular()
-        lateinit var result: MovieEntity
+        lateinit var result: MovieData
         for (tvShow in listTvShow) {
             if (tvShow.id == selectedMovie) {
                 result = tvShow

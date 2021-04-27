@@ -10,7 +10,7 @@ class MovieViewModelTest {
 
     @Before
     fun init() {
-        mainViewModel = MovieViewModel()
+        mainViewModel = MovieViewModel(mAcademyRepository)
     }
 
     @Test
