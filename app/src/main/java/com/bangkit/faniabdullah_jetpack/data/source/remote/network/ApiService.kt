@@ -12,12 +12,12 @@ interface ApiService {
     @GET("movie/now_playing")
     fun getMovieNowPlaying(
         @Query("api_key") apiKey: String = BuildConfig.MOVIE_TOKEN
-    ): Call<ParentResponse<MovieResponse>>
+    ): Call<CatalogResponse<MovieResponse>>
 
     @GET("tv/popular")
     fun getPopularTvShows(
         @Query("api_key") apiKey: String = BuildConfig.MOVIE_TOKEN
-    ): Call<ParentResponse<TvShowsResponse>>
+    ): Call<CatalogResponse<TvShowsResponse>>
 
 
 

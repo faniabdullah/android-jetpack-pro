@@ -25,10 +25,10 @@ class RemoteDataSource {
     ) {
         EspressoIdlingResource.increment()
         ApiConfig.getApiService().getMovieNowPlaying()
-            .enqueue(object : Callback<ParentResponse<MovieResponse>> {
+            .enqueue(object : Callback<CatalogResponse<MovieResponse>> {
                 override fun onResponse(
-                    call: Call<ParentResponse<MovieResponse>>,
-                    response: Response<ParentResponse<MovieResponse>>
+                    call: Call<CatalogResponse<MovieResponse>>,
+                    response: Response<CatalogResponse<MovieResponse>>
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.results?.let { callback.onAllMoviesReceived(it) }
@@ -36,7 +36,7 @@ class RemoteDataSource {
                     EspressoIdlingResource.decrement()
                 }
 
-                override fun onFailure(call: Call<ParentResponse<MovieResponse>>, t: Throwable) {
+                override fun onFailure(call: Call<CatalogResponse<MovieResponse>>, t: Throwable) {
                     Log.e("Failure", "${t.message}")
                     EspressoIdlingResource.decrement()
                 }
@@ -48,17 +48,17 @@ class RemoteDataSource {
 
     fun getTvShowPopular(callback: LoadPopularTvShowCallback) {
         ApiConfig.getApiService().getPopularTvShows()
-            .enqueue(object : Callback<ParentResponse<TvShowsResponse>> {
+            .enqueue(object : Callback<CatalogResponse<TvShowsResponse>> {
                 override fun onResponse(
-                    call: Call<ParentResponse<TvShowsResponse>>,
-                    response: Response<ParentResponse<TvShowsResponse>>
+                    call: Call<CatalogResponse<TvShowsResponse>>,
+                    response: Response<CatalogResponse<TvShowsResponse>>
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.results?.let { callback.onAllTvShowsReceived(it) }
                     }
                 }
 
-                override fun onFailure(call: Call<ParentResponse<TvShowsResponse>>, t: Throwable) {
+                override fun onFailure(call: Call<CatalogResponse<TvShowsResponse>>, t: Throwable) {
                     Log.e("Failure", "${t.message}")
                 }
             })
@@ -66,13 +66,44 @@ class RemoteDataSource {
 
     fun getMovieDetail(movieId: Int, callback: LoadMovieDetailCallback) {
         EspressoIdlingResource.increment()
+        ApiConfig.getApiService().getDetailMovie(movieId)
+            .enqueue(object : Callback<DetailMovieResponse> {
+                override fun onResponse(
+                    call: Call<DetailMovieResponse>,
+                    response: Response<DetailMovieResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { callback.onMovieDetailReceived(it) }
+                    }
+                    EspressoIdlingResource.decrement()
+                }
 
+                override fun onFailure(call: Call<DetailMovieResponse>, t: Throwable) {
+                    Log.e("Failure", "${t.message}")
+                    EspressoIdlingResource.decrement()
+                }
+            })
     }
 
     fun getTvShowDetail(tvShowId: Int, callback: LoadTvShowDetailCallback) {
         EspressoIdlingResource.increment()
+        ApiConfig.getApiService().getDetailTvShow(tvShowId)
+            .enqueue(object : Callback<DetailTvResponse> {
+                override fun onResponse(
+                    call: Call<DetailTvResponse>,
+                    response: Response<DetailTvResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { callback.onTvShowDetailReceived(it) }
+                    }
+                    EspressoIdlingResource.decrement()
+                }
 
-        EspressoIdlingResource.decrement()
+                override fun onFailure(call: Call<DetailTvResponse>, t: Throwable) {
+                    Log.e("Failure", "${t.message}")
+                    EspressoIdlingResource.decrement()
+                }
+            })
     }
 
     interface LoadMoviesNowPlayingCallback {
@@ -88,7 +119,7 @@ class RemoteDataSource {
     }
 
     interface LoadTvShowDetailCallback {
-        fun onTvShowDetailReceived(tvShowResponse: Call<DetailTvResponse>)
+        fun onTvShowDetailReceived(tvShowResponse: DetailTvResponse)
     }
 
 }

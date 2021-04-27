@@ -2,7 +2,7 @@ package com.bangkit.faniabdullah_jetpack.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ParentResponse<T>(
+data class CatalogResponse<T>(
 
 	@field:SerializedName("page")
 	val page: Int? = null,

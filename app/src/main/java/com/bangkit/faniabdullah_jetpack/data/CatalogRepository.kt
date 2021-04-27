@@ -3,6 +3,8 @@ package com.bangkit.faniabdullah_jetpack.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.DetailMovieResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.DetailTvResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.MovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
@@ -75,24 +77,24 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
 
     override fun getMovieDetail(movieId: Int): LiveData<DetailMovieData> {
         val movieResult = MutableLiveData<DetailMovieData>()
-//            remoteDataSource.getMovieDetail(
-//                movieId,
-//                object : RemoteDataSource.LoadMovieDetailCallback {
-//
-//                    override fun onMovieDetailReceived(movieResponse: DetailMovieResponse) {
-//                        val movie = DetailMovieData(
-//                            movieResponse.id.toString(),
-//                            movieResponse.originalTitle.toString(),
-//                            movieResponse.overview.toString(),
-//                            movieResponse.posterPath.toString(),
-//                            movieResponse.releaseDate.toString(),
-//                            movieResponse.voteAverage.toString(),
-//                            movieResponse.voteCount.toString()
-//                        )
-//
-//                        movieResult.postValue(movie)
-//                    }
-//                })
+        remoteDataSource.getMovieDetail(
+            movieId,
+            object : RemoteDataSource.LoadMovieDetailCallback {
+
+                override fun onMovieDetailReceived(movieResponse: DetailMovieResponse) {
+                    val movie = DetailMovieData(
+                        movieResponse.id.toString(),
+                        movieResponse.originalTitle,
+                        movieResponse.overview,
+                        movieResponse.posterPath,
+                        movieResponse.releaseDate,
+                        movieResponse.voteAverage,
+                        movieResponse.voteCount
+                    )
+
+                    movieResult.postValue(movie)
+                }
+            })
 
         return movieResult
     }
@@ -100,22 +102,22 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
     override fun getTvShowDetail(tvShowId: Int): LiveData<DetailMovieData> {
         val detailMovieData = MutableLiveData<DetailMovieData>()
 
-//            remoteDataSource.getTvShowDetail(tvShowId,
-//                object : RemoteDataSource.LoadTvShowDetailCallback {
-//
-//                    override fun onTvShowDetailReceived(tvShowResponse: Call<DetailTvResponse>) {
-//                        val movieDetail = DetailMovieData(
-//                            tvShowResponse.id.toString(),
-//                            tvShowResponse.originalName as String,
-//                            tvShowResponse.overview as String,
-//                            tvShowResponse.posterPath as String,
-//                            tvShowResponse.firstAirDate.toString(),
-//                            tvShowResponse.voteAverage.toString(),
-//                            tvShowResponse.voteCount.toString()
-//                        )
-//                        detailMovieData.postValue(movieDetail)
-//                    }
-//                })
+        remoteDataSource.getTvShowDetail(tvShowId,
+            object : RemoteDataSource.LoadTvShowDetailCallback {
+
+                override fun onTvShowDetailReceived(tvShowResponse: DetailTvResponse) {
+                    val movieDetail = DetailMovieData(
+                        tvShowResponse.id.toString(),
+                        tvShowResponse.originalName,
+                        tvShowResponse.overview,
+                        tvShowResponse.posterPath,
+                        tvShowResponse.firstAirDate,
+                        tvShowResponse.voteAverage,
+                        tvShowResponse.voteCount
+                    )
+                    detailMovieData.postValue(movieDetail)
+                }
+            })
         return detailMovieData
     }
 }
