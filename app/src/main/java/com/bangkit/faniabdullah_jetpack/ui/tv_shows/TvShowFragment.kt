@@ -53,8 +53,10 @@ class TvShowFragment : Fragment() {
         tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, {
-            if (it !== null){
+            if (it.isNotEmpty()){
                 adapter.setList(it)
+                showLoading(false)
+            }else{
                 showLoading(false)
             }
         })

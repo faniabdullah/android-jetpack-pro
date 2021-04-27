@@ -51,8 +51,10 @@ class MovieFragment : Fragment() {
 
 
         movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, {
-            if (it !== null) {
+            if (it.isNotEmpty()){
                 adapter.setList(it)
+                showLoading(false)
+            }else{
                 showLoading(false)
             }
         })
