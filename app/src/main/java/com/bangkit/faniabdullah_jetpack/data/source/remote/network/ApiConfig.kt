@@ -21,26 +21,5 @@ class ApiConfig {
                 .build()
             return retrofit.create(ApiService::class.java)
         }
-
-
-        private val httpClient = OkHttpClient.Builder().apply {
-
-        }.build()
-
-
-        private val retrofit: Retrofit.Builder by lazy {
-            Retrofit.Builder().apply {
-                client(httpClient)
-                baseUrl(Constant.BASE_URL)
-                addConverterFactory(GsonConverterFactory.create())
-            }
-        }
-
-
-        val instance: ApiService by lazy {
-            retrofit
-                .build()
-                .create(ApiService::class.java)
-        }
     }
 }
