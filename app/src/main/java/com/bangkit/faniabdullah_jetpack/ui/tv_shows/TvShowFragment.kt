@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentTvShowsBinding
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.ui.adapter.MovieAdapter
@@ -56,8 +57,10 @@ class TvShowFragment : Fragment() {
             if (it.isNotEmpty()){
                 adapter.setList(it)
                 showLoading(false)
+                showEmptyLayout(false)
             }else{
                 showLoading(false)
+                showEmptyLayout(true)
             }
         })
 
@@ -85,5 +88,19 @@ class TvShowFragment : Fragment() {
             binding.rvTvShows.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showEmptyLayout(state: Boolean) {
+        if (state) {
+            binding.rvTvShows.visibility = View.GONE
+            binding.notifyLayout.messageNotify.visibility = View.VISIBLE
+            binding.notifyLayout.pictureNotify.visibility = View.VISIBLE
+            binding.notifyLayout.messageNotify.text = getString(R.string.notification_error_server)
+        }else{
+            binding.rvTvShows.visibility = View.VISIBLE
+            binding.notifyLayout.messageNotify.visibility = View.GONE
+            binding.notifyLayout.pictureNotify.visibility = View.GONE
+        }
+
     }
 }

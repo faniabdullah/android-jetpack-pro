@@ -2,6 +2,7 @@ package com.bangkit.faniabdullah_jetpack.ui.detailmovie
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.faniabdullah_jetpack.R
@@ -21,7 +22,7 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        showLoading(true)
         val movieDa = intent?.getStringExtra(Constant.MOVIE_ID)
         val movie = movieDa?.toInt()
         val typeMovie = intent.getStringExtra(Constant.KEY_TYPE)
@@ -32,10 +33,13 @@ class DetailActivity : AppCompatActivity() {
             if (typeMovie == Constant.MOVIE_TYPE) {
                 detailViewModel.getDetailMovieById(movie).observe(this, {
                     displayData(it)
+
+                    showLoading(false)
                 })
             } else {
                 detailViewModel.getDetailTvShowById(movie).observe(this, {
                     displayData(it)
+                    showLoading(false)
                 })
             }
         }
@@ -56,8 +60,18 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.contentDetail.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.contentDetail.progressBar.visibility = View.GONE
+        }
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
+
+
 }

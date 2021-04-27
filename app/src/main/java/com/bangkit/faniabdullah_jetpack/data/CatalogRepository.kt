@@ -1,6 +1,5 @@
 package com.bangkit.faniabdullah_jetpack.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
@@ -29,19 +28,23 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
             RemoteDataSource.LoadMoviesNowPlayingCallback {
             override fun onAllMoviesReceived(movieResponse: List<MovieResponse?>) {
                 val tvShowList = ArrayList<MovieData>()
-                for (response in movieResponse) {
-                    if (response !== null) {
-                        val tvShow = MovieData(
-                            response.id.toString(),
-                            response.title,
-                            response.originalTitle,
-                            response.posterPath,
-                            response.overview,
-                            response.voteAverage,
-                            response.voteCount
-                        )
-                        tvShowList.add(tvShow)
+                if (movieResponse.isNotEmpty()) {
+                    for (response in movieResponse) {
+                        if (response !== null) {
+                            val tvShow = MovieData(
+                                response.id.toString(),
+                                response.title,
+                                response.originalTitle,
+                                response.posterPath,
+                                response.overview,
+                                response.voteAverage,
+                                response.voteCount
+                            )
+                            tvShowList.add(tvShow)
+                        }
+                        listMovieResult.postValue(tvShowList)
                     }
+                }else{
                     listMovieResult.postValue(tvShowList)
                 }
             }
@@ -56,7 +59,7 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
 
             override fun onAllTvShowsReceived(tvShowResponse: List<TvShowsResponse?>) {
                 val tvShowList = ArrayList<MovieData>()
-                if (tvShowResponse.isNotEmpty()){
+                if (tvShowResponse.isNotEmpty()) {
                     for (response in tvShowResponse) {
                         if (response !== null) {
                             val tvShow = MovieData(
@@ -72,7 +75,7 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
                         }
                         listTvShowResult.postValue(tvShowList)
                     }
-                }else{
+                } else {
                     listTvShowResult.postValue(tvShowList)
                 }
 

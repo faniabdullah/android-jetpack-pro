@@ -1,7 +1,7 @@
 package com.bangkit.faniabdullah_jetpack.data.source.local
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MovieEntity(

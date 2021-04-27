@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentMovieBinding
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.ui.adapter.MovieAdapter
@@ -53,10 +54,11 @@ class MovieFragment : Fragment() {
         movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, {
             if (it.isNotEmpty()){
                 adapter.setList(it)
-                showLoading(false)
+                showEmptyLayout(false)
             }else{
-                showLoading(false)
+                showEmptyLayout(true)
             }
+            showLoading(false)
         })
 
         adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
@@ -64,6 +66,20 @@ class MovieFragment : Fragment() {
                 showDetailMovie(data)
             }
         })
+    }
+
+    private fun showEmptyLayout(state: Boolean) {
+        if (state) {
+            binding.rvMovie.visibility = View.GONE
+            binding.notifyLayout.messageNotify.visibility = View.VISIBLE
+            binding.notifyLayout.pictureNotify.visibility = View.VISIBLE
+            binding.notifyLayout.messageNotify.text = getString(R.string.notification_error_server)
+        }else{
+            binding.rvMovie.visibility = View.VISIBLE
+            binding.notifyLayout.messageNotify.visibility = View.GONE
+            binding.notifyLayout.pictureNotify.visibility = View.GONE
+        }
+
     }
 
     private fun showDetailMovie(data: MovieData) {
