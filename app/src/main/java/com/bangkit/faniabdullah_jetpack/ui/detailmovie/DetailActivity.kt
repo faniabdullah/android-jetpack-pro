@@ -22,6 +22,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         showLoading(true)
+
         val movieDa = intent?.getStringExtra(Constant.MOVIE_ID)
         val movie = movieDa?.toInt()
         val typeMovie = intent.getStringExtra(Constant.KEY_TYPE)

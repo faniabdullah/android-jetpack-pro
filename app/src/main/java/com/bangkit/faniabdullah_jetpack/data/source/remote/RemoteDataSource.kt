@@ -2,7 +2,11 @@ package com.bangkit.faniabdullah_jetpack.data.source.remote
 
 import android.util.Log
 import com.bangkit.faniabdullah_jetpack.data.source.remote.network.ApiConfig
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.*
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.CatalogResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.DetailTvResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback

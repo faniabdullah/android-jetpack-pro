@@ -1,4 +1,4 @@
-package com.bangkit.faniabdullah_jetpack.data.source.remote.response
+package com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows
 
 import com.google.gson.annotations.SerializedName
 

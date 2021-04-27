@@ -1,5 +1,9 @@
-package com.bangkit.faniabdullah_jetpack.data.source.remote.response
+package com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows
 
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.GenresItem
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.ProductionCompaniesItem
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.ProductionCountriesItem
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.SpokenLanguagesItem
 import com.google.gson.annotations.SerializedName
 
 data class DetailTvResponse(

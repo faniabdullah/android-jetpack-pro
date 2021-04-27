@@ -3,10 +3,10 @@ package com.bangkit.faniabdullah_jetpack.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.DetailMovieResponse
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.DetailTvResponse
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.MovieResponse
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.TvShowsResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.DetailTvResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 
@@ -44,7 +44,7 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
                         }
                         listMovieResult.postValue(tvShowList)
                     }
-                }else{
+                } else {
                     listMovieResult.postValue(tvShowList)
                 }
             }

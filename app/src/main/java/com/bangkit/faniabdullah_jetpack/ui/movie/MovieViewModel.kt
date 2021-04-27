@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.faniabdullah_jetpack.data.CatalogRepository
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
-import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 
 class MovieViewModel(private val mCatalogRepository: CatalogRepository) : ViewModel() {
 

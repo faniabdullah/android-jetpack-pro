@@ -1,6 +1,5 @@
 package com.bangkit.faniabdullah_jetpack.ui.detailmovie
 
-import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
