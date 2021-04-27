@@ -37,9 +37,7 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = MovieAdapter()
 
-        if (adapter.itemCount <= 0) {
-            showLoading(true)
-        }
+        showLoading(true)
 
         binding.apply {
             rvMovie.layoutManager = GridLayoutManager(activity, 2)
@@ -52,10 +50,11 @@ class MovieFragment : Fragment() {
 
 
         movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, {
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 adapter.setList(it)
+                adapter.notifyDataSetChanged()
                 showEmptyLayout(false)
-            }else{
+            } else {
                 showEmptyLayout(true)
             }
             showLoading(false)
@@ -74,7 +73,7 @@ class MovieFragment : Fragment() {
             binding.notifyLayout.messageNotify.visibility = View.VISIBLE
             binding.notifyLayout.pictureNotify.visibility = View.VISIBLE
             binding.notifyLayout.messageNotify.text = getString(R.string.notification_error_server)
-        }else{
+        } else {
             binding.rvMovie.visibility = View.VISIBLE
             binding.notifyLayout.messageNotify.visibility = View.GONE
             binding.notifyLayout.pictureNotify.visibility = View.GONE

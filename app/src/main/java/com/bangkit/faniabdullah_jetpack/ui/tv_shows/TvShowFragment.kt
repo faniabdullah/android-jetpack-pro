@@ -2,12 +2,10 @@ package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.R
@@ -17,7 +15,6 @@ import com.bangkit.faniabdullah_jetpack.ui.adapter.MovieAdapter
 import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
-import okhttp3.internal.notify
 
 class TvShowFragment : Fragment() {
 
@@ -38,11 +35,6 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = MovieAdapter()
-        adapter.notifyDataSetChanged()
-
-        if (adapter.itemCount <= 0){
-            showLoading(true)
-        }
 
         binding.apply {
             rvTvShows.layoutManager = GridLayoutManager(activity, 2)
@@ -54,11 +46,12 @@ class TvShowFragment : Fragment() {
         tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, {
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 adapter.setList(it)
+                adapter.notifyDataSetChanged()
                 showLoading(false)
                 showEmptyLayout(false)
-            }else{
+            } else {
                 showLoading(false)
                 showEmptyLayout(true)
             }
@@ -96,7 +89,7 @@ class TvShowFragment : Fragment() {
             binding.notifyLayout.messageNotify.visibility = View.VISIBLE
             binding.notifyLayout.pictureNotify.visibility = View.VISIBLE
             binding.notifyLayout.messageNotify.text = getString(R.string.notification_error_server)
-        }else{
+        } else {
             binding.rvTvShows.visibility = View.VISIBLE
             binding.notifyLayout.messageNotify.visibility = View.GONE
             binding.notifyLayout.pictureNotify.visibility = View.GONE

@@ -1,7 +1,6 @@
 package com.bangkit.faniabdullah_jetpack.ui.detailmovie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
