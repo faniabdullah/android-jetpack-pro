@@ -1,10 +1,14 @@
 package com.bangkit.faniabdullah_jetpack.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.DetailMovieResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.DetailTvResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.MovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.TvShowsResponse
+import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -76,5 +80,54 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
             })
         }
         return listTvShowResult
+    }
+
+    override fun getMovieDetail(movieId: Int): LiveData<DetailMovieData> {
+        val movieResult = MutableLiveData<DetailMovieData>()
+        CoroutineScope(IO).launch {
+            remoteDataSource.getMovieDetail(
+                movieId,
+                object : RemoteDataSource.LoadMovieDetailCallback {
+
+                    override fun onMovieDetailReceived(movieResponse: DetailMovieResponse) {
+                        val movie = DetailMovieData(
+                            movieResponse.id.toString(),
+                            movieResponse.originalTitle.toString(),
+                            movieResponse.overview.toString(),
+                            movieResponse.posterPath.toString(),
+                            movieResponse.releaseDate.toString(),
+                            movieResponse.voteAverage.toString(),
+                            movieResponse.voteCount.toString()
+                        )
+
+                        movieResult.postValue(movie)
+                    }
+                })
+        }
+
+        return movieResult
+    }
+
+    override fun getTvShowDetail(tvShowId: Int): LiveData<DetailMovieData> {
+        val detailMovieData = MutableLiveData<DetailMovieData>()
+        CoroutineScope(IO).launch {
+            remoteDataSource.getTvShowDetail(tvShowId,
+                object : RemoteDataSource.LoadTvShowDetailCallback {
+
+                    override fun onTvShowDetailReceived(tvShowResponse: DetailTvResponse) {
+                        val movieDetail = DetailMovieData(
+                            tvShowResponse.id.toString(),
+                            tvShowResponse.originalName as String,
+                            tvShowResponse.overview as String,
+                            tvShowResponse.posterPath as String,
+                            tvShowResponse.firstAirDate.toString(),
+                            tvShowResponse.voteAverage.toString(),
+                            tvShowResponse.voteCount.toString()
+                        )
+                        detailMovieData.postValue(movieDetail)
+                    }
+                })
+        }
+        return detailMovieData
     }
 }

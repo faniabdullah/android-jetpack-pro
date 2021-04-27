@@ -2,6 +2,7 @@ package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,9 +43,9 @@ class TvShowFragment : Fragment() {
             rvTvShows.setHasFixedSize(true)
             rvTvShows.adapter = adapter
         }
-        val factory = ViewModelFactory.getInstance(requireActivity())
+        val factory = ViewModelFactory.getInstance()
 
-        tvShowViewModel = ViewModelProvider(this, factory).get(TvShowViewModel::class.java)
+        tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, {
             adapter.setList(it)
