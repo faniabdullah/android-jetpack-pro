@@ -3,25 +3,37 @@ package com.bangkit.faniabdullah_jetpack.ui
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.bangkit.faniabdullah_jetpack.R
-import com.bangkit.faniabdullah_jetpack.utils.DataDummy
+import com.bangkit.faniabdullah_jetpack.utils.EspressoIdlingResource
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MainActivityTest {
-    private val dummyMovieNowPlaying = DataDummy.generateDummyDataMovieNowPlaying()
-    private val dummyTvShowPopular = DataDummy.generateDummyDataTvShowsPopular()
 
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @Before
+    fun setUp() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.espressoTestIdlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.espressoTestIdlingResource)
+    }
 
     @Test
     fun showMovie() {
@@ -30,7 +42,7 @@ class MainActivityTest {
         onView(withId(R.id.rv_movie))
             .perform(
                 RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-                    dummyMovieNowPlaying.size
+                    10
                 )
             )
     }
@@ -43,7 +55,7 @@ class MainActivityTest {
         onView(withId(R.id.rv_tv_shows))
             .perform(
                 RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-                    dummyTvShowPopular.size
+                    10
                 )
             )
     }
@@ -59,7 +71,7 @@ class MainActivityTest {
         onView(withId(R.id.rv_movie))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                    3,
+                    1,
                     click()
                 )
             )
@@ -70,13 +82,6 @@ class MainActivityTest {
             .check(matches(isDisplayed()))
         onView(withId(R.id.tv_overview_detail))
             .check(matches(isDisplayed()))
-
-        onView(withId(R.id.tv_movie_detail_title))
-            .check(matches(withText(dummyMovieNowPlaying[3].original_title)))
-        onView(withId(R.id.tv_overview_detail))
-            .check(matches(withText(dummyMovieNowPlaying[3].overview)))
-        onView(withId(R.id.tv_info_movie))
-            .check(matches(withText(dummyMovieNowPlaying[3].vote_average.toString())))
 
         pressBack()
 
@@ -93,7 +98,7 @@ class MainActivityTest {
         onView(withId(R.id.rv_tv_shows))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                    3,
+                    1,
                     click()
                 )
             )
@@ -105,12 +110,6 @@ class MainActivityTest {
         onView(withId(R.id.tv_overview_detail))
             .check(matches(isDisplayed()))
 
-        onView(withId(R.id.tv_movie_detail_title))
-            .check(matches(withText(dummyTvShowPopular[3].original_title)))
-        onView(withId(R.id.tv_overview_detail))
-            .check(matches(withText(dummyTvShowPopular[3].overview)))
-        onView(withId(R.id.tv_info_movie))
-            .check(matches(withText(dummyTvShowPopular[3].vote_average.toString())))
 
         pressBack()
 
