@@ -10,8 +10,17 @@ import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvSh
 import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 
-class FakeCatalogRepository(private val remoteDataSource: RemoteDataSource) :
-    CatalogDataSource {
+class CatalogMovieMovieRepository private constructor(private val remoteDataSource: RemoteDataSource) :
+    CatalogMovieDataSource {
+    companion object {
+        @Volatile
+        private var instance: CatalogMovieMovieRepository? = null
+
+        fun getInstance(remoteDataSource: RemoteDataSource): CatalogMovieMovieRepository =
+            instance ?: synchronized(this) {
+                instance ?: CatalogMovieMovieRepository(remoteDataSource)
+            }
+    }
 
     override fun getMovieNowPlaying(): LiveData<List<MovieData>> {
         val listMovieResult = MutableLiveData<List<MovieData>>()

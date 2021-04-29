@@ -13,13 +13,13 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.mock
 
-class CatalogRepositoryTest {
+class CatalogMovieRepositoryTest {
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val remote = mock(RemoteDataSource::class.java)
-    private val movieCatalogueRepository = FakeCatalogRepository(remote)
+    private val movieCatalogueRepository = FakeCatalogMovieRepository(remote)
 
     private val moviesNowPlayingResponse = DataDummy.generateDummyDataRemoteNowPlaying()
     private val tvShowsPopularResponse = DataDummy.generateDummyDataRemoteTvShowPopular()

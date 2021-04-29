@@ -1,7 +1,7 @@
 package com.bangkit.faniabdullah_jetpack.data.source.remote.network
 
 import com.bangkit.faniabdullah_jetpack.BuildConfig
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.*
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.CatalogResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.DetailTvResponse
@@ -22,7 +22,6 @@ interface ApiService {
     fun getPopularTvShows(
         @Query("api_key") apiKey: String = BuildConfig.MOVIE_TOKEN
     ): Call<CatalogResponse<TvShowsResponse>>
-
 
 
     @GET("movie/{movie_id}")

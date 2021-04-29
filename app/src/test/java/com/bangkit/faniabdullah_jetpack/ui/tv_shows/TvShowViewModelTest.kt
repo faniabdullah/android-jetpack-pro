@@ -3,7 +3,7 @@ package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.bangkit.faniabdullah_jetpack.data.CatalogRepository
+import com.bangkit.faniabdullah_jetpack.data.CatalogMovieMovieRepository
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
@@ -20,20 +20,20 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class TvShowViewModelTest {
-    private lateinit var viewModel: TvShowViewModel
+    private lateinit var mainViewModel: TvShowViewModel
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var movieCatalogueRepository: CatalogRepository
+    private lateinit var movieCatalogueMovieRepository: CatalogMovieMovieRepository
 
     @Mock
     private lateinit var observer: Observer<List<MovieData>>
 
     @Before
     fun setUp() {
-        viewModel = TvShowViewModel(movieCatalogueRepository)
+        mainViewModel = TvShowViewModel(movieCatalogueMovieRepository)
     }
 
     @Test
@@ -42,14 +42,14 @@ class TvShowViewModelTest {
         val movies = MutableLiveData<List<MovieData>>()
         movies.value = dummyMovies
 
-        Mockito.`when`(movieCatalogueRepository.getPopularTvShows()).thenReturn(movies)
+        Mockito.`when`(movieCatalogueMovieRepository.getPopularTvShows()).thenReturn(movies)
 
-        val movie = viewModel.getTvShowsPopular().value
-        verify(movieCatalogueRepository).getPopularTvShows()
+        val movie = mainViewModel.getTvShowsPopular().value
+        verify(movieCatalogueMovieRepository).getPopularTvShows()
         assertNotNull(movie)
         assertEquals(12, movie?.size)
 
-        viewModel.getTvShowsPopular().observeForever(observer)
+        mainViewModel.getTvShowsPopular().observeForever(observer)
         verify(observer).onChanged(dummyMovies)
     }
 }
