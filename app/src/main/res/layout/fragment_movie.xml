@@ -10,9 +10,9 @@
         android:id="@+id/rv_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         tools:layout_editor_absoluteX="196dp"
         tools:layout_editor_absoluteY="284dp"
-        android:visibility="gone"
         tools:listitem="@layout/movie_item" />
 
     <ProgressBar
@@ -32,6 +32,5 @@
 
     <include
         android:id="@+id/notify_layout"
-        layout="@layout/layout_notify"
-        />
+        layout="@layout/layout_notify" />
 </androidx.constraintlayout.widget.ConstraintLayout>

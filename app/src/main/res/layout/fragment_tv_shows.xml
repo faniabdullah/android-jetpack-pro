@@ -33,6 +33,5 @@
 
     <include
         android:id="@+id/notify_layout"
-        layout="@layout/layout_notify"
-        />
+        layout="@layout/layout_notify" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/picture_notify"
@@ -24,14 +24,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:lineSpacingExtra="8dp"
+        android:padding="8dp"
         android:textAlignment="center"
         android:textSize="18sp"
         android:visibility="gone"
-        android:padding="8dp"
-        tools:text="@string/notification_error_server"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/picture_notify" />
+        app:layout_constraintTop_toBottomOf="@+id/picture_notify"
+        tools:text="@string/notification_error_server" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
