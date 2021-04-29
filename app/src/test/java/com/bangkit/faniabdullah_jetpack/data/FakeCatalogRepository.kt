@@ -33,8 +33,8 @@ class FakeCatalogRepository(private val remoteDataSource: RemoteDataSource) :
                             )
                             tvShowList.add(tvShow)
                         }
-                        listMovieResult.postValue(tvShowList)
                     }
+                    listMovieResult.postValue(tvShowList)
                 } else {
                     listMovieResult.postValue(tvShowList)
                 }
@@ -64,8 +64,8 @@ class FakeCatalogRepository(private val remoteDataSource: RemoteDataSource) :
                             )
                             tvShowList.add(tvShow)
                         }
-                        listTvShowResult.postValue(tvShowList)
                     }
+                    listTvShowResult.postValue(tvShowList)
                 } else {
                     listTvShowResult.postValue(tvShowList)
                 }

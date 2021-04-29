@@ -42,8 +42,8 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
                             )
                             tvShowList.add(tvShow)
                         }
-                        listMovieResult.postValue(tvShowList)
                     }
+                    listMovieResult.postValue(tvShowList)
                 } else {
                     listMovieResult.postValue(tvShowList)
                 }
@@ -73,8 +73,8 @@ class CatalogRepository private constructor(private val remoteDataSource: Remote
                             )
                             tvShowList.add(tvShow)
                         }
-                        listTvShowResult.postValue(tvShowList)
                     }
+                    listTvShowResult.postValue(tvShowList)
                 } else {
                     listTvShowResult.postValue(tvShowList)
                 }

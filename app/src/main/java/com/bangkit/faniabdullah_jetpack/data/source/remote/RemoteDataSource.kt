@@ -52,6 +52,7 @@ class RemoteDataSource {
 
 
     fun getTvShowPopular(callback: LoadPopularTvShowCallback) {
+        EspressoIdlingResource.increment()
         ApiConfig.getApiService().getPopularTvShows()
             .enqueue(object : Callback<CatalogResponse<TvShowsResponse>> {
                 override fun onResponse(
@@ -61,11 +62,13 @@ class RemoteDataSource {
                     if (response.isSuccessful) {
                         response.body()?.results?.let { callback.onAllTvShowsReceived(it) }
                     }
+                    EspressoIdlingResource.decrement()
                 }
 
                 override fun onFailure(call: Call<CatalogResponse<TvShowsResponse>>, t: Throwable) {
                     Log.e("Failure", "${t.message}")
                     callback.onAllTvShowsReceived(emptyList())
+                    EspressoIdlingResource.decrement()
                 }
             })
     }

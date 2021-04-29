@@ -35,7 +35,7 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = MovieAdapter()
-
+        showLoading(true)
         binding.apply {
             rvTvShows.layoutManager = GridLayoutManager(activity, 2)
             rvTvShows.setHasFixedSize(true)
@@ -62,6 +62,7 @@ class TvShowFragment : Fragment() {
                 showDetailMovie(data)
             }
         })
+
     }
 
     private fun showDetailMovie(data: MovieData) {
