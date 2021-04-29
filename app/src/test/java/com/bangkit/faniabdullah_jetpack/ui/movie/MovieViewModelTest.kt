@@ -19,7 +19,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class MovieViewModelTest {
-    private lateinit var viewModel: MovieViewModel
+    private lateinit var mainViewModel: MovieViewModel
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -32,7 +32,7 @@ class MovieViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = MovieViewModel(movieCatalogueMovieRepository)
+        mainViewModel = MovieViewModel(movieCatalogueMovieRepository)
     }
 
     @Test
@@ -43,12 +43,12 @@ class MovieViewModelTest {
 
         `when`(movieCatalogueMovieRepository.getMovieNowPlaying()).thenReturn(movies)
 
-        val movie = viewModel.getMovieNowPlaying().value
+        val movie = mainViewModel.getMovieNowPlaying().value
         verify(movieCatalogueMovieRepository).getMovieNowPlaying()
         assertNotNull(movie)
         assertEquals(12, movie?.size)
 
-        viewModel.getMovieNowPlaying().observeForever(observer)
+        mainViewModel.getMovieNowPlaying().observeForever(observer)
         verify(observer).onChanged(dummyMovies)
     }
 
