@@ -110,8 +110,6 @@ class MainActivityTest {
         onView(withId(R.id.tv_overview_detail))
             .check(matches(isDisplayed()))
 
-
         pressBack()
-
     }
 }
