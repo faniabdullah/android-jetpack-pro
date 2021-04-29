@@ -63,8 +63,16 @@ class DetailActivity : AppCompatActivity() {
     private fun showLoading(state: Boolean) {
         if (state) {
             binding.contentDetail.progressBar.visibility = View.VISIBLE
+            binding.contentDetail.tvOverviewDetail.visibility = View.GONE
+            binding.contentDetail.tvTitleOverview.visibility = View.GONE
+            binding.contentDetail.tvMovieDetailTitle.visibility = View.GONE
+            binding.contentDetail.tvInfoMovie.visibility = View.GONE
         } else {
             binding.contentDetail.progressBar.visibility = View.GONE
+            binding.contentDetail.tvOverviewDetail.visibility = View.VISIBLE
+            binding.contentDetail.tvTitleOverview.visibility = View.VISIBLE
+            binding.contentDetail.tvMovieDetailTitle.visibility = View.VISIBLE
+            binding.contentDetail.tvInfoMovie.visibility = View.VISIBLE
         }
     }
 
