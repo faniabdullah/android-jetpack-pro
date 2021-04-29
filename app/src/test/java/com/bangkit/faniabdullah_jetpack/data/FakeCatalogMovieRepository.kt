@@ -14,7 +14,7 @@ class FakeCatalogMovieRepository(private val remoteDataSource: RemoteDataSource)
     CatalogMovieDataSource {
 
     override fun getMovieNowPlaying(): LiveData<List<MovieData>> {
-        val listMovieResult = MutableLiveData<List<MovieData>>()
+        val listMovieNowPlayingResult = MutableLiveData<List<MovieData>>()
         remoteDataSource.getMovieNowPlaying(object :
             RemoteDataSource.LoadMoviesNowPlayingCallback {
             override fun onAllMoviesReceived(movieResponse: List<MovieResponse?>) {
@@ -34,14 +34,14 @@ class FakeCatalogMovieRepository(private val remoteDataSource: RemoteDataSource)
                             tvShowList.add(tvShow)
                         }
                     }
-                    listMovieResult.postValue(tvShowList)
+                    listMovieNowPlayingResult.postValue(tvShowList)
                 } else {
-                    listMovieResult.postValue(tvShowList)
+                    listMovieNowPlayingResult.postValue(tvShowList)
                 }
             }
         })
 
-        return listMovieResult
+        return listMovieNowPlayingResult
     }
 
     override fun getPopularTvShows(): LiveData<List<MovieData>> {
