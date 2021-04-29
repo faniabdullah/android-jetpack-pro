@@ -44,7 +44,7 @@ class DetailViewModelTest {
     )
 
     private val movieId = dummyMovieNowPlaying.id?.toInt()
-    private val tvShowId = dummyTvShowPopular.id
+    private val tvShowId = dummyTvShowPopular.id?.toInt()
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -88,10 +88,10 @@ class DetailViewModelTest {
         val movie = MutableLiveData<DetailMovieData>()
         movie.value = dummyDataDetailTvShows
 
-        `when`(movieId?.let { movieCatalogueRepository.getTvShowDetail(it) }).thenReturn(movie)
+        `when`(tvShowId?.let { movieCatalogueRepository.getTvShowDetail(it) }).thenReturn(movie)
         val detailData =
-            movieId?.let { mainViewModel.getDetailTvShowById(it).value } as DetailMovieData
-        verify(movieCatalogueRepository).getTvShowDetail(movieId)
+            tvShowId?.let { mainViewModel.getDetailTvShowById(it).value } as DetailMovieData
+        verify(movieCatalogueRepository).getTvShowDetail(tvShowId)
 
         assertNotNull(detailData)
         assertEquals(dummyTvShowPopular.original_title, detailData.original_title)
@@ -102,7 +102,7 @@ class DetailViewModelTest {
         assertEquals(dummyTvShowPopular.release_date, detailData.release_date)
         assertEquals(dummyTvShowPopular.vote_average, detailData.vote_average)
 
-        mainViewModel.getDetailTvShowById(movieId).observeForever(movieObserver)
+        mainViewModel.getDetailTvShowById(tvShowId).observeForever(movieObserver)
         verify(movieObserver).onChanged(dummyDataDetailTvShows)
     }
 }

@@ -1,5 +1,7 @@
 package com.bangkit.faniabdullah_jetpack.utils
 
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.*
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.*
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 
 object DataDummy {
@@ -330,5 +332,292 @@ object DataDummy {
         )
 
         return listTvShowsPopular
+    }
+
+    fun generateDummyDataRemoteNowPlaying(): List<MovieResponse> {
+        return listOf(
+            MovieResponse(
+                adult = false,
+                backdropPath = "/jtAI6OJIWLWiRItNSZoWjrsUtmi.jpg",
+                genreIds = listOf(10749),
+                id = 724089,
+                originalLanguage = "en",
+                originalTitle = "Gabriel's Inferno Part II",
+                overview = "Professor Gabriel Emerson finally learns the truth about Julia Mitchell's identity, but his realization comes a moment too late. Julia is done waiting for the well-respected Dante specialist to remember her and wants nothing more to do with him. Can Gabriel win back her heart before she finds love in another's arms?",
+                popularity = 12.613,
+                posterPath = "/x5o8cLZfEXMoZczTYWLrUo1P7UJ.jpg",
+                releaseDate = "2020-07-31",
+                title = "Gabriel's Inferno Part II",
+                video = false,
+                voteAverage = 8.7,
+                voteCount = 1240
+            ),
+            MovieResponse(
+                adult = false,
+                backdropPath = "/rSPw7tgCH9c6NqICZef4kZjFOQ5.jpg",
+                genreIds = listOf(
+                    18,
+                    80
+                ),
+                id = 238,
+                originalLanguage = "en",
+                originalTitle = "The Godfather",
+                overview = "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+                popularity = 45.469,
+                posterPath = "/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+                releaseDate = "1972-03-14",
+                title = "The Godfather",
+                video = false,
+                voteAverage = 8.7,
+                voteCount = 14196
+            ),
+            MovieResponse(
+                adult = false,
+                backdropPath = "/iNh3BivHyg5sQRPP1KOkzguEX0H.jpg",
+                genreIds = listOf(
+                    18,
+                    80
+                ),
+                id = 278,
+                originalLanguage = "en",
+                originalTitle = "The Shawshank Redemption",
+                overview = "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
+                popularity = 40.104,
+                posterPath = "/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+                releaseDate = "1994-09-23",
+                title = "The Shawshank Redemption",
+                video = false,
+                voteAverage = 8.7,
+                voteCount = 18799
+            )
+        )
+
+    }
+
+    fun generateDummyDataRemoteTvShowPopular(): List<TvShowsResponse> {
+        return listOf(
+            TvShowsResponse(
+                backdropPath = "/b0WmHGc8LHTdGCVzxRb3IBMur57.jpg",
+                firstAirDate = "2021-03-19",
+                genreIds = listOf(
+                    10765,
+                    10759,
+                    18,
+                    10768
+                ),
+                id = 88396,
+                name = "The Falcon and the Winter Soldier",
+                originCountry = listOf("US"),
+                originalLanguage = "en",
+                originalName = "The Falcon and the Winter Soldier",
+                overview = "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
+                popularity = 2640.049,
+                posterPath = "/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
+                voteAverage = 7.9,
+                voteCount = 4994
+            ),
+            TvShowsResponse(
+                backdropPath = "/mZjZgY6ObiKtVuKVDrnS9VnuNlE.jpg",
+                firstAirDate = "2017-09-25",
+                genreIds = listOf(18),
+                id = 71712,
+                name = "The Good Doctor",
+                originCountry = listOf("US"),
+                originalLanguage = "en",
+                originalName = "The Good Doctor",
+                overview = "A young surgeon with Savant syndrome is recruited into the surgical unit of a prestigious hospital. The question will arise: can a person who doesn't have the ability to relate to people actually save their lives",
+                popularity = 1548.3,
+                posterPath = "/6tfT03sGp9k4c0J3dypjrI8TSAI.jpg",
+                voteAverage = 8.6,
+                voteCount = 8153
+            ),
+            TvShowsResponse(
+                backdropPath = "/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg",
+                firstAirDate = "2016-01-25",
+                genreIds = listOf(
+                    80,
+                    10765
+                ),
+                id = 63174,
+                name = "Lucifer",
+                originCountry = listOf("US"),
+                originalLanguage = "en",
+                originalName = "Lucifer",
+                overview = "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape.",
+                popularity = 748.564,
+                posterPath = "/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg",
+                voteAverage = 8.5,
+                voteCount = 8378
+            )
+        )
+    }
+
+    fun generateDummyDataDetailMovie(): DetailMovieResponse {
+        return DetailMovieResponse(
+            adult = false,
+            backdropPath = "/jtAI6OJIWLWiRItNSZoWjrsUtmi.jpg",
+            belongsToCollection = BelongsToCollection(
+                id = 729322,
+                name = "Gabriel's Inferno Collection",
+                posterPath = "/LdSn17U6ybhtPJT3S6fTNRni5Y.jpg",
+                backdropPath = "/hXF55codODfnzTZDExbUbfFmA9y.jpg"
+            ),
+            budget = 0,
+            genres = listOf(
+                GenresItem(
+                    id = 10749,
+                    name = "Romance"
+                ),
+            ),
+            homepage = "https://watch.passionflix.com/watch/f299fa17-5a2b-4fee-b53a-a4651747431b",
+            id = 724089,
+            imdbId = "tt13535454",
+            originalLanguage = "en",
+            originalTitle = "Gabriel's Inferno Part II",
+            overview = "Professor Gabriel Emerson finally learns the truth about Julia Mitchell's identity, but his realization comes a moment too late. Julia is done waiting for the well-respected Dante specialist to remember her and wants nothing more to do with him. Can Gabriel win back her heart before she finds love in another's arms?",
+            popularity = 12.613,
+            posterPath = "/x5o8cLZfEXMoZczTYWLrUo1P7UJ.jpg",
+            productionCompanies = listOf(
+                ProductionCompaniesItem(
+                    id = 92153,
+                    logoPath = "/psjvYkjjgAPtS8utnFYDM8t8yi7.png",
+                    name = "PassionFlix",
+                    originCountry = "US"
+                ),
+            ),
+            productionCountries = listOf(),
+            releaseDate = "2020-07-31",
+            revenue = 0,
+            runtime = 105,
+            spokenLanguages = listOf(
+                SpokenLanguagesItem(
+                    englishName = "English",
+                    iso6391 = "en",
+                    name = "English"
+                )
+            ),
+            status = "Released",
+            tagline = "",
+            title = "Gabriel's Inferno Part II",
+            video = false,
+            voteAverage = 8.7,
+            voteCount = 1240
+
+        )
+    }
+
+    fun generateDummyDataDetailTvShow(): DetailTvResponse {
+        return DetailTvResponse(
+            backdropPath = "/b0WmHGc8LHTdGCVzxRb3IBMur57.jpg",
+            createdBy = listOf(
+                CreatedByItem(
+                    id = 1868712,
+                    creditId = "605508e2960cde00721fc5e8",
+                    name = "Malcolm Spellman",
+                    gender = 2,
+                    profilePath = null
+                )
+            ),
+            episodeRunTime = listOf(50),
+            firstAirDate = "2021-03-19",
+            genres = listOf(
+                GenresItem(
+                    id = 10765,
+                    name = "Sci-Fi & Fantasy"
+                ),
+                GenresItem(
+                    id = 10759,
+                    name = "Action & Adventure"
+                ),
+                GenresItem(
+                    id = 18,
+                    name = "Drama"
+                ),
+                GenresItem(
+                    id = 10768,
+                    name = "War & Politics"
+                )
+            ),
+            homepage = "https://www.disneyplus.com/series/the-falcon-and-the-winter-soldier/4gglDBMx8icA",
+            id = 88396,
+            inProduction = false,
+            languages = listOf(
+                "en",
+                "fr"
+            ),
+            lastAirDate = "2021-04-23",
+            lastEpisodeToAir = LastEpisodeToAir(
+                airDate = "2021-04-23",
+                episodeNumber = 6,
+                id = 2558743,
+                name = "One World, One People",
+                overview = "As The Flag Smashers escalate their efforts, Sam and Bucky take action.",
+                productionCode = "",
+                seasonNumber = 1,
+                stillPath = "/qXxCqMP7aj3rGndhVfGUyyU6hyq.jpg",
+                voteAverage = 6.6,
+                voteCount = 5
+            ),
+            name = "The Falcon and the Winter Soldier",
+            nextEpisodeToAir = null,
+            networks = listOf(
+                NetworksItem(
+                    name = "Disney+",
+                    id = 2739,
+                    logoPath = "/gJ8VX6JSu3ciXHuC2dDGAo2lvwM.png",
+                    originCountry = "US"
+                )
+            ),
+            numberOfEpisodes = 6,
+            numberOfSeasons = 1,
+            originCountry = listOf("US"),
+            originalLanguage = "en",
+            originalName = "The Falcon and the Winter Soldier",
+            overview = "Following the events of “Avengers: Endgame”, the Falcon, Sam Wilson and the Winter Soldier, Bucky Barnes team up in a global adventure that tests their abilities, and their patience.",
+            popularity = 2640.049,
+            posterPath = "/6kbAMLteGO8yyewYau6bJ683sw7.jpg",
+            productionCompanies = listOf(
+                ProductionCompaniesItem(
+                    id = 420,
+                    logoPath = "/hUzeosd33nzE5MCNsZxCGEKTXaQ.png",
+                    name = "Marvel Studios",
+                    originCountry = "US"
+                )
+            ),
+            productionCountries = listOf(
+                ProductionCountriesItem(
+                    iso31661 = "US",
+                    name = "United States of America"
+                )
+            ),
+            seasons = listOf(
+                SeasonsItem(
+                    airDate = "2021-03-19",
+                    episodeCount = 6,
+                    id = 156676,
+                    name = "Season 1",
+                    overview = "",
+                    posterPath = "/fIT6Y6O3cUX1X8qY8pZgzEvxUDQ.jpg",
+                    seasonNumber = 1
+                )
+            ),
+            spokenLanguages = listOf(
+                SpokenLanguagesItem(
+                    englishName = "English",
+                    iso6391 = "en",
+                    name = "English"
+                ),
+                SpokenLanguagesItem(
+                    englishName = "French",
+                    iso6391 = "fr",
+                    name = "Français"
+                )
+            ),
+            status = "Ended",
+            tagline = "Honor the shield.",
+            type = "Miniseries",
+            voteAverage = 7.9,
+            voteCount = 5000
+        )
     }
 }
