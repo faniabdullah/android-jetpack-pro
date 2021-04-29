@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.bangkit.faniabdullah_jetpack.data.CatalogMovieMovieRepository
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 
-class TvShowViewModel(private val mCatalogMovieRepository: CatalogMovieMovieRepository) : ViewModel() {
+class TvShowViewModel(private val mCatalogMovieRepository: CatalogMovieMovieRepository) :
+    ViewModel() {
 
     fun getTvShowsPopular(): LiveData<List<MovieData>> = mCatalogMovieRepository.getPopularTvShows()
 }

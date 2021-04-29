@@ -1,8 +1,10 @@
 package com.bangkit.faniabdullah_jetpack.utils
 
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.*
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.*
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.*
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.DetailTvResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 
 object DataDummy {
