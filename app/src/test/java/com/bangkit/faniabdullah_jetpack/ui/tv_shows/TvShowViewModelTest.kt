@@ -3,7 +3,7 @@ package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.bangkit.faniabdullah_jetpack.data.CatalogMovieMovieRepository
+import com.bangkit.faniabdullah_jetpack.data.CatalogMovieRepository
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
@@ -26,14 +26,14 @@ class TvShowViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var movieCatalogueMovieRepository: CatalogMovieMovieRepository
+    private lateinit var catalogueMovieRepository: CatalogMovieRepository
 
     @Mock
     private lateinit var observer: Observer<List<MovieData>>
 
     @Before
     fun setUp() {
-        mainViewModel = TvShowViewModel(movieCatalogueMovieRepository)
+        mainViewModel = TvShowViewModel(catalogueMovieRepository)
     }
 
     @Test
@@ -42,10 +42,10 @@ class TvShowViewModelTest {
         val movies = MutableLiveData<List<MovieData>>()
         movies.value = dummyMovies
 
-        Mockito.`when`(movieCatalogueMovieRepository.getPopularTvShows()).thenReturn(movies)
+        Mockito.`when`(catalogueMovieRepository.getPopularTvShows()).thenReturn(movies)
 
         val movie = mainViewModel.getTvShowsPopular().value
-        verify(movieCatalogueMovieRepository).getPopularTvShows()
+        verify(catalogueMovieRepository).getPopularTvShows()
         assertNotNull(movie)
         assertEquals(12, movie?.size)
 

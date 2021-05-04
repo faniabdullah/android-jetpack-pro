@@ -10,15 +10,17 @@ import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvSh
 import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 
-class CatalogMovieMovieRepository private constructor(private val remoteDataSource: RemoteDataSource) :
+class CatalogMovieRepository private constructor(private val remoteDataSource: RemoteDataSource) :
     CatalogMovieDataSource {
     companion object {
         @Volatile
-        private var instance: CatalogMovieMovieRepository? = null
+        private var instance: CatalogMovieRepository? = null
 
-        fun getInstance(remoteDataSource: RemoteDataSource): CatalogMovieMovieRepository =
+        fun getInstance(remoteDataSource: RemoteDataSource): CatalogMovieRepository =
             instance ?: synchronized(this) {
-                instance ?: CatalogMovieMovieRepository(remoteDataSource)
+                instance ?: CatalogMovieRepository(remoteDataSource).apply {
+                    instance = this
+                }
             }
     }
 

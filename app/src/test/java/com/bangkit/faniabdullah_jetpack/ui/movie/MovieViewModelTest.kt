@@ -3,7 +3,7 @@ package com.bangkit.faniabdullah_jetpack.ui.movie
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.bangkit.faniabdullah_jetpack.data.CatalogMovieMovieRepository
+import com.bangkit.faniabdullah_jetpack.data.CatalogMovieRepository
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
@@ -25,14 +25,14 @@ class MovieViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var movieCatalogueMovieRepository: CatalogMovieMovieRepository
+    private lateinit var catalogueMovieRepository: CatalogMovieRepository
 
     @Mock
     private lateinit var observer: Observer<List<MovieData>>
 
     @Before
     fun setUp() {
-        viewModel = MovieViewModel(movieCatalogueMovieRepository)
+        viewModel = MovieViewModel(catalogueMovieRepository)
     }
 
     @Test
@@ -41,10 +41,10 @@ class MovieViewModelTest {
         val movies = MutableLiveData<List<MovieData>>()
         movies.value = dummyMovies
 
-        `when`(movieCatalogueMovieRepository.getMovieNowPlaying()).thenReturn(movies)
+        `when`(catalogueMovieRepository.getMovieNowPlaying()).thenReturn(movies)
 
         val movie = viewModel.getMovieNowPlaying().value
-        verify(movieCatalogueMovieRepository).getMovieNowPlaying()
+        verify(catalogueMovieRepository).getMovieNowPlaying()
         assertNotNull(movie)
         assertEquals(12, movie?.size)
 

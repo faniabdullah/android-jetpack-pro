@@ -36,23 +36,22 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = MovieAdapter()
         showLoading(true)
-        binding.apply {
-            rvTvShows.layoutManager = GridLayoutManager(activity, 2)
-            rvTvShows.setHasFixedSize(true)
-            rvTvShows.adapter = adapter
+        binding.rvTvShows.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            setHasFixedSize(true)
+            adapter = adapter
         }
         val factory = ViewModelFactory.getInstance()
 
         tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, {
+            showLoading(false)
             if (it.isNotEmpty()) {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
-                showLoading(false)
                 showEmptyLayout(false)
             } else {
-                showLoading(false)
                 showEmptyLayout(true)
             }
         })

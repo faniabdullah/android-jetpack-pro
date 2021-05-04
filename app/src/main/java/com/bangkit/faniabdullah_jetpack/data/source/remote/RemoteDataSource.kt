@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RemoteDataSource {
+class RemoteDataSource  private constructor() {
 
     companion object {
         @Volatile
@@ -20,7 +20,9 @@ class RemoteDataSource {
 
         fun getInstance(): RemoteDataSource =
             instance ?: synchronized(this) {
-                instance ?: RemoteDataSource()
+                instance ?: RemoteDataSource().apply {
+                    instance = this
+                }
             }
     }
 

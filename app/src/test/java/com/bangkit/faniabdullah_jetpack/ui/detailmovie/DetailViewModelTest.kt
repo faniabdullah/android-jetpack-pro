@@ -3,7 +3,7 @@ package com.bangkit.faniabdullah_jetpack.ui.detailmovie
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.bangkit.faniabdullah_jetpack.data.CatalogMovieMovieRepository
+import com.bangkit.faniabdullah_jetpack.data.CatalogMovieRepository
 import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import org.junit.Assert.assertEquals
@@ -50,14 +50,14 @@ class DetailViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var movieCatalogueMovieRepository: CatalogMovieMovieRepository
+    private lateinit var catalogueMovieRepository: CatalogMovieRepository
 
     @Mock
     private lateinit var movieObserver: Observer<DetailMovieData>
 
     @Before
     fun setUpMovie() {
-        mainViewModel = DetailViewModel(movieCatalogueMovieRepository)
+        mainViewModel = DetailViewModel(catalogueMovieRepository)
     }
 
     @Test
@@ -65,10 +65,10 @@ class DetailViewModelTest {
         val movie = MutableLiveData<DetailMovieData>()
         movie.value = dummyDataDetailMovie
 
-        `when`(movieId?.let { movieCatalogueMovieRepository.getMovieDetail(it) }).thenReturn(movie)
+        `when`(movieId?.let { catalogueMovieRepository.getMovieDetail(it) }).thenReturn(movie)
         val detailData =
             movieId?.let { mainViewModel.getDetailMovieById(it).value } as DetailMovieData
-        verify(movieCatalogueMovieRepository).getMovieDetail(movieId)
+        verify(catalogueMovieRepository).getMovieDetail(movieId)
 
         assertNotNull(detailData)
         assertEquals(dummyMovieNowPlaying.original_title, detailData.original_title)
@@ -88,10 +88,10 @@ class DetailViewModelTest {
         val movie = MutableLiveData<DetailMovieData>()
         movie.value = dummyDataDetailTvShows
 
-        `when`(tvShowId?.let { movieCatalogueMovieRepository.getTvShowDetail(it) }).thenReturn(movie)
+        `when`(tvShowId?.let { catalogueMovieRepository.getTvShowDetail(it) }).thenReturn(movie)
         val detailData =
             tvShowId?.let { mainViewModel.getDetailTvShowById(it).value } as DetailMovieData
-        verify(movieCatalogueMovieRepository).getTvShowDetail(tvShowId)
+        verify(catalogueMovieRepository).getTvShowDetail(tvShowId)
 
         assertNotNull(detailData)
         assertEquals(dummyTvShowPopular.original_title, detailData.original_title)
