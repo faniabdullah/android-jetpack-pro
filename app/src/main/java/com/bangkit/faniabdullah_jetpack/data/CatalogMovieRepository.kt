@@ -2,6 +2,7 @@ package com.bangkit.faniabdullah_jetpack.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bangkit.faniabdullah_jetpack.data.source.local.LocalDataSource
 import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
@@ -9,16 +10,29 @@ import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.Deta
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
+import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
 
-class CatalogMovieRepository private constructor(private val remoteDataSource: RemoteDataSource) :
+class CatalogMovieRepository private constructor(
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    private val appExecutors: AppExecutors
+) :
     CatalogMovieDataSource {
     companion object {
         @Volatile
         private var instance: CatalogMovieRepository? = null
 
-        fun getInstance(remoteDataSource: RemoteDataSource): CatalogMovieRepository =
+        fun getInstance(
+            remoteDataSource: RemoteDataSource,
+            localData: LocalDataSource,
+            appExecutors: AppExecutors
+        ): CatalogMovieRepository =
             instance ?: synchronized(this) {
-                instance ?: CatalogMovieRepository(remoteDataSource).apply {
+                instance ?: CatalogMovieRepository(
+                    remoteDataSource,
+                    localData,
+                    appExecutors
+                ).apply {
                     instance = this
                 }
             }
