@@ -53,10 +53,10 @@ class CatalogMovieRepositoryTest {
                 tvShowsPopularResponse
             )
             null
-        }.`when`(remote).getTvShowPopular(any())
+        }.`when`(remote).getTvShowPopular()
 
         val data = LiveDataTestUtil.getValue(movieCatalogueRepository.getPopularTvShows())
-        verify(remote).getTvShowPopular(any())
+        verify(remote).getTvShowPopular()
 
         assertNotNull(data)
         assertEquals(tvShowsPopularResponse.size, data.size)

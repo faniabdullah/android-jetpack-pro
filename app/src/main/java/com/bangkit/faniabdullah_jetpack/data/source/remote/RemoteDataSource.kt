@@ -60,8 +60,9 @@ class RemoteDataSource private constructor() {
     }
 
 
-    fun getTvShowPopular(callback: LoadPopularTvShowCallback) {
+    fun getTvShowPopular(): LiveData<ApiResponse<List<TvShowsResponse>>> {
         EspressoIdlingResource.increment()
+        val resultResponse = MutableLiveData<ApiResponse<List<TvShowsResponse>>>()
         ApiConfig.getApiService().getPopularTvShows()
             .enqueue(object : Callback<CatalogResponse<TvShowsResponse>> {
                 override fun onResponse(
@@ -69,17 +70,17 @@ class RemoteDataSource private constructor() {
                     response: Response<CatalogResponse<TvShowsResponse>>
                 ) {
                     if (response.isSuccessful) {
-                        response.body()?.results?.let { callback.onAllTvShowsReceived(it) }
+                        resultResponse.postValue(ApiResponse.success(response.body()?.results as List<TvShowsResponse>))
                     }
                     EspressoIdlingResource.decrement()
                 }
 
                 override fun onFailure(call: Call<CatalogResponse<TvShowsResponse>>, t: Throwable) {
                     Log.e("Failure", "${t.message}")
-                    callback.onAllTvShowsReceived(emptyList())
                     EspressoIdlingResource.decrement()
                 }
             })
+        return  resultResponse
     }
 
     fun getMovieDetail(movieId: Int, callback: LoadMovieDetailCallback) {

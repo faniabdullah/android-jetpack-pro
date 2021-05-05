@@ -59,7 +59,9 @@ class MovieFragment : Fragment() {
                         adapter.notifyDataSetChanged()
                         showEmptyLayout(false)
                     }
-                    else -> showLoading(false)
+                    Status.ERROR ->{
+                        showEmptyLayout(true)
+                    }
                 }
             }
 

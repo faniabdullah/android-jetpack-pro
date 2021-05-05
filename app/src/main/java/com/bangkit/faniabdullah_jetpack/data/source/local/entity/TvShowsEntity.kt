@@ -14,7 +14,7 @@ data class TvShowsEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "tvShowsId")
-    val tvShows_id: String,
+    val tvShows_id: Int,
     @ColumnInfo(name = "title")
     val original_title: String? = null,
     @ColumnInfo(name = "overview")

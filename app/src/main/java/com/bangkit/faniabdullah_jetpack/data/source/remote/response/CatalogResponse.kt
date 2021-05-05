@@ -11,7 +11,7 @@ data class CatalogResponse<T>(
 	val totalPages: Int? = null,
 
 	@field:SerializedName("results")
-	val results: List<T?>? = null,
+	val results: List<T>? = null,
 
 	@field:SerializedName("total_results")
 	val totalResults: Int? = null

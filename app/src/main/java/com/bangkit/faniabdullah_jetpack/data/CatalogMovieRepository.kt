@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.local.LocalDataSource
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
+import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
@@ -11,7 +12,6 @@ import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.Deta
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.ApiResponse
 import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
-import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
 import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
 
@@ -76,35 +76,41 @@ class CatalogMovieRepository private constructor(
         }.asLiveData()
     }
 
-    override fun getPopularTvShows(): LiveData<List<MovieData>> {
-        val listTvShowResult = MutableLiveData<List<MovieData>>()
-        remoteDataSource.getTvShowPopular(object : RemoteDataSource.LoadPopularTvShowCallback {
+    override fun getPopularTvShows(): LiveData<Resource<List<TvShowsEntity>>> {
+        return object :
+            NetworkBoundResource<List<TvShowsEntity>, List<TvShowsResponse>>(appExecutors) {
+            public override fun loadFromDB(): LiveData<List<TvShowsEntity>> =
+                localDataSource.getAllTvShowsPopular()
 
-            override fun onAllTvShowsReceived(tvShowResponse: List<TvShowsResponse?>) {
-                val tvShowList = ArrayList<MovieData>()
-                if (tvShowResponse.isNotEmpty()) {
-                    for (response in tvShowResponse) {
-                        if (response !== null) {
-                            val tvShow = MovieData(
-                                response.id.toString(),
-                                response.name,
-                                response.originalName,
-                                response.posterPath,
-                                response.overview,
-                                response.voteAverage,
-                                response.voteCount
-                            )
-                            tvShowList.add(tvShow)
-                        }
+            override fun shouldFetch(data: List<TvShowsEntity>?): Boolean =
+                data == null || data.isEmpty()
+
+            public override fun createCall(): LiveData<ApiResponse<List<TvShowsResponse>>> =
+                remoteDataSource.getTvShowPopular()
+
+            public override fun saveCallResult(data: List<TvShowsResponse>) {
+                val movieList = ArrayList<TvShowsEntity>()
+
+                for (response in data) {
+                    val course = response.id?.let {
+                        TvShowsEntity(
+                            it,
+                            response.originalName,
+                            response.overview,
+                            response.posterPath,
+                            response.firstAirDate,
+                            response.voteAverage,
+                            response.voteCount
+                        )
                     }
-                    listTvShowResult.postValue(tvShowList)
-                } else {
-                    listTvShowResult.postValue(tvShowList)
+                    if (course != null) {
+                        movieList.add(course)
+                    }
                 }
 
+                localDataSource.insertTvShows(movieList)
             }
-        })
-        return listTvShowResult
+        }.asLiveData()
     }
 
     override fun getMovieDetail(movieId: Int): LiveData<DetailMovieData> {

@@ -21,32 +21,7 @@ class FakeCatalogMovieRepository(private val remoteDataSource: RemoteDataSource)
 
     override fun getPopularTvShows(): LiveData<List<MovieData>> {
         val listTvShowResult = MutableLiveData<List<MovieData>>()
-        remoteDataSource.getTvShowPopular(object : RemoteDataSource.LoadPopularTvShowCallback {
-
-            override fun onAllTvShowsReceived(tvShowResponse: List<TvShowsResponse?>) {
-                val tvShowList = ArrayList<MovieData>()
-                if (tvShowResponse.isNotEmpty()) {
-                    for (response in tvShowResponse) {
-                        if (response !== null) {
-                            val tvShow = MovieData(
-                                response.id.toString(),
-                                response.name,
-                                response.originalName,
-                                response.posterPath,
-                                response.overview,
-                                response.voteAverage,
-                                response.voteCount
-                            )
-                            tvShowList.add(tvShow)
-                        }
-                    }
-                    listTvShowResult.postValue(tvShowList)
-                } else {
-                    listTvShowResult.postValue(tvShowList)
-                }
-
-            }
-        })
+        remoteDataSource.getTvShowPopular()
         return listTvShowResult
     }
 
