@@ -14,7 +14,7 @@ data class MovieEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "movieId")
-    val movie_id: String? = null,
+    val movie_id: Int,
     @ColumnInfo(name = "title")
     val original_title: String? = null,
     @ColumnInfo(name = "overview")

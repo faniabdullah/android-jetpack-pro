@@ -5,15 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.faniabdullah_jetpack.R
+import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.databinding.MovieItemBinding
-import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
-    private val list = ArrayList<MovieData>()
+    private val list = ArrayList<MovieEntity>()
     private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -21,13 +21,13 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: MovieData)
+        fun onItemClicked(data: MovieEntity)
     }
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = MovieItemBinding.bind(itemView)
 
-        fun bind(movie: MovieData) {
+        fun bind(movie: MovieEntity) {
             binding.apply {
                 tvTitle.text = movie.original_title
                 tvOverview.text = movie.overview
@@ -41,7 +41,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         }
     }
 
-    fun setList(movies: List<MovieData>) {
+    fun setList(movies: List<MovieEntity>) {
         list.clear()
         list.addAll(movies)
         notifyDataSetChanged()

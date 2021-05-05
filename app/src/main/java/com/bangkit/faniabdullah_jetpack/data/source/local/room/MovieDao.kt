@@ -29,13 +29,13 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTvShows(courses: List<TvShowsEntity>)
 
-    @Query("SELECT * FROM tb_tvshows ")
+    @Query("SELECT * FROM tb_tvShows ")
     fun getListTvShowsPopular(): LiveData<List<TvShowsEntity>>
 
-    @Query("SELECT * FROM tb_tvshows where bookmarked = 1")
+    @Query("SELECT * FROM tb_tvShows where bookmarked = 1")
     fun getBookmarkedTvShows(): LiveData<List<TvShowsEntity>>
 
-    @Query("SELECT * FROM tb_tvshows WHERE tvShowsId = :tvShowId")
+    @Query("SELECT * FROM tb_tvShows WHERE tvShowsId = :tvShowId")
     fun getDetailTvShowsById(tvShowId: Int): LiveData<TvShowsEntity>
 
 }

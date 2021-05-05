@@ -19,30 +19,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        showLoading(true)
 
-        val movieDa = intent?.getStringExtra(Constant.MOVIE_ID)
-        val movie = movieDa?.toInt()
-        val typeMovie = intent.getStringExtra(Constant.KEY_TYPE)
-        val factory = ViewModelFactory.getInstance()
-        detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
-
-        if (movie != null) {
-            if (typeMovie == Constant.MOVIE_TYPE) {
-                detailViewModel.getDetailMovieById(movie).observe(this, {
-                    displayData(it)
-
-                    showLoading(false)
-                })
-            } else {
-                detailViewModel.getDetailTvShowById(movie).observe(this, {
-                    displayData(it)
-                    showLoading(false)
-                })
-            }
-        }
     }
 
     private fun displayData(data: DetailMovieData?) {

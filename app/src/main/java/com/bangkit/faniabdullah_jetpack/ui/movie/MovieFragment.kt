@@ -9,12 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.R
+import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentMovieBinding
-import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.ui.adapter.MovieAdapter
 import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
+import com.bangkit.faniabdullah_jetpack.utils.vo.Status
 
 class MovieFragment : Fragment() {
 
@@ -45,23 +46,29 @@ class MovieFragment : Fragment() {
             rvMovie.adapter = adapter
         }
 
-        val factory = ViewModelFactory.getInstance()
+        val factory = ViewModelFactory.getInstance(requireActivity())
         movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
 
-        movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, {
-            if (it.isNotEmpty()) {
-                adapter.setList(it)
-                adapter.notifyDataSetChanged()
-                showEmptyLayout(false)
-            } else {
-                showEmptyLayout(true)
+        movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, { movie ->
+            if (movie != null) {
+                when (movie.status) {
+                    Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
+                    Status.SUCCESS -> {
+                        movie.data?.let { adapter.setList(it) }
+                        adapter.notifyDataSetChanged()
+                        showEmptyLayout(false)
+                    }
+                    else -> showLoading(false)
+                }
             }
+
             showLoading(false)
         })
 
         adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: MovieData) {
+
+            override fun onItemClicked(data: MovieEntity) {
                 showDetailMovie(data)
             }
         })
@@ -81,9 +88,9 @@ class MovieFragment : Fragment() {
 
     }
 
-    private fun showDetailMovie(data: MovieData) {
+    private fun showDetailMovie(data: MovieEntity) {
         val intentDetail = Intent(activity, DetailActivity::class.java)
-        intentDetail.putExtra(Constant.MOVIE_ID, data.id)
+        intentDetail.putExtra(Constant.MOVIE_ID, data.movie_id)
             .putExtra(Constant.KEY_TYPE, Constant.MOVIE_TYPE)
         startActivity(intentDetail)
     }

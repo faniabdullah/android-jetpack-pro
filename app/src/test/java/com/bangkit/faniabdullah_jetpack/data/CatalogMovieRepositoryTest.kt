@@ -37,10 +37,10 @@ class CatalogMovieRepositoryTest {
                 moviesNowPlayingResponse
             )
             null
-        }.`when`(remote).getMovieNowPlaying(any())
+        }.`when`(remote).getMovieNowPlaying()
 
         val movieEntities = LiveDataTestUtil.getValue(movieCatalogueRepository.getMovieNowPlaying())
-        verify(remote).getMovieNowPlaying(any())
+        verify(remote).getMovieNowPlaying()
 
         assertNotNull(movieEntities)
         assertEquals(moviesNowPlayingResponse.size, movieEntities.size)

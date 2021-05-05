@@ -9,12 +9,12 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-@Entity(tableName = "tb_tvshows")
+@Entity(tableName = "tb_tvShows")
 data class TvShowsEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "tvShowsId")
-    val tvshows_id: String? = null,
+    val tvShows_id: String,
     @ColumnInfo(name = "title")
     val original_title: String? = null,
     @ColumnInfo(name = "overview")

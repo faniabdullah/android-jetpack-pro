@@ -3,7 +3,7 @@ package com.bangkit.faniabdullah_jetpack.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.ApiResponse
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.StatusResponse
+import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.StatusResponseNetwork
 import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
 import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
 
@@ -49,8 +49,8 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
-            when (response.status) {
-                StatusResponse.SUCCESS ->
+            when (response.statusNetwork) {
+                StatusResponseNetwork.SUCCESS ->
                     mExecutors.diskIO().execute {
                         saveCallResult(response.body)
                         mExecutors.mainThread().execute {
@@ -59,12 +59,12 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
                             }
                         }
                     }
-                StatusResponse.EMPTY -> mExecutors.mainThread().execute {
+                StatusResponseNetwork.EMPTY -> mExecutors.mainThread().execute {
                     result.addSource(loadFromDB()) { newData ->
                         result.value = Resource.success(newData)
                     }
                 }
-                StatusResponse.ERROR -> {
+                StatusResponseNetwork.ERROR -> {
                     onFetchFailed()
                     result.addSource(dbSource) { newData ->
                         result.value = Resource.error(response.message, newData)

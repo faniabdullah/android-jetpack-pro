@@ -33,34 +33,7 @@ class TvShowFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        adapter = MovieAdapter()
-        showLoading(true)
-        binding.rvTvShows.apply {
-            layoutManager = GridLayoutManager(activity, 2)
-            setHasFixedSize(true)
-            adapter = adapter
-        }
-        val factory = ViewModelFactory.getInstance()
 
-        tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
-
-        tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, {
-            showLoading(false)
-            if (it.isNotEmpty()) {
-                adapter.setList(it)
-                adapter.notifyDataSetChanged()
-                showEmptyLayout(false)
-            } else {
-                showEmptyLayout(true)
-            }
-        })
-
-        adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: MovieData) {
-                showDetailMovie(data)
-            }
-        })
 
     }
 

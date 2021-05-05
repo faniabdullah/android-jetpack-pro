@@ -1,5 +1,6 @@
 package com.bangkit.faniabdullah_jetpack.utils
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.faniabdullah_jetpack.data.CatalogMovieRepository
@@ -15,9 +16,9 @@ class ViewModelFactory private constructor(private val mCatalogMovieRepository: 
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance(): ViewModelFactory =
+        fun getInstance(context : Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideCatalogRepository()).apply {
+                instance ?: ViewModelFactory(Injection.provideCatalogRepository(context)).apply {
                     instance = this
                 }
             }

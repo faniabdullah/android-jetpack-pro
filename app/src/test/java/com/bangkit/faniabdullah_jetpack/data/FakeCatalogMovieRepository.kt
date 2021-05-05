@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.DetailTvResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
@@ -15,31 +14,7 @@ class FakeCatalogMovieRepository(private val remoteDataSource: RemoteDataSource)
 
     override fun getMovieNowPlaying(): LiveData<List<MovieData>> {
         val listMovieNowPlayingResult = MutableLiveData<List<MovieData>>()
-        remoteDataSource.getMovieNowPlaying(object :
-            RemoteDataSource.LoadMoviesNowPlayingCallback {
-            override fun onAllMoviesReceived(movieResponse: List<MovieResponse?>) {
-                val tvShowList = ArrayList<MovieData>()
-                if (movieResponse.isNotEmpty()) {
-                    for (response in movieResponse) {
-                        if (response !== null) {
-                            val tvShow = MovieData(
-                                response.id.toString(),
-                                response.title,
-                                response.originalTitle,
-                                response.posterPath,
-                                response.overview,
-                                response.voteAverage,
-                                response.voteCount
-                            )
-                            tvShowList.add(tvShow)
-                        }
-                    }
-                    listMovieNowPlayingResult.postValue(tvShowList)
-                } else {
-                    listMovieNowPlayingResult.postValue(tvShowList)
-                }
-            }
-        })
+        remoteDataSource.getMovieNowPlaying()
 
         return listMovieNowPlayingResult
     }
