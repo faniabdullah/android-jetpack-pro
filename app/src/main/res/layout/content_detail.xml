@@ -98,4 +98,20 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:tint="@color/blue_200"
+        android:contentDescription="@string/title_nav_bookmarked"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/poster_movie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toEndOf="@+id/poster_movie"
+        app:layout_constraintTop_toBottomOf="@+id/tv_info_movie"
+        app:layout_constraintVertical_bias="0.792"
+        app:srcCompat="@drawable/ic_baseline_bookmark_border_blue_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

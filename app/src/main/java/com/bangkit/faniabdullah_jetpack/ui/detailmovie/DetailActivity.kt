@@ -12,6 +12,7 @@ import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.google.android.material.snackbar.Snackbar
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var detailViewModel: DetailViewModel
@@ -36,16 +37,23 @@ class DetailActivity : AppCompatActivity() {
             if (typeMovie == Constant.MOVIE_TYPE) {
                 detailViewModel.getDetailMovieById(movie).observe(this, {
                     displayDataMovie(it)
+                    setActionButton(it, null)
                     showLoading(false)
                 })
             } else {
                 detailViewModel.getDetailTvShowById(movie).observe(this, {
                     displayDataTvShows(it)
+                    setActionButton(null, it)
                     showLoading(false)
                 })
             }
         }
+    }
 
+    private fun setActionButton(movie: MovieEntity?, tvShow: TvShowsEntity?) {
+        binding.contentDetail.floatingActionButton.setOnClickListener {
+            setBookmark(movie, tvShow)
+        }
     }
 
     private fun displayDataMovie(data: MovieEntity) {
@@ -60,6 +68,7 @@ class DetailActivity : AppCompatActivity() {
                     .placeholder(R.drawable.placeholder_movie)
                     .into(contentDetail.posterMovie)
             }
+            setBookmarkedState(bookmarked)
         }
     }
 
@@ -75,7 +84,41 @@ class DetailActivity : AppCompatActivity() {
                     .placeholder(R.drawable.placeholder_movie)
                     .into(contentDetail.posterMovie)
             }
+            setBookmarkedState(bookmarked)
         }
+    }
+
+    private fun setBookmark(movie: MovieEntity?, tvShow: TvShowsEntity?) {
+        if (movie != null) {
+            if (movie.bookmarked) {
+                showSnackBar("${movie.original_title} Removed from favorite")
+            } else {
+                showSnackBar("${movie.original_title} Added to favorite")
+            }
+            detailViewModel.setBookmarkedMovies(movie)
+        } else {
+            if (tvShow != null) {
+                if (tvShow.bookmarked) {
+                    showSnackBar("${tvShow.original_title} Aemoved from favorite")
+                } else {
+                    showSnackBar("${tvShow.original_title} Removed from favorite")
+                }
+                detailViewModel.setBookmarkedTvShow(tvShow)
+            }
+        }
+    }
+
+    private fun setBookmarkedState(status: Boolean) {
+        if (status) {
+            binding.contentDetail.floatingActionButton.setImageResource(R.drawable.ic_baseline_bookmark_blue_24)
+        } else {
+            binding.contentDetail.floatingActionButton.setImageResource(R.drawable.ic_baseline_bookmark_border_blue_24)
+        }
+    }
+
+    private fun showSnackBar(msg: String) {
+        Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG)
+            .show()
     }
 
     private fun showLoading(state: Boolean) {

@@ -11,4 +11,10 @@
         android:id="@+id/navigation_tv_shows"
         android:icon="@drawable/ic_baseline_tv_24"
         android:title="@string/title_tv_shows" />
+
+    <item
+        android:id="@+id/navigation_bookmarked"
+        android:icon="@drawable/ic_baseline_bookmark_24"
+        android:title="@string/title_nav_bookmarked" />
+
 </menu>

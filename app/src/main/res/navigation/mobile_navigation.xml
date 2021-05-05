@@ -18,4 +18,10 @@
         android:label="@string/title_tv_shows"
         tools:layout="@layout/fragment_tv_shows" />
 
+    <fragment
+        android:id="@+id/navigation_bookmarked"
+        android:name="com.bangkit.faniabdullah_jetpack.BookmarkFragment"
+        android:label="@string/title_nav_bookmarked"
+        tools:layout="@layout/fragment_bookmark" />
+
 </navigation>
