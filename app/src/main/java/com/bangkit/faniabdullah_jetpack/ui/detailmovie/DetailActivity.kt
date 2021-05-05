@@ -5,8 +5,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.faniabdullah_jetpack.R
+import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
+import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.databinding.ActivityDetailBinding
-import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
 import com.bumptech.glide.Glide
@@ -19,11 +20,51 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        showLoading(true)
+
+        val movie = intent?.getIntExtra(Constant.MOVIE_ID, 1)
+
+
+        val typeMovie = intent.getStringExtra(Constant.KEY_TYPE)
+        val factory = ViewModelFactory.getInstance(this)
+
+        detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
+
+        if (movie != null) {
+            if (typeMovie == Constant.MOVIE_TYPE) {
+                detailViewModel.getDetailMovieById(movie).observe(this, {
+                    displayDataMovie(it)
+                    showLoading(false)
+                })
+            } else {
+                detailViewModel.getDetailTvShowById(movie).observe(this, {
+                    displayDataTvShows(it)
+                    showLoading(false)
+                })
+            }
+        }
 
     }
 
-    private fun displayData(data: DetailMovieData?) {
-        data?.apply {
+    private fun displayDataMovie(data: MovieEntity) {
+        data.apply {
+            binding.apply {
+                contentDetail.tvInfoMovie.text = vote_average.toString()
+                contentDetail.tvMovieDetailTitle.text = original_title
+                contentDetail.tvOverviewDetail.text = overview
+                Glide.with(this@DetailActivity)
+                    .load("${Constant.BASE_IMAGE_URL}${poster_path}")
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .placeholder(R.drawable.placeholder_movie)
+                    .into(contentDetail.posterMovie)
+            }
+        }
+    }
+
+    private fun displayDataTvShows(data: TvShowsEntity) {
+        data.apply {
             binding.apply {
                 contentDetail.tvInfoMovie.text = vote_average.toString()
                 contentDetail.tvMovieDetailTitle.text = original_title
@@ -39,17 +80,22 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showLoading(state: Boolean) {
         if (state) {
-            binding.contentDetail.progressBar.visibility = View.VISIBLE
-            binding.contentDetail.tvOverviewDetail.visibility = View.GONE
-            binding.contentDetail.tvTitleOverview.visibility = View.GONE
-            binding.contentDetail.tvMovieDetailTitle.visibility = View.GONE
-            binding.contentDetail.tvInfoMovie.visibility = View.GONE
+            binding.contentDetail.apply {
+                progressBar.visibility = View.VISIBLE
+                tvOverviewDetail.visibility = View.GONE
+                tvTitleOverview.visibility = View.GONE
+                tvMovieDetailTitle.visibility = View.GONE
+                tvInfoMovie.visibility = View.GONE
+            }
+
         } else {
-            binding.contentDetail.progressBar.visibility = View.GONE
-            binding.contentDetail.tvOverviewDetail.visibility = View.VISIBLE
-            binding.contentDetail.tvTitleOverview.visibility = View.VISIBLE
-            binding.contentDetail.tvMovieDetailTitle.visibility = View.VISIBLE
-            binding.contentDetail.tvInfoMovie.visibility = View.VISIBLE
+            binding.contentDetail.apply {
+                progressBar.visibility = View.GONE
+                tvOverviewDetail.visibility = View.VISIBLE
+                tvTitleOverview.visibility = View.VISIBLE
+                tvMovieDetailTitle.visibility = View.VISIBLE
+                tvInfoMovie.visibility = View.VISIBLE
+            }
         }
     }
 

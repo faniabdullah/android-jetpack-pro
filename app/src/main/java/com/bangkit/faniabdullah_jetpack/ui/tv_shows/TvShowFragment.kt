@@ -2,7 +2,6 @@ package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,13 +54,13 @@ class TvShowFragment : Fragment() {
                 when (movie.status) {
                     Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
                     Status.SUCCESS -> {
-                        movie.data?.let { adapter.setList(it)
+                        movie.data?.let {
+                            adapter.setList(it)
                         }
                         adapter.notifyDataSetChanged()
-                        Log.e("see",""+adapter.itemCount)
                     }
-                    Status.ERROR ->{
-
+                    Status.ERROR -> {
+                        showEmptyLayout(true)
                     }
                 }
             }

@@ -1,17 +1,13 @@
 package com.bangkit.faniabdullah_jetpack.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.local.LocalDataSource
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.DetailTvResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.ApiResponse
-import com.bangkit.faniabdullah_jetpack.domain.model.DetailMovieData
 import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
 import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
 
@@ -113,49 +109,10 @@ class CatalogMovieRepository private constructor(
         }.asLiveData()
     }
 
-    override fun getMovieDetail(movieId: Int): LiveData<DetailMovieData> {
-        val movieResult = MutableLiveData<DetailMovieData>()
-        remoteDataSource.getMovieDetail(
-            movieId,
-            object : RemoteDataSource.LoadMovieDetailCallback {
+    override fun getMovieDetail(movieId: Int): LiveData<MovieEntity> =
+        localDataSource.getMovieById(movieId)
 
-                override fun onMovieDetailReceived(movieResponse: DetailMovieResponse) {
-                    val movie = DetailMovieData(
-                        movieResponse.id.toString(),
-                        movieResponse.originalTitle,
-                        movieResponse.overview,
-                        movieResponse.posterPath,
-                        movieResponse.releaseDate,
-                        movieResponse.voteAverage,
-                        movieResponse.voteCount
-                    )
+    override fun getTvShowDetail(tvShowId: Int): LiveData<TvShowsEntity> =
+        localDataSource.getTvShowsById(tvShowId)
 
-                    movieResult.postValue(movie)
-                }
-            })
-
-        return movieResult
-    }
-
-    override fun getTvShowDetail(tvShowId: Int): LiveData<DetailMovieData> {
-        val detailMovieData = MutableLiveData<DetailMovieData>()
-
-        remoteDataSource.getTvShowDetail(tvShowId,
-            object : RemoteDataSource.LoadTvShowDetailCallback {
-
-                override fun onTvShowDetailReceived(tvShowResponse: DetailTvResponse) {
-                    val movieDetail = DetailMovieData(
-                        tvShowResponse.id.toString(),
-                        tvShowResponse.originalName,
-                        tvShowResponse.overview,
-                        tvShowResponse.posterPath,
-                        tvShowResponse.firstAirDate,
-                        tvShowResponse.voteAverage,
-                        tvShowResponse.voteCount
-                    )
-                    detailMovieData.postValue(movieDetail)
-                }
-            })
-        return detailMovieData
-    }
 }

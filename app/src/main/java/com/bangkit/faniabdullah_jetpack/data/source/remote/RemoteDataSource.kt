@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.remote.network.ApiConfig
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.CatalogResponse
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.DetailMovieResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieResponse
-import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.DetailTvResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.ApiResponse
 import com.bangkit.faniabdullah_jetpack.utils.EspressoIdlingResource
@@ -59,7 +57,6 @@ class RemoteDataSource private constructor() {
         return resultResponse
     }
 
-
     fun getTvShowPopular(): LiveData<ApiResponse<List<TvShowsResponse>>> {
         EspressoIdlingResource.increment()
         val resultResponse = MutableLiveData<ApiResponse<List<TvShowsResponse>>>()
@@ -80,63 +77,8 @@ class RemoteDataSource private constructor() {
                     EspressoIdlingResource.decrement()
                 }
             })
-        return  resultResponse
+        return resultResponse
     }
 
-    fun getMovieDetail(movieId: Int, callback: LoadMovieDetailCallback) {
-        EspressoIdlingResource.increment()
-        ApiConfig.getApiService().getDetailMovie(movieId)
-            .enqueue(object : Callback<DetailMovieResponse> {
-                override fun onResponse(
-                    call: Call<DetailMovieResponse>,
-                    response: Response<DetailMovieResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let { callback.onMovieDetailReceived(it) }
-                    }
-                    EspressoIdlingResource.decrement()
-                }
-
-                override fun onFailure(call: Call<DetailMovieResponse>, t: Throwable) {
-                    Log.e("Failure", "${t.message}")
-
-                    EspressoIdlingResource.decrement()
-                }
-            })
-    }
-
-    fun getTvShowDetail(tvShowId: Int, callback: LoadTvShowDetailCallback) {
-        EspressoIdlingResource.increment()
-        ApiConfig.getApiService().getDetailTvShow(tvShowId)
-            .enqueue(object : Callback<DetailTvResponse> {
-                override fun onResponse(
-                    call: Call<DetailTvResponse>,
-                    response: Response<DetailTvResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let { callback.onTvShowDetailReceived(it) }
-                    }
-                    EspressoIdlingResource.decrement()
-                }
-
-                override fun onFailure(call: Call<DetailTvResponse>, t: Throwable) {
-                    Log.e("Failure", "${t.message}")
-                    EspressoIdlingResource.decrement()
-                }
-            })
-    }
-
-
-    interface LoadMovieDetailCallback {
-        fun onMovieDetailReceived(movieResponse: DetailMovieResponse)
-    }
-
-    interface LoadPopularTvShowCallback {
-        fun onAllTvShowsReceived(tvShowResponse: List<TvShowsResponse?>)
-    }
-
-    interface LoadTvShowDetailCallback {
-        fun onTvShowDetailReceived(tvShowResponse: DetailTvResponse)
-    }
 
 }
