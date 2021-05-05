@@ -13,8 +13,8 @@
         android:title="@string/title_tv_shows" />
 
     <item
-        android:id="@+id/navigation_bookmarked"
+        android:id="@+id/navigation_favorite"
         android:icon="@drawable/ic_baseline_bookmark_24"
-        android:title="@string/title_nav_bookmarked" />
+        android:title="@string/title_nav_favorite" />
 
 </menu>

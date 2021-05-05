@@ -18,29 +18,29 @@ class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
 
     fun getAllMoviesNowPlaying(): LiveData<List<MovieEntity>> = mMovieDao.getListMovieNowPlaying()
 
-    fun getAllBookmarkedMovie(): LiveData<List<MovieEntity>> = mMovieDao.getBookmarkedMovie()
+    fun getAllFavoritesMovie(): LiveData<List<MovieEntity>> = mMovieDao.getBookmarkedMovie()
 
     fun getMovieById(movieId: Int): LiveData<MovieEntity> = mMovieDao.getDetailMovieById(movieId)
 
     fun insertMovies(movies: List<MovieEntity>) = mMovieDao.insertMovie(movies)
 
 
-    fun setBookmarkedMovie(movie: MovieEntity, newState: Boolean) {
-        movie.bookmarked = newState
+    fun setFavoriteMovie(movie: MovieEntity, newState: Boolean) {
+        movie.favorite = newState
         mMovieDao.updateMovie(movie)
     }
 
 
     fun insertTvShows(tvShows: List<TvShowsEntity>) = mMovieDao.insertTvShows(tvShows)
 
-    fun setBookmarkedTvShows(tvShows: TvShowsEntity, newState: Boolean) {
-        tvShows.bookmarked = newState
+    fun setFavoriteTvShows(tvShows: TvShowsEntity, newState: Boolean) {
+        tvShows.favorite = newState
         mMovieDao.updateTvShows(tvShows)
     }
 
     fun getAllTvShowsPopular(): LiveData<List<TvShowsEntity>> = mMovieDao.getListTvShowsPopular()
 
-    fun getAllBookmarkedTvShows(): LiveData<List<TvShowsEntity>> = mMovieDao.getBookmarkedTvShows()
+    fun getAllFavoritesTvShows(): LiveData<List<TvShowsEntity>> = mMovieDao.getBookmarkedTvShows()
 
     fun getTvShowsById(tvShowsId: Int): LiveData<TvShowsEntity> =
         mMovieDao.getDetailTvShowsById(tvShowsId)

@@ -5,7 +5,7 @@
     <string name="title_tv_shows">TV shows</string>
     <string name="title_notifications">Notifications</string>
     <string name="overview_title">Overview</string>
-    <string name="title_nav_bookmarked">Bookmark</string>
+    <string name="title_nav_favorite">Favorite</string>
     <string name="notification_error_server">Oops… \n There is a something problem , please try again later and Don\'t forget to check your internet again :)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

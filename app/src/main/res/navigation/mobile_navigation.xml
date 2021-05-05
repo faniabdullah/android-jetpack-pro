@@ -19,9 +19,9 @@
         tools:layout="@layout/fragment_tv_shows" />
 
     <fragment
-        android:id="@+id/navigation_bookmarked"
-        android:name="com.bangkit.faniabdullah_jetpack.BookmarkFragment"
-        android:label="@string/title_nav_bookmarked"
-        tools:layout="@layout/fragment_bookmark" />
+        android:id="@+id/navigation_favorite"
+        android:name="com.bangkit.faniabdullah_jetpack.ui.favorite.FavoriteFragment"
+        android:label="@string/title_nav_favorite"
+        tools:layout="@layout/fragment_favorite" />
 
 </navigation>

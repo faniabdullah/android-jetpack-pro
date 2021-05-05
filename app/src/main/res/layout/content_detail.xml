@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         app:tint="@color/blue_200"
-        android:contentDescription="@string/title_nav_bookmarked"
+        android:contentDescription="@string/title_nav_favorite"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="@+id/poster_movie"
         app:layout_constraintEnd_toEndOf="parent"

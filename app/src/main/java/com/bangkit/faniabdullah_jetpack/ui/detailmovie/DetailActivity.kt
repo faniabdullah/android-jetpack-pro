@@ -68,7 +68,7 @@ class DetailActivity : AppCompatActivity() {
                     .placeholder(R.drawable.placeholder_movie)
                     .into(contentDetail.posterMovie)
             }
-            setBookmarkedState(bookmarked)
+            setBookmarkedState(favorite)
         }
     }
 
@@ -84,13 +84,13 @@ class DetailActivity : AppCompatActivity() {
                     .placeholder(R.drawable.placeholder_movie)
                     .into(contentDetail.posterMovie)
             }
-            setBookmarkedState(bookmarked)
+            setBookmarkedState(favorite)
         }
     }
 
     private fun setBookmark(movie: MovieEntity?, tvShow: TvShowsEntity?) {
         if (movie != null) {
-            if (movie.bookmarked) {
+            if (movie.favorite) {
                 showSnackBar("${movie.original_title} Removed from favorite")
             } else {
                 showSnackBar("${movie.original_title} Added to favorite")
@@ -98,7 +98,7 @@ class DetailActivity : AppCompatActivity() {
             detailViewModel.setBookmarkedMovies(movie)
         } else {
             if (tvShow != null) {
-                if (tvShow.bookmarked) {
+                if (tvShow.favorite) {
                     showSnackBar("${tvShow.original_title} Aemoved from favorite")
                 } else {
                     showSnackBar("${tvShow.original_title} Removed from favorite")
@@ -108,8 +108,8 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setBookmarkedState(status: Boolean) {
-        if (status) {
+    private fun setBookmarkedState(isFavorite: Boolean) {
+        if (isFavorite) {
             binding.contentDetail.floatingActionButton.setImageResource(R.drawable.ic_baseline_bookmark_blue_24)
         } else {
             binding.contentDetail.floatingActionButton.setImageResource(R.drawable.ic_baseline_bookmark_border_blue_24)

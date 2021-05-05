@@ -16,12 +16,12 @@ class DetailViewModel(private val mCatalogMovieRepository: CatalogMovieRepositor
         mCatalogMovieRepository.getTvShowDetail(tvShowId)
 
     fun setBookmarkedTvShow(tvShow: TvShowsEntity) {
-        val newState = !tvShow.bookmarked
-        mCatalogMovieRepository.setBookmarkedTvShow(tvShow, newState)
+        val newState = !tvShow.favorite
+        mCatalogMovieRepository.setFavoriteTvShows(tvShow, newState)
     }
 
     fun setBookmarkedMovies(movie: MovieEntity) {
-        val newState = !movie.bookmarked
-        mCatalogMovieRepository.setBookmarkedMovie(movie, newState)
+        val newState = !movie.favorite
+        mCatalogMovieRepository.setFavoriteMovies(movie, newState)
     }
 }

@@ -10,7 +10,9 @@
         android:id="@+id/rv_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:orientation="vertical"
+        app:spanCount="2"
         tools:layout_editor_absoluteX="196dp"
         tools:layout_editor_absoluteY="284dp"
         tools:listitem="@layout/movie_item" />
@@ -32,5 +34,7 @@
 
     <include
         android:id="@+id/notify_layout"
-        layout="@layout/layout_notify" />
+        layout="@layout/layout_notify"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="225dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,5 +28,5 @@ data class MovieEntity(
     @ColumnInfo(name = "vote_count")
     val vote_count: Int? = null,
     @ColumnInfo(name = "bookmarked")
-    var bookmarked: Boolean = false,
+    var favorite: Boolean = false,
 ) : Parcelable
