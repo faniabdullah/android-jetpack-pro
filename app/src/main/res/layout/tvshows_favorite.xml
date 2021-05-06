@@ -8,7 +8,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tv_shows"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="320dp"
         tools:listitem="@layout/movie_item_fav"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:orientation="horizontal"
@@ -16,6 +16,6 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <include
-        android:id="@+id/notify_layout"
+        android:id="@+id/notify_layout_tv_shows"
         layout="@layout/layout_notify" />
 </androidx.constraintlayout.widget.ConstraintLayout>
