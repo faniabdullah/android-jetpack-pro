@@ -3,9 +3,13 @@ package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.bangkit.faniabdullah_jetpack.data.CatalogMovieRepository
+import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
+import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
+import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -29,7 +33,10 @@ class TvShowViewModelTest {
     private lateinit var catalogueMovieRepository: CatalogMovieRepository
 
     @Mock
-    private lateinit var observer: Observer<List<MovieData>>
+    private lateinit var observer: Observer<Resource<PagedList<TvShowsEntity>>>
+
+    @Mock
+    private lateinit var moviePagedList: PagedList<TvShowsEntity>
 
     @Before
     fun setUp() {
@@ -38,18 +45,21 @@ class TvShowViewModelTest {
 
     @Test
     fun testGetTvShowsPopular() {
-        val dummyMovies = DataDummy.generateDummyDataTvShowsPopular()
-        val movies = MutableLiveData<List<MovieData>>()
-        movies.value = dummyMovies
 
-        Mockito.`when`(catalogueMovieRepository.getPopularTvShows()).thenReturn(movies)
+        val dummyMovies = Resource.success(moviePagedList)
+        Mockito.`when`(dummyMovies.data?.size).thenReturn(4)
+        val movie = MutableLiveData<Resource<PagedList<TvShowsEntity>>>()
+        movie.value = dummyMovies
 
-        val movie = mainViewModel.getTvShowsPopular().value
-        verify(catalogueMovieRepository).getPopularTvShows()
-        assertNotNull(movie)
-        assertEquals(12, movie?.size)
+        Mockito.`when`(catalogueMovieRepository.getPopularTvShows()).thenReturn(movie)
+
+        val movieEntity = mainViewModel.getTvShowsPopular().value?.data
+        Mockito.verify(catalogueMovieRepository).getPopularTvShows()
+
+        assertNotNull(movieEntity)
+        assertEquals(4, movieEntity?.size)
 
         mainViewModel.getTvShowsPopular().observeForever(observer)
-        verify(observer).onChanged(dummyMovies)
+        Mockito.verify(observer).onChanged(dummyMovies)
     }
 }
