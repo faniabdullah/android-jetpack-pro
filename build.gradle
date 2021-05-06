@@ -4,7 +4,7 @@ buildscript {
     ext.glide_version = "4.11.0"
     ext.retrofit_version = "2.9.0"
     ext.logging_interceptor_version = "4.9.0"
-    ext.pagingVersion = '2.1.1'
+    ext.pagingVersion = '3.0.0'
     repositories {
         google()
         mavenCentral()
