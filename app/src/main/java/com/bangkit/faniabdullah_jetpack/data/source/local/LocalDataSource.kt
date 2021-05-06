@@ -1,6 +1,7 @@
 package com.bangkit.faniabdullah_jetpack.data.source.local
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.room.MovieDao
@@ -16,9 +17,9 @@ class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
             }
     }
 
-    fun getAllMoviesNowPlaying(): LiveData<List<MovieEntity>> = mMovieDao.getListMovieNowPlaying()
+    fun getAllMoviesNowPlaying(): DataSource.Factory<Int, MovieEntity> = mMovieDao.getListMovieNowPlaying()
 
-    fun getAllFavoritesMovie(): LiveData<List<MovieEntity>> = mMovieDao.getBookmarkedMovie()
+    fun getAllFavoritesMovie(): DataSource.Factory<Int, MovieEntity> = mMovieDao.getBookmarkedMovie()
 
     fun getMovieById(movieId: Int): LiveData<MovieEntity> = mMovieDao.getDetailMovieById(movieId)
 
@@ -38,9 +39,9 @@ class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
         mMovieDao.updateTvShows(tvShows)
     }
 
-    fun getAllTvShowsPopular(): LiveData<List<TvShowsEntity>> = mMovieDao.getListTvShowsPopular()
+    fun getAllTvShowsPopular(): DataSource.Factory<Int, TvShowsEntity> = mMovieDao.getListTvShowsPopular()
 
-    fun getAllFavoritesTvShows(): LiveData<List<TvShowsEntity>> = mMovieDao.getBookmarkedTvShows()
+    fun getAllFavoritesTvShows(): DataSource.Factory<Int, TvShowsEntity> = mMovieDao.getBookmarkedTvShows()
 
     fun getTvShowsById(tvShowsId: Int): LiveData<TvShowsEntity> =
         mMovieDao.getDetailTvShowsById(tvShowsId)

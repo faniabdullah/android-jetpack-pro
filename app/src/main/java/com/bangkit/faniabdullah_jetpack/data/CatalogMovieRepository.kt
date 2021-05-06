@@ -1,6 +1,8 @@
 package com.bangkit.faniabdullah_jetpack.data
 
 import androidx.lifecycle.LiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.bangkit.faniabdullah_jetpack.data.source.local.LocalDataSource
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
@@ -36,12 +38,22 @@ class CatalogMovieRepository private constructor(
             }
     }
 
-    override fun getMovieNowPlaying(): LiveData<Resource<List<MovieEntity>>> {
-        return object : NetworkBoundResource<List<MovieEntity>, List<MovieResponse>>(appExecutors) {
-            public override fun loadFromDB(): LiveData<List<MovieEntity>> =
-                localDataSource.getAllMoviesNowPlaying()
+    override fun getMovieNowPlaying(): LiveData<Resource<PagedList<MovieEntity>>> {
+        return object :
+            NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>(appExecutors) {
+            public override fun loadFromDB(): LiveData<PagedList<MovieEntity>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(4)
+                    .setPageSize(4)
+                    .build()
+                return LivePagedListBuilder(
+                    localDataSource.getAllMoviesNowPlaying(),
+                    config
+                ).build()
+            }
 
-            override fun shouldFetch(data: List<MovieEntity>?): Boolean =
+            override fun shouldFetch(data: PagedList<MovieEntity>?): Boolean =
                 data == null || data.isEmpty()
 
             public override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
@@ -72,13 +84,20 @@ class CatalogMovieRepository private constructor(
         }.asLiveData()
     }
 
-    override fun getPopularTvShows(): LiveData<Resource<List<TvShowsEntity>>> {
+    override fun getPopularTvShows(): LiveData<Resource<PagedList<TvShowsEntity>>> {
         return object :
-            NetworkBoundResource<List<TvShowsEntity>, List<TvShowsResponse>>(appExecutors) {
-            public override fun loadFromDB(): LiveData<List<TvShowsEntity>> =
-                localDataSource.getAllTvShowsPopular()
+            NetworkBoundResource<PagedList<TvShowsEntity>, List<TvShowsResponse>>(appExecutors) {
+            public override fun loadFromDB(): LiveData<PagedList<TvShowsEntity>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(4)
+                    .setPageSize(4)
+                    .build()
+                return LivePagedListBuilder(localDataSource.getAllTvShowsPopular(), config).build()
+            }
 
-            override fun shouldFetch(data: List<TvShowsEntity>?): Boolean =
+
+            override fun shouldFetch(data: PagedList<TvShowsEntity>?): Boolean =
                 data == null || data.isEmpty()
 
             public override fun createCall(): LiveData<ApiResponse<List<TvShowsResponse>>> =
@@ -119,13 +138,25 @@ class CatalogMovieRepository private constructor(
         appExecutors.diskIO().execute { localDataSource.setFavoriteTvShows(tvShow, state) }
     }
 
-    override fun getFavoritesTvShows(): LiveData<List<TvShowsEntity>> =
-        localDataSource.getAllFavoritesTvShows()
+    override fun getFavoritesTvShows(): LiveData<PagedList<TvShowsEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getAllFavoritesTvShows(), config).build()
+    }
 
     override fun setFavoriteMovies(movie: MovieEntity, state: Boolean) {
         appExecutors.diskIO().execute { localDataSource.setFavoriteMovie(movie, state) }
     }
 
-    override fun getFavoritesMovies(): LiveData<List<MovieEntity>> =
-        localDataSource.getAllFavoritesMovie()
+    override fun getFavoritesMovies(): LiveData<PagedList<MovieEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getAllFavoritesMovie(), config).build()
+    }
 }

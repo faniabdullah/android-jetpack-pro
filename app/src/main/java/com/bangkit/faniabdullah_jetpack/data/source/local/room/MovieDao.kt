@@ -1,6 +1,7 @@
 package com.bangkit.faniabdullah_jetpack.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
@@ -15,10 +16,10 @@ interface MovieDao {
     fun insertMovie(courses: List<MovieEntity>)
 
     @Query("SELECT * FROM tb_movie ")
-    fun getListMovieNowPlaying(): LiveData<List<MovieEntity>>
+    fun getListMovieNowPlaying(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM tb_movie where bookmarked = 1")
-    fun getBookmarkedMovie(): LiveData<List<MovieEntity>>
+    fun getBookmarkedMovie(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM tb_movie WHERE movieId = :movieId")
     fun getDetailMovieById(movieId: Int): LiveData<MovieEntity>
@@ -30,10 +31,10 @@ interface MovieDao {
     fun insertTvShows(courses: List<TvShowsEntity>)
 
     @Query("SELECT * FROM tb_tvShows ")
-    fun getListTvShowsPopular(): LiveData<List<TvShowsEntity>>
+    fun getListTvShowsPopular(): DataSource.Factory<Int, TvShowsEntity>
 
     @Query("SELECT * FROM tb_tvShows where bookmarked = 1")
-    fun getBookmarkedTvShows(): LiveData<List<TvShowsEntity>>
+    fun getBookmarkedTvShows(): DataSource.Factory<Int, TvShowsEntity>
 
     @Query("SELECT * FROM tb_tvShows WHERE tvShowsId = :tvShowId")
     fun getDetailTvShowsById(tvShowId: Int): LiveData<TvShowsEntity>

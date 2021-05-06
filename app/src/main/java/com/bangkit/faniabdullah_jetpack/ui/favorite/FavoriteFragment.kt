@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentFavoriteBinding
-import com.bangkit.faniabdullah_jetpack.ui.adapter.favorite.MovieFavoriteAdapter
-import com.bangkit.faniabdullah_jetpack.ui.adapter.favorite.TvShowsFavoriteAdapter
 import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
@@ -58,27 +56,13 @@ class FavoriteFragment : Fragment() {
         val factory = ViewModelFactory.getInstance(requireActivity())
         favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
 
-        movieAdapter.setOnItemClickCallback(object : MovieFavoriteAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: MovieEntity) {
-                showDetailMovie(data, null)
-            }
+
+        favoriteViewModel.getFavoriteMovie().observe(viewLifecycleOwner, { movie ->
+            movieAdapter.submitList(movie)
         })
 
-        tvShowsAdapter.setOnItemClickCallback(object : TvShowsFavoriteAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: TvShowsEntity) {
-                showDetailMovie(null, data)
-            }
-        })
-
-
-        favoriteViewModel.getFavoriteMovie().observe(viewLifecycleOwner, {
-            movieAdapter.setList(it)
-            movieAdapter.notifyDataSetChanged()
-        })
-
-        favoriteViewModel.getFavoriteTvShows().observe(viewLifecycleOwner, {
-            tvShowsAdapter.setList(it)
-            tvShowsAdapter.notifyDataSetChanged()
+        favoriteViewModel.getFavoriteTvShows().observe(viewLifecycleOwner, { movie ->
+            tvShowsAdapter.submitList(movie)
         })
     }
 

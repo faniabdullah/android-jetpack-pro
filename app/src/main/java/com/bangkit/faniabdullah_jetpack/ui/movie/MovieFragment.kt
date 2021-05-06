@@ -2,6 +2,7 @@ package com.bangkit.faniabdullah_jetpack.ui.movie
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentMovieBinding
-import com.bangkit.faniabdullah_jetpack.ui.adapter.MovieAdapter
 import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
@@ -55,11 +55,13 @@ class MovieFragment : Fragment() {
                 when (movie.status) {
                     Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
                     Status.SUCCESS -> {
-                        movie.data?.let { adapter.setList(it) }
-                        adapter.notifyDataSetChanged()
+                        movie.data?.let {
+                            adapter.submitList(it)
+                            Log.e("SEE", "MS" + it.size)
+                        }
                         showEmptyLayout(false)
                     }
-                    Status.ERROR ->{
+                    Status.ERROR -> {
                         showEmptyLayout(true)
                     }
                 }
@@ -68,12 +70,7 @@ class MovieFragment : Fragment() {
             showLoading(false)
         })
 
-        adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
 
-            override fun onItemClicked(data: MovieEntity) {
-                showDetailMovie(data)
-            }
-        })
     }
 
     private fun showEmptyLayout(state: Boolean) {

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentTvShowsBinding
-import com.bangkit.faniabdullah_jetpack.ui.adapter.TvShowsAdapter
 import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
 import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
@@ -55,9 +54,9 @@ class TvShowFragment : Fragment() {
                     Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
                     Status.SUCCESS -> {
                         movie.data?.let {
-                            adapter.setList(it)
+                            adapter.submitList(it)
+
                         }
-                        adapter.notifyDataSetChanged()
                     }
                     Status.ERROR -> {
                         showEmptyLayout(true)
@@ -66,18 +65,9 @@ class TvShowFragment : Fragment() {
             }
 
             showLoading(false)
-
             showEmptyLayout(false)
         })
 
-
-
-        adapter.setOnItemClickCallback(object : TvShowsAdapter.OnItemClickCallback {
-
-            override fun onItemClicked(data: TvShowsEntity) {
-                showDetailMovie(data)
-            }
-        })
 
     }
 
