@@ -112,4 +112,30 @@ class MainActivityTest {
 
         pressBack()
     }
+
+    @Test
+    fun showsFavorites() {
+        onView(withId(R.id.navigation_tv_shows)).perform(click())
+        onView(withId(R.id.rv_tv_shows))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.rv_tv_shows))
+            .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(3))
+        onView(withId(R.id.rv_tv_shows))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    1,
+                    click()
+                )
+            )
+
+        onView(withId(R.id.poster_movie))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.tv_movie_detail_title))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.tv_overview_detail))
+            .check(matches(isDisplayed()))
+
+        pressBack()
+    }
 }

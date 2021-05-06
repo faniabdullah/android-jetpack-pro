@@ -1,7 +1,6 @@
 package com.bangkit.faniabdullah_jetpack.ui.favorite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentFavoriteBinding
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
 
@@ -42,15 +42,21 @@ class FavoriteFragment : Fragment() {
 
 
             favoriteViewModel.getFavoriteMovie().observe(viewLifecycleOwner, { movie ->
-
                 movieAdapter.submitList(movie)
-                movieAdapter.notifyDataSetChanged()
+                if (movie.size > 0) {
+                    isEmptyMovieFavorites(false)
+                } else {
+                    isEmptyMovieFavorites(true)
+                }
             })
 
             favoriteViewModel.getFavoriteTvShows().observe(viewLifecycleOwner, { movie ->
-
                 tvShowsAdapter.submitList(movie)
-                movieAdapter.notifyDataSetChanged()
+                if (movie.size > 0) {
+                    isEmptyTvShowsFavorites(false)
+                } else {
+                    isEmptyTvShowsFavorites(true)
+                }
             })
 
             binding.favoriteMovie.apply {
@@ -69,5 +75,47 @@ class FavoriteFragment : Fragment() {
 
         }
 
+    }
+
+    private fun isEmptyMovieFavorites(state: Boolean) {
+        if (state) {
+            binding.favoriteMovie.apply {
+                notifyMovieLayout.apply {
+                    messageNotify.text = getString(R.string.notification_empty_favorite)
+                    messageNotify.visibility = View.VISIBLE
+                    pictureNotify.visibility = View.VISIBLE
+                }
+                rvMovie.visibility = View.GONE
+            }
+        } else {
+            binding.favoriteMovie.apply {
+                notifyMovieLayout.apply {
+                    messageNotify.visibility = View.GONE
+                    pictureNotify.visibility = View.GONE
+                }
+                rvMovie.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun isEmptyTvShowsFavorites(state: Boolean) {
+        if (state) {
+            binding.favoriteTvshows.apply {
+                notifyLayoutTvShows.apply {
+                    messageNotify.text = getString(R.string.notification_empty_favorite)
+                    messageNotify.visibility = View.VISIBLE
+                    pictureNotify.visibility = View.VISIBLE
+                }
+                rvTvShows.visibility = View.GONE
+            }
+        } else {
+            binding.favoriteTvshows.apply {
+                notifyLayoutTvShows.apply {
+                    messageNotify.visibility = View.GONE
+                    pictureNotify.visibility = View.GONE
+                }
+                rvTvShows.visibility = View.VISIBLE
+            }
+        }
     }
 }

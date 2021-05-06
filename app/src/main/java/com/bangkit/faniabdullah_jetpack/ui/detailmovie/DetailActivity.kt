@@ -51,7 +51,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setActionButton(movie: MovieEntity?, tvShow: TvShowsEntity?) {
-        binding.contentDetail.floatingActionButton.setOnClickListener {
+        binding.contentDetail.addToFavorites.setOnClickListener {
             setBookmark(movie, tvShow)
         }
     }
@@ -110,9 +110,9 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setBookmarkedState(isFavorite: Boolean) {
         if (isFavorite) {
-            binding.contentDetail.floatingActionButton.setImageResource(R.drawable.ic_baseline_bookmark_blue_24)
+            binding.contentDetail.addToFavorites.setImageResource(R.drawable.ic_baseline_bookmark_blue_24)
         } else {
-            binding.contentDetail.floatingActionButton.setImageResource(R.drawable.ic_baseline_bookmark_border_blue_24)
+            binding.contentDetail.addToFavorites.setImageResource(R.drawable.ic_baseline_bookmark_border_blue_24)
         }
     }
 
