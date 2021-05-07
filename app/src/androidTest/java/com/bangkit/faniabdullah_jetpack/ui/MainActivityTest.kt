@@ -35,7 +35,6 @@ class MainActivityTest {
     @After
     fun tearDown() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.espressoTestIdlingResource)
-
     }
 
     @Test
@@ -117,8 +116,7 @@ class MainActivityTest {
     }
 
     @Test
-    @Throws(Exception::class)
-    fun ShowEmptyFavorite() {
+    fun showEmptyFavorite() {
         onView(withId(R.id.navigation_favorite)).perform(click())
         onView(withId(R.id.picture_notify_movie))
             .check(matches(isDisplayed()))
@@ -127,7 +125,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun ShowsFavoritesMovieAndTvShows() {
+    fun showsFavoritesMovieAndTvShows() {
         onView(withId(R.id.navigation_tv_shows)).perform(click())
         onView(withId(R.id.rv_tv_shows))
             .check(matches(isDisplayed()))
@@ -167,7 +165,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun InsertUpdatesFavorites() {
+    fun insertUpdatesFavorites() {
 
         onView(withId(R.id.navigation_tv_shows)).perform(click())
         onView(withId(R.id.rv_tv_shows))
