@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movie"
+        android:id="@+id/rv_movie_favorite"
         android:layout_width="match_parent"
         tools:listitem="@layout/movie_item_fav"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -17,5 +17,5 @@
 
     <include
         android:id="@+id/notify_movie_layout"
-        layout="@layout/layout_notify" />
+        layout="@layout/layout_empty_movie_fav"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MainActivityTest {
 
@@ -28,11 +29,13 @@ class MainActivityTest {
     @Before
     fun setUp() {
         IdlingRegistry.getInstance().register(EspressoIdlingResource.espressoTestIdlingResource)
+
     }
 
     @After
     fun tearDown() {
         IdlingRegistry.getInstance().unregister(EspressoIdlingResource.espressoTestIdlingResource)
+
     }
 
     @Test
@@ -61,7 +64,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun showsDetailMovie() {
+    fun showDetailMovie() {
         onView(withId(R.id.navigation_movie)).perform(click())
         onView(withId(R.id.rv_movie))
             .check(matches(isDisplayed()))
@@ -88,7 +91,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun showsDetailTvShows() {
+    fun showDetailTvShows() {
         onView(withId(R.id.navigation_tv_shows)).perform(click())
         onView(withId(R.id.rv_tv_shows))
             .check(matches(isDisplayed()))
@@ -110,6 +113,56 @@ class MainActivityTest {
         onView(withId(R.id.tv_overview_detail))
             .check(matches(isDisplayed()))
 
+        pressBack()
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun ShowEmptyFavorite() {
+        onView(withId(R.id.navigation_favorite)).perform(click())
+        onView(withId(R.id.picture_notify_movie))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.picture_notify_tv))
+            .check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun ShowsFavoritesMovieAndTvShows() {
+        onView(withId(R.id.navigation_tv_shows)).perform(click())
+        onView(withId(R.id.rv_tv_shows))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.rv_tv_shows))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    1,
+                    click()
+                )
+            )
+        onView(withId(R.id.tv_movie_detail_title))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.addToFavorite)).perform(click())
+        pressBack()
+
+        onView(withId(R.id.navigation_movie)).perform(click())
+        onView(withId(R.id.rv_movie))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.rv_movie))
+            .perform(
+                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                    1,
+                    click()
+                )
+            )
+        onView(withId(R.id.tv_movie_detail_title))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.addToFavorite)).perform(click())
+        pressBack()
+
+        onView(withId(R.id.navigation_favorite)).perform(click())
+        onView(withId(R.id.rv_movie_favorite))
+            .check(matches(isDisplayed()))
+        onView(withId(R.id.rv_tv_shows_favorite))
+            .check(matches(isDisplayed()))
         pressBack()
     }
 
@@ -176,4 +229,5 @@ class MainActivityTest {
         onView(withId(R.id.addToFavorite)).perform(click())
         pressBack()
     }
+
 }
