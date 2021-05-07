@@ -60,17 +60,17 @@ class FavoriteFragment : Fragment() {
             })
 
             binding.favoriteMovie.apply {
-                rvMovie.layoutManager =
+                rvMovieFavorite.layoutManager =
                     LinearLayoutManager(activity, GridLayoutManager.HORIZONTAL, false)
-                rvMovie.setHasFixedSize(true)
-                rvMovie.adapter = movieAdapter
+                rvMovieFavorite.setHasFixedSize(true)
+                rvMovieFavorite.adapter = movieAdapter
             }
 
             binding.favoriteTvshows.apply {
-                rvTvShows.layoutManager =
+                rvTvShowsFavorite.layoutManager =
                     LinearLayoutManager(activity, GridLayoutManager.HORIZONTAL, false)
-                rvTvShows.setHasFixedSize(true)
-                rvTvShows.adapter = tvShowsAdapter
+                rvTvShowsFavorite.setHasFixedSize(true)
+                rvTvShowsFavorite.adapter = tvShowsAdapter
             }
 
         }
@@ -81,19 +81,19 @@ class FavoriteFragment : Fragment() {
         if (state) {
             binding.favoriteMovie.apply {
                 notifyMovieLayout.apply {
-                    messageNotify.text = getString(R.string.notification_empty_favorite)
-                    messageNotify.visibility = View.VISIBLE
-                    pictureNotify.visibility = View.VISIBLE
+                    messageNotifyMovie.text = getString(R.string.notification_empty_favorite)
+                    messageNotifyMovie.visibility = View.VISIBLE
+                    pictureNotifyMovie.visibility = View.VISIBLE
                 }
-                rvMovie.visibility = View.GONE
+                rvMovieFavorite.visibility = View.GONE
             }
         } else {
             binding.favoriteMovie.apply {
                 notifyMovieLayout.apply {
-                    messageNotify.visibility = View.GONE
-                    pictureNotify.visibility = View.GONE
+                    messageNotifyMovie.visibility = View.GONE
+                    pictureNotifyMovie.visibility = View.GONE
                 }
-                rvMovie.visibility = View.VISIBLE
+                rvMovieFavorite.visibility = View.VISIBLE
             }
         }
     }
@@ -102,19 +102,19 @@ class FavoriteFragment : Fragment() {
         if (state) {
             binding.favoriteTvshows.apply {
                 notifyLayoutTvShows.apply {
-                    messageNotify.text = getString(R.string.notification_empty_favorite)
-                    messageNotify.visibility = View.VISIBLE
-                    pictureNotify.visibility = View.VISIBLE
+                    messageNotifyTv.text = getString(R.string.notification_empty_favorite)
+                    messageNotifyTv.visibility = View.VISIBLE
+                    pictureNotifyTv.visibility = View.VISIBLE
                 }
-                rvTvShows.visibility = View.GONE
+                rvTvShowsFavorite.visibility = View.GONE
             }
         } else {
             binding.favoriteTvshows.apply {
                 notifyLayoutTvShows.apply {
-                    messageNotify.visibility = View.GONE
-                    pictureNotify.visibility = View.GONE
+                    messageNotifyTv.visibility = View.GONE
+                    pictureNotifyTv.visibility = View.GONE
                 }
-                rvTvShows.visibility = View.VISIBLE
+                rvTvShowsFavorite.visibility = View.VISIBLE
             }
         }
     }
