@@ -21,25 +21,6 @@ class CatalogMovieRepository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : CatalogMovieDataSource {
-    companion object {
-        @Volatile
-        private var instance: CatalogMovieRepository? = null
-
-        fun getInstance(
-            remoteDataSource: RemoteDataSource,
-            localData: LocalDataSource,
-            appExecutors: AppExecutors
-        ): CatalogMovieRepository =
-            instance ?: synchronized(this) {
-                instance ?: CatalogMovieRepository(
-                    remoteDataSource,
-                    localData,
-                    appExecutors
-                ).apply {
-                    instance = this
-                }
-            }
-    }
 
     override fun getMovieNowPlaying(): LiveData<Resource<PagedList<MovieEntity>>> {
         return object :

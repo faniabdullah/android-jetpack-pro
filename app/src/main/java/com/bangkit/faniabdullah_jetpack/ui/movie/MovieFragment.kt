@@ -55,9 +55,6 @@ class MovieFragment : Fragment() {
             rvMovie.setHasFixedSize(true)
             rvMovie.adapter = adapter
         }
-//
-//        val factory = ViewModelFactory.getInstance(requireActivity())
-//        movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
         movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, { movie ->
             if (movie != null) {

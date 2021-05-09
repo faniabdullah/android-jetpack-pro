@@ -13,18 +13,6 @@ import javax.inject.Inject
 @AppScope
 class ViewModelFactory @Inject constructor(private val mCatalogMovieRepository: CatalogMovieRepository) :
     ViewModelProvider.NewInstanceFactory() {
-//
-//    companion object {
-//        @Volatile
-//        private var instance: ViewModelFactory? = null
-//
-//        fun getInstance(context: Context): ViewModelFactory =
-//            instance ?: synchronized(this) {
-//                instance ?: ViewModelFactory(Injection.provideCatalogRepository(context)).apply {
-//                    instance = this
-//                }
-//            }
-//    }
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

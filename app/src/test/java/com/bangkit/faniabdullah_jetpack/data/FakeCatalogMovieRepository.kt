@@ -19,8 +19,7 @@ class FakeCatalogMovieRepository(
     private val appExecutors: AppExecutors
 ) :
     CatalogMovieDataSource {
-
-
+    
     override fun getMovieNowPlaying(): LiveData<Resource<PagedList<MovieEntity>>> {
         return object :
             NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>(appExecutors) {

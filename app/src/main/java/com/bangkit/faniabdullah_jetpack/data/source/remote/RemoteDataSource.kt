@@ -18,18 +18,6 @@ import javax.inject.Singleton
 @Singleton
 class RemoteDataSource @Inject constructor() {
 
-    companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource().apply {
-                    instance = this
-                }
-            }
-    }
-
     fun getMovieNowPlaying(): LiveData<ApiResponse<List<MovieResponse>>> {
         EspressoIdlingResource.increment()
 

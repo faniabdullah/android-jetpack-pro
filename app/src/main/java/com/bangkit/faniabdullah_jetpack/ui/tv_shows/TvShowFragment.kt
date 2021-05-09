@@ -51,11 +51,6 @@ class TvShowFragment : Fragment() {
             rvTvShows.setHasFixedSize(true)
             rvTvShows.adapter = adapter
         }
-//
-//        val factory = ViewModelFactory.getInstance(requireActivity())
-//        tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
-
-
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, { movie ->
             if (movie != null) {
                 when (movie.status) {

@@ -11,15 +11,6 @@ import javax.inject.Singleton
 @Singleton
 class LocalDataSource @Inject constructor(private val mMovieDao: MovieDao) {
 
-//    companion object {
-//        private var INSTANCE: LocalDataSource? = null
-//
-//        fun getInstance(mMovieDao: MovieDao): LocalDataSource =
-//            INSTANCE ?: LocalDataSource(mMovieDao).apply {
-//                INSTANCE = this
-//            }
-//    }
-
     fun getAllMoviesNowPlaying(): DataSource.Factory<Int, MovieEntity> =
         mMovieDao.getListMovieNowPlaying()
 

@@ -29,7 +29,6 @@ class MainActivityTest {
     @Before
     fun setUp() {
         IdlingRegistry.getInstance().register(EspressoIdlingResource.espressoTestIdlingResource)
-
     }
 
     @After
