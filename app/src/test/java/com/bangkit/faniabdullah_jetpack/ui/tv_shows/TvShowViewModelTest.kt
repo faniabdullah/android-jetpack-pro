@@ -5,12 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.bangkit.faniabdullah_jetpack.data.CatalogMovieRepository
-import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
-import com.bangkit.faniabdullah_jetpack.domain.model.MovieData
-import com.bangkit.faniabdullah_jetpack.utils.DataDummy
-import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
-import com.nhaarman.mockitokotlin2.verify
+import com.bangkit.faniabdullah_jetpack.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before

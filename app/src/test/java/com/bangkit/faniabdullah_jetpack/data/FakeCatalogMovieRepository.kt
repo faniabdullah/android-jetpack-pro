@@ -11,7 +11,7 @@ import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieR
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.ApiResponse
 import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
-import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
+import com.bangkit.faniabdullah_jetpack.vo.Resource
 
 class FakeCatalogMovieRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -19,8 +19,7 @@ class FakeCatalogMovieRepository(
     private val appExecutors: AppExecutors
 ) :
     CatalogMovieDataSource {
-
-
+    
     override fun getMovieNowPlaying(): LiveData<Resource<PagedList<MovieEntity>>> {
         return object :
             NetworkBoundResource<PagedList<MovieEntity>, List<MovieResponse>>(appExecutors) {

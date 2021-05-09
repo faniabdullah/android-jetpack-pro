@@ -12,20 +12,11 @@ import com.bangkit.faniabdullah_jetpack.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RemoteDataSource private constructor() {
-
-    companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource().apply {
-                    instance = this
-                }
-            }
-    }
+@Singleton
+class RemoteDataSource @Inject constructor() {
 
     fun getMovieNowPlaying(): LiveData<ApiResponse<List<MovieResponse>>> {
         EspressoIdlingResource.increment()

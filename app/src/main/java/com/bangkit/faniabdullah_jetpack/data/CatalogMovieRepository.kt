@@ -11,32 +11,16 @@ import com.bangkit.faniabdullah_jetpack.data.source.remote.response.movie.MovieR
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.tvshows.TvShowsResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.ApiResponse
 import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
-import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
+import com.bangkit.faniabdullah_jetpack.vo.Resource
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class CatalogMovieRepository private constructor(
+@Singleton
+class CatalogMovieRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : CatalogMovieDataSource {
-    companion object {
-        @Volatile
-        private var instance: CatalogMovieRepository? = null
-
-        fun getInstance(
-            remoteDataSource: RemoteDataSource,
-            localData: LocalDataSource,
-            appExecutors: AppExecutors
-        ): CatalogMovieRepository =
-            instance ?: synchronized(this) {
-                instance ?: CatalogMovieRepository(
-                    remoteDataSource,
-                    localData,
-                    appExecutors
-                ).apply {
-                    instance = this
-                }
-            }
-    }
 
     override fun getMovieNowPlaying(): LiveData<Resource<PagedList<MovieEntity>>> {
         return object :

@@ -1,4 +1,4 @@
-package com.bangkit.faniabdullah_jetpack.utils.vo
+package com.bangkit.faniabdullah_jetpack.vo
 
 data class Resource<T>(val status: Status, val data: T?, val message: String?) {
     companion object {
