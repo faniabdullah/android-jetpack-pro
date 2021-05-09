@@ -17,10 +17,10 @@ interface CatalogMovieDataSource {
 
     fun setFavoriteTvShows(tvShow: TvShowsEntity, state: Boolean)
 
-    fun getFavoritesTvShows() : LiveData<PagedList<TvShowsEntity>>
+    fun getFavoritesTvShows(): LiveData<PagedList<TvShowsEntity>>
 
     fun setFavoriteMovies(movie: MovieEntity, state: Boolean)
 
-    fun getFavoritesMovies() : LiveData<PagedList<MovieEntity>>
+    fun getFavoritesMovies(): LiveData<PagedList<MovieEntity>>
 
 }
