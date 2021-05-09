@@ -12,8 +12,11 @@ import com.bangkit.faniabdullah_jetpack.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RemoteDataSource private constructor() {
+@Singleton
+class RemoteDataSource @Inject constructor() {
 
     companion object {
         @Volatile

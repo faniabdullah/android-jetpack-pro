@@ -1,23 +1,32 @@
 package com.bangkit.faniabdullah_jetpack.ui.movie
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bangkit.faniabdullah_jetpack.MyApplication
 import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentMovieBinding
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
-import com.bangkit.faniabdullah_jetpack.utils.vo.Status
+import com.bangkit.faniabdullah_jetpack.vo.Status
+import javax.inject.Inject
 
 class MovieFragment : Fragment() {
 
-    private lateinit var movieViewModel: MovieViewModel
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding as FragmentMovieBinding
     private lateinit var adapter: MovieAdapter
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val movieViewModel: MovieViewModel by viewModels {
+        factory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,6 +35,12 @@ class MovieFragment : Fragment() {
     ): View {
         _binding = FragmentMovieBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
     }
 
 
@@ -40,9 +55,9 @@ class MovieFragment : Fragment() {
             rvMovie.setHasFixedSize(true)
             rvMovie.adapter = adapter
         }
-
-        val factory = ViewModelFactory.getInstance(requireActivity())
-        movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
+//
+//        val factory = ViewModelFactory.getInstance(requireActivity())
+//        movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
         movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, { movie ->
             if (movie != null) {

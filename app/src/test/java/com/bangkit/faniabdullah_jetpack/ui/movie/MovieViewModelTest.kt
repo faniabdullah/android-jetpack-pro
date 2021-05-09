@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.bangkit.faniabdullah_jetpack.data.CatalogMovieRepository
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
-import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
+import com.bangkit.faniabdullah_jetpack.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before

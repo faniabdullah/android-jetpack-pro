@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
-import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
+import com.bangkit.faniabdullah_jetpack.vo.Resource
 
 interface CatalogMovieDataSource {
     fun getMovieNowPlaying(): LiveData<Resource<PagedList<MovieEntity>>>

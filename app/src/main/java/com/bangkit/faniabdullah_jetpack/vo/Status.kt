@@ -1,4 +1,4 @@
-package com.bangkit.faniabdullah_jetpack.utils.vo
+package com.bangkit.faniabdullah_jetpack.vo
 
 enum class Status {
     SUCCESS,

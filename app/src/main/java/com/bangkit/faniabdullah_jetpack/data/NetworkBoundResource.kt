@@ -5,7 +5,7 @@ import androidx.lifecycle.MediatorLiveData
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.ApiResponse
 import com.bangkit.faniabdullah_jetpack.data.source.remote.response.vo.StatusResponseNetwork
 import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
-import com.bangkit.faniabdullah_jetpack.utils.vo.Resource
+import com.bangkit.faniabdullah_jetpack.vo.Resource
 
 abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecutors: AppExecutors) {
 

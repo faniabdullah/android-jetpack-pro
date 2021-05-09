@@ -1,20 +1,29 @@
 package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.bangkit.faniabdullah_jetpack.MyApplication
 import com.bangkit.faniabdullah_jetpack.R
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentTvShowsBinding
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
-import com.bangkit.faniabdullah_jetpack.utils.vo.Status
+import com.bangkit.faniabdullah_jetpack.vo.Status
+import javax.inject.Inject
 
 class TvShowFragment : Fragment() {
 
-    private lateinit var tvShowViewModel: TvShowViewModel
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val tvShowViewModel: TvShowViewModel by viewModels {
+        factory
+    }
+
     private var _binding: FragmentTvShowsBinding? = null
     private val binding get() = _binding as FragmentTvShowsBinding
     private lateinit var adapter: TvShowsAdapter
@@ -28,6 +37,12 @@ class TvShowFragment : Fragment() {
         return binding.root
     }
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = TvShowsAdapter()
 
@@ -36,9 +51,9 @@ class TvShowFragment : Fragment() {
             rvTvShows.setHasFixedSize(true)
             rvTvShows.adapter = adapter
         }
-
-        val factory = ViewModelFactory.getInstance(requireActivity())
-        tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
+//
+//        val factory = ViewModelFactory.getInstance(requireActivity())
+//        tvShowViewModel = ViewModelProvider(this, factory)[TvShowViewModel::class.java]
 
 
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, { movie ->

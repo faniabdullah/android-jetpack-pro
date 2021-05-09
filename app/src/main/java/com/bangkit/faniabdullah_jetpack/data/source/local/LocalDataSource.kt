@@ -5,17 +5,20 @@ import androidx.paging.DataSource
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.room.MovieDao
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LocalDataSource private constructor(private val mMovieDao: MovieDao) {
+@Singleton
+class LocalDataSource @Inject constructor(private val mMovieDao: MovieDao) {
 
-    companion object {
-        private var INSTANCE: LocalDataSource? = null
-
-        fun getInstance(mMovieDao: MovieDao): LocalDataSource =
-            INSTANCE ?: LocalDataSource(mMovieDao).apply {
-                INSTANCE = this
-            }
-    }
+//    companion object {
+//        private var INSTANCE: LocalDataSource? = null
+//
+//        fun getInstance(mMovieDao: MovieDao): LocalDataSource =
+//            INSTANCE ?: LocalDataSource(mMovieDao).apply {
+//                INSTANCE = this
+//            }
+//    }
 
     fun getAllMoviesNowPlaying(): DataSource.Factory<Int, MovieEntity> =
         mMovieDao.getListMovieNowPlaying()
