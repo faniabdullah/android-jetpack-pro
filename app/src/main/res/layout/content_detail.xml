@@ -112,6 +112,6 @@
         app:layout_constraintStart_toEndOf="@+id/poster_movie"
         app:layout_constraintTop_toBottomOf="@+id/tv_info_movie"
         app:layout_constraintVertical_bias="0.792"
-        app:srcCompat="@drawable/ic_baseline_bookmark_border_blue_24" />
+        app:srcCompat="@drawable/ic_baseline_favorite_border_blue_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

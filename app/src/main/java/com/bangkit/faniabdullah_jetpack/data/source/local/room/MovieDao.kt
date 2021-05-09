@@ -39,11 +39,4 @@ interface MovieDao {
     @Query("SELECT * FROM tb_tvShows WHERE tvShowsId = :tvShowId")
     fun getDetailTvShowsById(tvShowId: Int): LiveData<TvShowsEntity>
 
-
-    @Query("DELETE FROM tb_tvShows")
-    fun deleteAllTvShows()
-
-    @Query("DELETE FROM tb_movie")
-    fun deleteAllMovie()
-
 }

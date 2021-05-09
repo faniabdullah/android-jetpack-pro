@@ -29,7 +29,9 @@ class RemoteDataSource private constructor() {
 
     fun getMovieNowPlaying(): LiveData<ApiResponse<List<MovieResponse>>> {
         EspressoIdlingResource.increment()
+
         val resultResponse = MutableLiveData<ApiResponse<List<MovieResponse>>>()
+
         ApiConfig.getApiService().getMovieNowPlaying()
             .enqueue(object : Callback<CatalogResponse<MovieResponse>> {
                 override fun onResponse(
@@ -74,6 +76,12 @@ class RemoteDataSource private constructor() {
 
                 override fun onFailure(call: Call<CatalogResponse<TvShowsResponse>>, t: Throwable) {
                     Log.e("Failure", "${t.message}")
+                    resultResponse.postValue(
+                        ApiResponse.error(
+                            t.message.toString(),
+                            mutableListOf()
+                        )
+                    )
                     EspressoIdlingResource.decrement()
                 }
             })

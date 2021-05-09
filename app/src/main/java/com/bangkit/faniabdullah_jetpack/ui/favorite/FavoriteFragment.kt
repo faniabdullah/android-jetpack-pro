@@ -40,7 +40,6 @@ class FavoriteFragment : Fragment() {
             val factory = ViewModelFactory.getInstance(requireActivity())
             favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
 
-
             favoriteViewModel.getFavoriteMovie().observe(viewLifecycleOwner, { movie ->
                 movieAdapter.submitList(movie)
                 if (movie.size > 0) {

@@ -1,8 +1,6 @@
 package com.bangkit.faniabdullah_jetpack.ui.movie
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.R
-import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentMovieBinding
-import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
-import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
 import com.bangkit.faniabdullah_jetpack.utils.vo.Status
 
@@ -38,7 +33,7 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = MovieAdapter()
 
-        showLoading(true)
+
 
         binding.apply {
             rvMovie.layoutManager = GridLayoutManager(activity, 2)
@@ -49,25 +44,23 @@ class MovieFragment : Fragment() {
         val factory = ViewModelFactory.getInstance(requireActivity())
         movieViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
-
         movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, { movie ->
             if (movie != null) {
                 when (movie.status) {
-                    Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
+                    Status.LOADING -> showLoading(true)
                     Status.SUCCESS -> {
                         movie.data?.let {
                             adapter.submitList(it)
-                            Log.e("SEE", "MS" + it.size)
+                            showLoading(false)
                         }
                         showEmptyLayout(false)
                     }
                     Status.ERROR -> {
+                        showLoading(false)
                         showEmptyLayout(true)
                     }
                 }
             }
-
-            showLoading(false)
         })
 
 
@@ -85,13 +78,6 @@ class MovieFragment : Fragment() {
             binding.notifyLayout.pictureNotify.visibility = View.GONE
         }
 
-    }
-
-    private fun showDetailMovie(data: MovieEntity) {
-        val intentDetail = Intent(activity, DetailActivity::class.java)
-        intentDetail.putExtra(Constant.MOVIE_ID, data.movie_id)
-            .putExtra(Constant.KEY_TYPE, Constant.MOVIE_TYPE)
-        startActivity(intentDetail)
     }
 
     private fun showLoading(state: Boolean) {

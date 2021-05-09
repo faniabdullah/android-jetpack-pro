@@ -8,5 +8,6 @@
     <string name="title_nav_favorite">Favorite</string>
     <string name="notification_error_server">Oops… \n There is a something problem , please try again later and Don\'t forget to check your internet again :)</string>
     <string name="notification_empty_favorite">Oops… \n Your Doesn\'t Have a Favorite Movie </string>
-
+    <string name="add_to_favorite">Added to favorite </string>
+    <string name="removed_from_favorite">Removed to favorite </string>
 </resources>

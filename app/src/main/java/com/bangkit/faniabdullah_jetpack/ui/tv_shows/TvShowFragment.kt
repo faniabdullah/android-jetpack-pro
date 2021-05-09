@@ -1,6 +1,5 @@
 package com.bangkit.faniabdullah_jetpack.ui.tv_shows
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bangkit.faniabdullah_jetpack.R
-import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 import com.bangkit.faniabdullah_jetpack.databinding.FragmentTvShowsBinding
-import com.bangkit.faniabdullah_jetpack.ui.detailmovie.DetailActivity
-import com.bangkit.faniabdullah_jetpack.utils.Constant
 import com.bangkit.faniabdullah_jetpack.utils.ViewModelFactory
 import com.bangkit.faniabdullah_jetpack.utils.vo.Status
 
@@ -35,9 +31,6 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter = TvShowsAdapter()
 
-        showLoading(true)
-
-
         binding.apply {
             rvTvShows.layoutManager = GridLayoutManager(activity, 2)
             rvTvShows.setHasFixedSize(true)
@@ -51,11 +44,13 @@ class TvShowFragment : Fragment() {
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, { movie ->
             if (movie != null) {
                 when (movie.status) {
-                    Status.LOADING -> binding.progressBar.visibility = View.VISIBLE
+                    Status.LOADING ->
+                        showLoading(true)
                     Status.SUCCESS -> {
                         movie.data?.let {
                             adapter.submitList(it)
-
+                            showLoading(false)
+                            showEmptyLayout(false)
                         }
                     }
                     Status.ERROR -> {
@@ -63,21 +58,8 @@ class TvShowFragment : Fragment() {
                     }
                 }
             }
-
-            showLoading(false)
-            showEmptyLayout(false)
         })
-
-
     }
-
-    private fun showDetailMovie(data: TvShowsEntity) {
-        val intentDetail = Intent(context, DetailActivity::class.java)
-        intentDetail.putExtra(Constant.MOVIE_ID, data.tvShows_id)
-            .putExtra(Constant.KEY_TYPE, Constant.TV_SHOWS_TYPE)
-        startActivity(intentDetail)
-    }
-
 
     private fun showLoading(state: Boolean) {
 

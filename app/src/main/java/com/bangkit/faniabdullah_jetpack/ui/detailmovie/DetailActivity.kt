@@ -26,8 +26,6 @@ class DetailActivity : AppCompatActivity() {
         showLoading(true)
 
         val movie = intent?.getIntExtra(Constant.MOVIE_ID, 1)
-
-
         val typeMovie = intent.getStringExtra(Constant.KEY_TYPE)
         val factory = ViewModelFactory.getInstance(this)
 
@@ -58,15 +56,15 @@ class DetailActivity : AppCompatActivity() {
 
     private fun displayDataMovie(data: MovieEntity) {
         data.apply {
-            binding.apply {
-                contentDetail.tvInfoMovie.text = vote_average.toString()
-                contentDetail.tvMovieDetailTitle.text = original_title
-                contentDetail.tvOverviewDetail.text = overview
+            binding.contentDetail.apply {
+                tvInfoMovie.text = vote_average.toString()
+                tvMovieDetailTitle.text = original_title
+                tvOverviewDetail.text = overview
                 Glide.with(this@DetailActivity)
                     .load("${Constant.BASE_IMAGE_URL}${poster_path}")
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .placeholder(R.drawable.placeholder_movie)
-                    .into(contentDetail.posterMovie)
+                    .into(posterMovie)
             }
             setBookmarkedState(favorite)
         }
@@ -74,15 +72,15 @@ class DetailActivity : AppCompatActivity() {
 
     private fun displayDataTvShows(data: TvShowsEntity) {
         data.apply {
-            binding.apply {
-                contentDetail.tvInfoMovie.text = vote_average.toString()
-                contentDetail.tvMovieDetailTitle.text = original_title
-                contentDetail.tvOverviewDetail.text = overview
+            binding.contentDetail.apply {
+                tvInfoMovie.text = vote_average.toString()
+                tvMovieDetailTitle.text = original_title
+                tvOverviewDetail.text = overview
                 Glide.with(this@DetailActivity)
                     .load("${Constant.BASE_IMAGE_URL}${poster_path}")
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .placeholder(R.drawable.placeholder_movie)
-                    .into(contentDetail.posterMovie)
+                    .into(posterMovie)
             }
             setBookmarkedState(favorite)
         }
@@ -91,17 +89,17 @@ class DetailActivity : AppCompatActivity() {
     private fun setBookmark(movie: MovieEntity?, tvShow: TvShowsEntity?) {
         if (movie != null) {
             if (movie.favorite) {
-                showSnackBar("${movie.original_title} Removed from favorite")
+                showSnackBar("${movie.original_title} " + getString(R.string.removed_from_favorite))
             } else {
-                showSnackBar("${movie.original_title} Added to favorite")
+                showSnackBar("${movie.original_title} " + getString(R.string.add_to_favorite))
             }
             detailViewModel.setBookmarkedMovies(movie)
         } else {
             if (tvShow != null) {
                 if (tvShow.favorite) {
-                    showSnackBar("${tvShow.original_title} Aemoved from favorite")
+                    showSnackBar("${tvShow.original_title} " + getString(R.string.removed_from_favorite))
                 } else {
-                    showSnackBar("${tvShow.original_title} Removed from favorite")
+                    showSnackBar("${tvShow.original_title} " + getString(R.string.add_to_favorite))
                 }
                 detailViewModel.setBookmarkedTvShow(tvShow)
             }
@@ -110,9 +108,9 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setBookmarkedState(isFavorite: Boolean) {
         if (isFavorite) {
-            binding.contentDetail.addToFavorite.setImageResource(R.drawable.ic_baseline_bookmark_blue_24)
+            binding.contentDetail.addToFavorite.setImageResource(R.drawable.ic_baseline_favorite_blue_24)
         } else {
-            binding.contentDetail.addToFavorite.setImageResource(R.drawable.ic_baseline_bookmark_border_blue_24)
+            binding.contentDetail.addToFavorite.setImageResource(R.drawable.ic_baseline_favorite_border_blue_24)
         }
     }
 
