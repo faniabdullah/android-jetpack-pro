@@ -10,4 +10,6 @@
     <string name="notification_empty_favorite">Oops… \n Your Doesn\'t Have a Favorite Movie </string>
     <string name="add_to_favorite">Added to favorite </string>
     <string name="removed_from_favorite">Removed to favorite </string>
+    <string name="your_favorites_movie">Your Favorites Movie</string>
+    <string name="your_favorites_tvshows">Your Favorites TvShows</string>
 </resources>
