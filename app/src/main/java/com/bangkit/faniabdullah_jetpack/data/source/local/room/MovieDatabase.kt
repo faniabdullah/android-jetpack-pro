@@ -1,8 +1,6 @@
 package com.bangkit.faniabdullah_jetpack.data.source.local.room
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
