@@ -11,17 +11,4 @@ import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
 abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 
-    companion object {
-        private var INSTANCE: MovieDatabase? = null
-
-        fun getInstance(context: Context): MovieDatabase =
-            INSTANCE ?: synchronized(this) {
-                Room.databaseBuilder(
-                    context.applicationContext,
-                    MovieDatabase::class.java,
-                    "Movie-db"
-                )
-                    .build().apply { INSTANCE = this }
-            }
-    }
 }

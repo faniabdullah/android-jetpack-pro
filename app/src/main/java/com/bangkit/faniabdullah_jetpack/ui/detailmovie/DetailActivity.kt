@@ -36,10 +36,6 @@ class DetailActivity : AppCompatActivity() {
 
         val movie = intent?.getIntExtra(Constant.MOVIE_ID, 1)
         val typeMovie = intent.getStringExtra(Constant.KEY_TYPE)
-//        val factory = ViewModelFactory.getInstance(this)
-//
-//        detailViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
-
         if (movie != null) {
             if (typeMovie == Constant.MOVIE_TYPE) {
                 detailViewModel.getDetailMovieById(movie).observe(this, {

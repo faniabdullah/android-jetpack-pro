@@ -47,7 +47,7 @@ class CatalogMovieRepository @Inject constructor(
                 val movieList = ArrayList<MovieEntity>()
 
                 for (response in data) {
-                    val course = response.id?.let {
+                    val movie = response.id?.let {
                         MovieEntity(
                             it,
                             response.title,
@@ -58,8 +58,8 @@ class CatalogMovieRepository @Inject constructor(
                             response.voteCount
                         )
                     }
-                    if (course != null) {
-                        movieList.add(course)
+                    if (movie != null) {
+                        movieList.add(movie)
                     }
                 }
 
@@ -91,7 +91,7 @@ class CatalogMovieRepository @Inject constructor(
                 val movieList = ArrayList<TvShowsEntity>()
 
                 for (response in data) {
-                    val course = response.id?.let {
+                    val movie = response.id?.let {
                         TvShowsEntity(
                             it,
                             response.originalName,
@@ -102,8 +102,8 @@ class CatalogMovieRepository @Inject constructor(
                             response.voteCount
                         )
                     }
-                    if (course != null) {
-                        movieList.add(course)
+                    if (movie != null) {
+                        movieList.add(movie)
                     }
                 }
 

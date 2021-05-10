@@ -13,7 +13,7 @@ interface MovieDao {
     fun updateMovie(movie: MovieEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovie(courses: List<MovieEntity>)
+    fun insertMovie(movies: List<MovieEntity>)
 
     @Query("SELECT * FROM tb_movie ")
     fun getListMovieNowPlaying(): DataSource.Factory<Int, MovieEntity>
@@ -28,7 +28,7 @@ interface MovieDao {
     fun updateTvShows(tvShows: TvShowsEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertTvShows(courses: List<TvShowsEntity>)
+    fun insertTvShows(movies: List<TvShowsEntity>)
 
     @Query("SELECT * FROM tb_tvShows ")
     fun getListTvShowsPopular(): DataSource.Factory<Int, TvShowsEntity>
