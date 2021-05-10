@@ -22,7 +22,7 @@ interface ApplicationComponent {
         fun create(@BindsInstance context: Context): ApplicationComponent
     }
 
-    fun provideRepository() : CatalogMovieDataSource
+    fun provideRepository(): CatalogMovieDataSource
 
     fun inject(tvShowFragment: TvShowFragment)
     fun inject(movieFragment: MovieFragment)

@@ -7,8 +7,8 @@ import dagger.Module
 
 
 @Module(includes = [DatabaseModule::class])
-abstract  class RepositoryModule {
+abstract class RepositoryModule {
 
     @Binds
-    abstract fun provideRepository(catalogMovieRepository: CatalogMovieRepository) : CatalogMovieDataSource
+    abstract fun provideRepository(catalogMovieRepository: CatalogMovieRepository): CatalogMovieDataSource
 }
