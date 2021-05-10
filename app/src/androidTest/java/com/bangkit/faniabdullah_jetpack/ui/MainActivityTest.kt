@@ -121,6 +121,7 @@ class MainActivityTest {
             .check(matches(isDisplayed()))
         onView(withId(R.id.picture_notify_tv))
             .check(matches(isDisplayed()))
+        pressBack()
     }
 
     @Test
