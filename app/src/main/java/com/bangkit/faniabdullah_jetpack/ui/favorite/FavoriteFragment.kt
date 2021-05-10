@@ -70,18 +70,18 @@ class FavoriteFragment : Fragment() {
                 }
             })
 
-            binding.favoriteMovie.apply {
-                rvMovieFavorite.layoutManager =
+            binding.favoriteMovie.rvMovieFavorite.apply {
+                layoutManager =
                     LinearLayoutManager(activity, GridLayoutManager.HORIZONTAL, false)
-                rvMovieFavorite.setHasFixedSize(true)
-                rvMovieFavorite.adapter = movieAdapter
+                setHasFixedSize(true)
+                adapter = movieAdapter
             }
 
-            binding.favoriteTvshows.apply {
-                rvTvShowsFavorite.layoutManager =
+            binding.favoriteTvshows.rvTvShowsFavorite.apply {
+                layoutManager =
                     LinearLayoutManager(activity, GridLayoutManager.HORIZONTAL, false)
-                rvTvShowsFavorite.setHasFixedSize(true)
-                rvTvShowsFavorite.adapter = tvShowsAdapter
+                setHasFixedSize(true)
+                adapter = tvShowsAdapter
             }
 
         }

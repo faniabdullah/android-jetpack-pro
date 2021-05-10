@@ -19,7 +19,7 @@ class MovieFragment : Fragment() {
 
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding as FragmentMovieBinding
-    private lateinit var adapter: MovieAdapter
+    private lateinit var movieAdapter: MovieAdapter
 
     @Inject
     lateinit var factory: ViewModelFactory
@@ -46,14 +46,12 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = MovieAdapter()
+        movieAdapter = MovieAdapter()
 
-
-
-        binding.apply {
-            rvMovie.layoutManager = GridLayoutManager(activity, 2)
-            rvMovie.setHasFixedSize(true)
-            rvMovie.adapter = adapter
+        binding.rvMovie.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            setHasFixedSize(true)
+            adapter = movieAdapter
         }
 
         movieViewModel.getMovieNowPlaying().observe(viewLifecycleOwner, { movie ->
@@ -62,7 +60,7 @@ class MovieFragment : Fragment() {
                     Status.LOADING -> showLoading(true)
                     Status.SUCCESS -> {
                         movie.data?.let {
-                            adapter.submitList(it)
+                            movieAdapter.submitList(it)
                             showLoading(false)
                         }
                         showEmptyLayout(false)
@@ -81,13 +79,18 @@ class MovieFragment : Fragment() {
     private fun showEmptyLayout(state: Boolean) {
         if (state) {
             binding.rvMovie.visibility = View.GONE
-            binding.notifyLayout.messageNotify.visibility = View.VISIBLE
-            binding.notifyLayout.pictureNotify.visibility = View.VISIBLE
-            binding.notifyLayout.messageNotify.text = getString(R.string.notification_error_server)
+            binding.notifyLayout.apply {
+                messageNotify.visibility = View.VISIBLE
+                pictureNotify.visibility = View.VISIBLE
+                messageNotify.text = getString(R.string.notification_error_server)
+            }
         } else {
             binding.rvMovie.visibility = View.VISIBLE
-            binding.notifyLayout.messageNotify.visibility = View.GONE
-            binding.notifyLayout.pictureNotify.visibility = View.GONE
+            binding.notifyLayout.apply {
+                messageNotify.visibility = View.GONE
+                pictureNotify.visibility = View.GONE
+            }
+
         }
 
     }

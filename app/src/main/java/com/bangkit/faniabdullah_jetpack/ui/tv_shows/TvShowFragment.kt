@@ -26,7 +26,7 @@ class TvShowFragment : Fragment() {
 
     private var _binding: FragmentTvShowsBinding? = null
     private val binding get() = _binding as FragmentTvShowsBinding
-    private lateinit var adapter: TvShowsAdapter
+    private lateinit var tvShowsAdapter: TvShowsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,12 +44,12 @@ class TvShowFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = TvShowsAdapter()
+        tvShowsAdapter = TvShowsAdapter()
 
-        binding.apply {
-            rvTvShows.layoutManager = GridLayoutManager(activity, 2)
-            rvTvShows.setHasFixedSize(true)
-            rvTvShows.adapter = adapter
+        binding.rvTvShows.apply {
+            layoutManager = GridLayoutManager(activity, 2)
+            setHasFixedSize(true)
+            adapter = tvShowsAdapter
         }
         tvShowViewModel.getTvShowsPopular().observe(viewLifecycleOwner, { movie ->
             if (movie != null) {
@@ -58,7 +58,7 @@ class TvShowFragment : Fragment() {
                         showLoading(true)
                     Status.SUCCESS -> {
                         movie.data?.let {
-                            adapter.submitList(it)
+                            tvShowsAdapter.submitList(it)
                             showLoading(false)
                             showEmptyLayout(false)
                         }
@@ -85,13 +85,19 @@ class TvShowFragment : Fragment() {
     private fun showEmptyLayout(state: Boolean) {
         if (state) {
             binding.rvTvShows.visibility = View.VISIBLE
-            binding.notifyLayout.messageNotify.visibility = View.GONE
-            binding.notifyLayout.pictureNotify.visibility = View.GONE
-            binding.notifyLayout.messageNotify.text = getString(R.string.notification_error_server)
+            binding.notifyLayout.apply {
+                messageNotify.visibility = View.GONE
+                pictureNotify.visibility = View.GONE
+                messageNotify.text = getString(R.string.notification_error_server)
+            }
+            binding.notifyLayout
+            binding.notifyLayout
         } else {
             binding.rvTvShows.visibility = View.VISIBLE
-            binding.notifyLayout.messageNotify.visibility = View.GONE
-            binding.notifyLayout.pictureNotify.visibility = View.GONE
+            binding.notifyLayout.apply {
+                messageNotify.visibility = View.GONE
+                pictureNotify.visibility = View.GONE
+            }
         }
 
     }
