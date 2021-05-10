@@ -11,6 +11,7 @@
         android:layout_height="205dp"
         android:src="@drawable/notify"
         android:visibility="gone"
+        android:contentDescription="@string/image_notify"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
