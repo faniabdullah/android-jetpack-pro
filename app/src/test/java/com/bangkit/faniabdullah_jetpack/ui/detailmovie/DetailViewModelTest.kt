@@ -14,8 +14,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
@@ -108,5 +107,62 @@ class DetailViewModelTest {
 
         mainViewModel.getDetailTvShowById(tvShowId).observeForever(tvObserver)
         verify(tvObserver).onChanged(dummyDataDetailTvShows)
+    }
+
+    @Test
+    fun testSetTvShowsFavorite() {
+
+        val movie = MutableLiveData<TvShowsEntity>()
+        movie.value = dummyDataDetailTvShows
+        `when`(tvShowId.let { catalogueMovieRepository.getTvShowDetail(it) }).thenReturn(movie)
+        val detailData =
+            tvShowId.let { mainViewModel.getDetailTvShowById(it).value } as TvShowsEntity
+        verify(catalogueMovieRepository).getTvShowDetail(tvShowId)
+        mainViewModel.setBookmarkedTvShow(detailData)
+        verify(catalogueMovieRepository).setFavoriteTvShows(detailData, true)
+        verifyNoMoreInteractions(tvObserver)
+    }
+
+    @Test
+    fun testDeleteFavoriteTvShows() {
+        val movie = MutableLiveData<TvShowsEntity>()
+        movie.value = dummyDataDetailTvShows.copy(favorite = true)
+        `when`(tvShowId.let { catalogueMovieRepository.getTvShowDetail(it) }).thenReturn(movie)
+        val detailData =
+            tvShowId.let { mainViewModel.getDetailTvShowById(it).value } as TvShowsEntity
+        verify(catalogueMovieRepository).getTvShowDetail(tvShowId)
+        mainViewModel.setBookmarkedTvShow(detailData)
+        verify(catalogueMovieRepository).setFavoriteTvShows(detailData, false)
+        verifyNoMoreInteractions(tvObserver)
+    }
+
+
+    @Test
+    fun testSetMovieFavorite() {
+        val movie = MutableLiveData<MovieEntity>()
+        movie.value = dummyDataDetailMovie
+        `when`(movieId.let { catalogueMovieRepository.getMovieDetail(it) }).thenReturn(movie)
+        val detailData =
+            movieId.let { mainViewModel.getDetailMovieById(it).value } as MovieEntity
+
+
+        verify(catalogueMovieRepository).getMovieDetail(movieId)
+        mainViewModel.setBookmarkedMovies(detailData)
+        verify(catalogueMovieRepository).setFavoriteMovies(detailData, true)
+        verifyNoMoreInteractions(movieObserver)
+    }
+
+    @Test
+    fun testDeleteFavoriteMovie() {
+        val movie = MutableLiveData<MovieEntity>()
+        movie.value = dummyDataDetailMovie.copy(favorite = true)
+        `when`(movieId.let { catalogueMovieRepository.getMovieDetail(it) }).thenReturn(movie)
+        val detailData =
+            movieId.let { mainViewModel.getDetailMovieById(it).value } as MovieEntity
+        verify(catalogueMovieRepository).getMovieDetail(movieId)
+
+        mainViewModel.setBookmarkedMovies(detailData)
+        verify(catalogueMovieRepository).setFavoriteMovies(detailData, false)
+        verifyNoMoreInteractions(movieObserver)
     }
 }
