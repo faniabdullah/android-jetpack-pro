@@ -11,6 +11,7 @@ import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
 import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import com.bangkit.faniabdullah_jetpack.vo.Resource
+import com.nhaarman.mockitokotlin2.doNothing
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.assertEquals
@@ -126,11 +127,11 @@ class CatalogMovieRepositoryTest {
         val dataDummy = DataDummy.generateDummyDataMovieNowPlaying()[0]
         val expectedDataDummy = dataDummy.copy(favorite = true)
 
-        with(movieCatalogueRepository) {
-            setFavoriteMovies(dataDummy, true)
-        }
+        doNothing().`when`(local).setFavoriteMovie(dataDummy, true)
+        movieCatalogueRepository.setFavoriteMovies(dataDummy, true)
         verify(local).setFavoriteMovie(dataDummy, true)
 
+        doNothing().`when`(dao).updateMovie(expectedDataDummy)
         localDataSource.setFavoriteMovie(dataDummy, true)
         verify(dao, times(1)).updateMovie(expectedDataDummy)
     }
@@ -139,12 +140,13 @@ class CatalogMovieRepositoryTest {
     fun setTvShowsFavorite() {
         val localDataSource = LocalDataSource(dao)
         val dataDummy = DataDummy.generateDummyDataTvShowsPopular()[0]
-
         val expectedDataDummy = dataDummy.copy(favorite = true)
 
+        doNothing().`when`(local).setFavoriteTvShows(dataDummy, true)
         movieCatalogueRepository.setFavoriteTvShows(dataDummy, true)
         verify(local).setFavoriteTvShows(dataDummy, true)
 
+        doNothing().`when`(dao).updateTvShows(expectedDataDummy)
         localDataSource.setFavoriteTvShows(dataDummy, true)
         verify(dao, times(1)).updateTvShows(expectedDataDummy)
     }

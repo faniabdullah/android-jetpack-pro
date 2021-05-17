@@ -129,13 +129,16 @@ class DetailViewModelTest {
     fun testDeleteFavoriteTvShows() {
         val movie = MutableLiveData<TvShowsEntity>()
         movie.value = dummyDataDetailTvShows.copy(favorite = true)
+
         `when`(tvShowId.let { catalogueMovieRepository.getTvShowDetail(it) }).thenReturn(movie)
         val detailData =
             tvShowId.let { mainViewModel.getDetailTvShowById(it).value } as TvShowsEntity
         verify(catalogueMovieRepository).getTvShowDetail(tvShowId)
+
         mainViewModel.setBookmarkedTvShow(detailData)
         verify(catalogueMovieRepository).setFavoriteTvShows(detailData, false)
         verifyNoMoreInteractions(tvObserver)
+
     }
 
 
@@ -159,6 +162,7 @@ class DetailViewModelTest {
         val movie = MutableLiveData<MovieEntity>()
         movie.value = dummyDataDetailMovie.copy(favorite = true)
         `when`(movieId.let { catalogueMovieRepository.getMovieDetail(it) }).thenReturn(movie)
+
         val detailData =
             movieId.let { mainViewModel.getDetailMovieById(it).value } as MovieEntity
         verify(catalogueMovieRepository).getMovieDetail(movieId)
