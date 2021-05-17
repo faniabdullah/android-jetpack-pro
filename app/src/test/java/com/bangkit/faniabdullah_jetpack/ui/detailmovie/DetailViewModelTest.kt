@@ -118,6 +118,8 @@ class DetailViewModelTest {
         val detailData =
             tvShowId.let { mainViewModel.getDetailTvShowById(it).value } as TvShowsEntity
         verify(catalogueMovieRepository).getTvShowDetail(tvShowId)
+
+
         mainViewModel.setBookmarkedTvShow(detailData)
         verify(catalogueMovieRepository).setFavoriteTvShows(detailData, true)
         verifyNoMoreInteractions(tvObserver)

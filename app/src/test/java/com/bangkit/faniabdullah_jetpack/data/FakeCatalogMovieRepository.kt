@@ -45,7 +45,7 @@ class FakeCatalogMovieRepository(
                 val movieList = ArrayList<MovieEntity>()
 
                 for (response in data) {
-                    val course = response.id?.let {
+                    val movie = response.id?.let {
                         MovieEntity(
                             it,
                             response.title,
@@ -56,8 +56,8 @@ class FakeCatalogMovieRepository(
                             response.voteCount
                         )
                     }
-                    if (course != null) {
-                        movieList.add(course)
+                    if (movie != null) {
+                        movieList.add(movie)
                     }
                 }
 
@@ -89,7 +89,7 @@ class FakeCatalogMovieRepository(
                 val movieList = ArrayList<TvShowsEntity>()
 
                 for (response in data) {
-                    val course = response.id?.let {
+                    val movie = response.id?.let {
                         TvShowsEntity(
                             it,
                             response.originalName,
@@ -100,8 +100,8 @@ class FakeCatalogMovieRepository(
                             response.voteCount
                         )
                     }
-                    if (course != null) {
-                        movieList.add(course)
+                    if (movie != null) {
+                        movieList.add(movie)
                     }
                 }
 
@@ -117,7 +117,7 @@ class FakeCatalogMovieRepository(
         localDataSource.getTvShowsById(tvShowId)
 
     override fun setFavoriteTvShows(tvShow: TvShowsEntity, state: Boolean) {
-        appExecutors.diskIO().execute { localDataSource.setFavoriteTvShows(tvShow, state) }
+        localDataSource.setFavoriteTvShows(tvShow, state)
     }
 
     override fun getFavoritesTvShows(): LiveData<PagedList<TvShowsEntity>> {
@@ -130,7 +130,7 @@ class FakeCatalogMovieRepository(
     }
 
     override fun setFavoriteMovies(movie: MovieEntity, state: Boolean) {
-        appExecutors.diskIO().execute { localDataSource.setFavoriteMovie(movie, state) }
+        localDataSource.setFavoriteMovie(movie, state)
     }
 
     override fun getFavoritesMovies(): LiveData<PagedList<MovieEntity>> {

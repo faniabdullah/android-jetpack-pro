@@ -12,13 +12,13 @@ object DataDummy {
         listMovieNowPlaying.add(
             MovieEntity(
                 1,
-                "/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
                 "Godzilla vs. Kong",
                 "In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
-
+                "/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
                 "2021-03-24",
                 8.3,
                 8,
+                false
             )
         )
 
@@ -32,6 +32,7 @@ object DataDummy {
                 "2021-02-24",
                 8.3,
                 8,
+                favorite = false
             )
         )
 
@@ -46,6 +47,7 @@ object DataDummy {
                 "2021-03-03",
                 8.3,
                 8,
+                false
             )
         )
 

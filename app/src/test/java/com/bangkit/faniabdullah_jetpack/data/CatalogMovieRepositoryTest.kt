@@ -11,13 +11,19 @@ import com.bangkit.faniabdullah_jetpack.data.source.remote.RemoteDataSource
 import com.bangkit.faniabdullah_jetpack.utils.AppExecutors
 import com.bangkit.faniabdullah_jetpack.utils.DataDummy
 import com.bangkit.faniabdullah_jetpack.vo.Resource
-import com.nhaarman.mockitokotlin2.doNothing
+import com.nhaarman.mockitokotlin2.*
 import com.nhaarman.mockitokotlin2.verify
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mockito
 import org.mockito.Mockito.*
+import org.mockito.Mockito.any
+import java.lang.NullPointerException
+import kotlin.jvm.Throws
 
 class CatalogMovieRepositoryTest {
 
@@ -121,25 +127,17 @@ class CatalogMovieRepositoryTest {
 
     @Test
     fun setMovieFavorite() {
-        val localDataSource = LocalDataSource(dao)
         val dataDummy = DataDummy.generateDummyDataMovieNowPlaying()[0]
-        val expectedDataDummy = dataDummy.copy(favorite = true)
-
-        doNothing().`when`(dao).updateMovie(expectedDataDummy)
-        localDataSource.setFavoriteMovie(dataDummy, true)
-
-        verify(dao, times(1)).updateMovie(expectedDataDummy)
+        with(movieCatalogueRepository) {
+            setFavoriteMovies(dataDummy, true)
+        }
+        verify(local).setFavoriteMovie(dataDummy, true)
     }
 
     @Test
     fun setTvShowsFavorite() {
-        val localDataSource = LocalDataSource(dao)
         val dataDummy = DataDummy.generateDummyDataTvShowsPopular()[0]
-        val expectedDataDummy = dataDummy.copy(favorite = true)
-
-        doNothing().`when`(dao).updateTvShows(expectedDataDummy)
-        localDataSource.setFavoriteTvShows(dataDummy, true)
-
-        verify(dao, times(1)).updateTvShows(expectedDataDummy)
+        movieCatalogueRepository.setFavoriteTvShows(dataDummy, true)
+        verify(local).setFavoriteTvShows(dataDummy, true)
     }
 }
