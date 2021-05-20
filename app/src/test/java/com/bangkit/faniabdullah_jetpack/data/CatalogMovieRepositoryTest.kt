@@ -3,6 +3,7 @@ package com.bangkit.faniabdullah_jetpack.data
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
+import com.bangkit.faniabdullah_jetpack.TestExecutor
 import com.bangkit.faniabdullah_jetpack.data.source.local.LocalDataSource
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.MovieEntity
 import com.bangkit.faniabdullah_jetpack.data.source.local.entity.TvShowsEntity
@@ -126,7 +127,9 @@ class CatalogMovieRepositoryTest {
         val localDataSource = LocalDataSource(dao)
         val dataDummy = DataDummy.generateDummyDataMovieNowPlaying()[0]
         val expectedDataDummy = dataDummy.copy(favorite = true)
+        val testExecutors = AppExecutors(TestExecutor(), TestExecutor() , TestExecutor())
 
+        `when`(appExecutors.diskIO()).thenReturn(testExecutors.diskIO())
         doNothing().`when`(local).setFavoriteMovie(dataDummy, true)
         movieCatalogueRepository.setFavoriteMovies(dataDummy, true)
         verify(local).setFavoriteMovie(dataDummy, true)
@@ -142,6 +145,9 @@ class CatalogMovieRepositoryTest {
         val dataDummy = DataDummy.generateDummyDataTvShowsPopular()[0]
         val expectedDataDummy = dataDummy.copy(favorite = true)
 
+        val testExecutors = AppExecutors(TestExecutor(), TestExecutor() , TestExecutor())
+
+        `when`(appExecutors.diskIO()).thenReturn(testExecutors.diskIO())
         doNothing().`when`(local).setFavoriteTvShows(dataDummy, true)
         movieCatalogueRepository.setFavoriteTvShows(dataDummy, true)
         verify(local).setFavoriteTvShows(dataDummy, true)
