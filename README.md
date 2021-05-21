@@ -12,7 +12,7 @@ Clone this repository and import into Android Studio
 ```    
 > **NOTE :**  This repository have some branch , consist of practice, submission 2 & submission 3 [final] 
 > 1. Master - consists of a combination of branches practice & submission 1 , 2 and 3
-> 2. Submission 1 - contains tasks from submission 2 ( **Get 4 Star** )
+> 2. Submission 1 - contains tasks from submission 1 ( **Get 4 Star** )
 > 3. Submission 2 - contains tasks from submission 2 ( **Get 5 Star** )
 > 4. Submission 3 - contains tasks from submission 3 ( **Get 5 Star** )
 > 
