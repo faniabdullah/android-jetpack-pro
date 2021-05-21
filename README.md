@@ -1,5 +1,3 @@
-# learn- Android -Jetpack Pro
-This repository for learn About Mobile Development at Bangkit Academy || course "Learn Android Jetpack Pro" at Dicoding .
 
 # Android-Jetpack Pro
 This repository for learn About Mobile Development at Bangkit Academy || course  [Learn Android Jetpack Pro](https://www.dicoding.com/academies/129)  at [Dicoding](https://www.dicoding.com) </br>
