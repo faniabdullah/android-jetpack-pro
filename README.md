@@ -10,7 +10,7 @@ that implements MVVM(Model View ViewModel) architecture using the components Vie
 ## Installation 
 Clone this repository and import into Android Studio    
 ```
-    https://github.com/faniabdullah/Android-Application-Fundamentals.git
+   https://github.com/faniabdullah/android-jetpack-pro.git
 ```    
 > **NOTE :**  This repository have some branch , consist of practice, submission 2 & submission 3 [final] 
 > 1. Master - consists of a combination of branches practice & submission 1 , 2 and 3
